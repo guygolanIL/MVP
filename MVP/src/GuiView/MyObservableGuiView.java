@@ -29,7 +29,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				setChanged();
-				notifyObservers("generate 3d maze gui 15 3 15");
+				notifyObservers("generate 3d maze gui 15 15 15");
 			}
 			
 			@Override
