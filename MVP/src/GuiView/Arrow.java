@@ -6,9 +6,9 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 
 public class Arrow extends Canvas {
+	
 	protected boolean state;
 
 	public boolean isState() {
@@ -43,18 +43,15 @@ public class Arrow extends Canvas {
 				else
 					   image = new Image(getDisplay(),red);
 
-			     int imageWidth = image.getBounds().width;
-			     int imageHeight = image.getBounds().height;
-			     int width = canvas.getSize().x;
-			     int height = canvas.getSize().y;
+			    int imageWidth = image.getBounds().width;
+			    int imageHeight = image.getBounds().height;
+			    int width = canvas.getSize().x;
+			    int height = canvas.getSize().y;
 
-			     e.gc.drawImage(image,0,0,imageWidth,imageHeight,0,0,width,height);
-					canvas.getParent().redraw();
-				
+			    e.gc.drawImage(image,0,0,imageWidth,imageHeight,0,0,width,height);
+				canvas.getParent().redraw();
 				  
 			}
-				      
-				
 		});
     	
 	}

@@ -2,10 +2,7 @@ package cliView;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
-import java.util.Observable;
-
 import view.ObservableCommonView;
-import view.View;
 
 public abstract class ObservableCommonCLIView extends ObservableCommonView {
 

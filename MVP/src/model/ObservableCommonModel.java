@@ -21,7 +21,7 @@ public abstract class ObservableCommonModel extends Observable implements Model{
 		mazeMap = new HashMap<String, Maze3d>();
 		solutionMap = new HashMap<String, Solution<Position>>();
 		charPositionMap= new HashMap<String, Position>();
-		 threadPool = Executors.newCachedThreadPool();
+		threadPool = Executors.newCachedThreadPool();
 	}
 
 }

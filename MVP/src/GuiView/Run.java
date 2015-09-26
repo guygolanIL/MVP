@@ -1,8 +1,4 @@
 package GuiView;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import algorithms.mazeGenerators.Maze3d;
 
 public class Run {

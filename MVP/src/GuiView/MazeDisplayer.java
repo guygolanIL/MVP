@@ -38,18 +38,20 @@ public abstract class MazeDisplayer extends Canvas{
 		this.mazeData=mazeData;
 		Display.getDefault().syncExec(new Runnable() {
 		    public void run() {
-		redraw();
-		update();
-	}});}
+		    	redraw();
+		    	update();
+		    }
+		});
+	}
 	
 	public void setCharPosition(Position position){
 		this.charPosition=position;
 		Display.getDefault().syncExec(new Runnable() {
 		    public void run() {
-		redraw();
-		update();
-	}});}
-
-
+		    	redraw();
+		    	update();
+		    }
+		});
+	}
 
 }

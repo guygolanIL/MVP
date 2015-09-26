@@ -49,53 +49,53 @@ public class PossibleMoves extends MazeDisplayer {
 			
 			@Override
 			public void paintControl(PaintEvent e) {
-System.out.println("dsd");
+				System.out.println("paint control");
+				
 				if ((charPosition!=null)&&(mazeData!=null))
 				{
 				String[] possibleMoves = mazeData.getPossibleMoves(charPosition);
 				
-				for (String string : possibleMoves) {
-					moves.add(string);
-				}
+					for (String string : possibleMoves) {
+						moves.add(string);
+					}
 								
-				if (moves.contains("UP"))
-					lvlUp.setState(true);
-				else
-					lvlUp.setState(false);
-
-				if (moves.contains("FORWARD"))
-				 up.setState(true);
-				else
-				 up.setState(false);
-
-				if (moves.contains("DOWN"))
-				lvlDown.setState(true);
-				else
-				lvlDown.setState(false);
-				
-
-				if (moves.contains("LEFT"))
-				left.setState(true);
-				else
-				left.setState(false);
-				
-
-				if (moves.contains("RIGHT"))
-				right.setState(true); 
-				else
-					right.setState(false);
-				
-				if (moves.contains("BACKWARD"))
-				down.setState(true);
-				else
-					down.setState(false);
-		
+					if (moves.contains("UP"))
+						lvlUp.setState(true);
+					else
+						lvlUp.setState(false);
+	
+					if (moves.contains("FORWARD"))
+					 up.setState(true);
+					else
+					 up.setState(false);
+	
+					if (moves.contains("DOWN"))
+					lvlDown.setState(true);
+					else
+					lvlDown.setState(false);
+					
+	
+					if (moves.contains("LEFT"))
+					left.setState(true);
+					else
+					left.setState(false);
+					
+	
+					if (moves.contains("RIGHT"))
+					right.setState(true); 
+					else
+						right.setState(false);
+					
+					if (moves.contains("BACKWARD"))
+					down.setState(true);
+					else
+						down.setState(false);
+			
 				}
 			}
 		});
 		
 	}
-
 
 }
 

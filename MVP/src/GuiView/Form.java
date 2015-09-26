@@ -35,43 +35,40 @@ public class Form<T> extends BasicWindow {
 		Button saveButton=new Button(shell, SWT.PUSH);
 		saveButton.setText("  Save  ");
 		saveButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 2, 1));
-				saveButton.addSelectionListener(new SelectionListener() {
+		saveButton.addSelectionListener(new SelectionListener() {
 					
 					@Override
 					public void widgetSelected(SelectionEvent arg0) {
 						try {
 							created=(T) format.getConstructor().newInstance();
 					
-						for (Field field : fields) {
-							System.out.println(field.getName());
-							String tmp = hm.get(field.getName()).getText();
-							
-							System.out.println(tmp);
-							String type = field.getType().getSimpleName();
-							switch (type)
-							{
-							
-							case "int":
-								field.set(created,Integer.parseInt(tmp));
-								break;
-							case "String":
-							case "char[]":
-								field.set(created,tmp);
-								break;
-							} 
-						}
+							for (Field field : fields) {
+								System.out.println(field.getName());
+								String tmp = hm.get(field.getName()).getText();
+								
+								System.out.println(tmp);
+								String type = field.getType().getSimpleName();
+								switch (type)
+								{
+								
+								case "int":
+									field.set(created,Integer.parseInt(tmp));
+									break;
+								case "String":
+								case "char[]":
+									field.set(created,tmp);
+									break;
+								} 
+							}
 						}
 						catch (IllegalArgumentException | IllegalAccessException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-							}
-					 catch (InstantiationException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+						}
+						catch (InstantiationException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
-							
-						
-						
+						}	
 					}
 					
 					@Override
@@ -79,17 +76,13 @@ public class Form<T> extends BasicWindow {
 						// TODO Auto-generated method stub
 						
 					}
-				});
-		
-		
+				});	
 	}
 
 	@Override
 	void initWidgets() {
 			//shell.setLayout(new GridLayout(2,false));		
-		
-		
-		
+	
 	}
 
 	public T getObject() {

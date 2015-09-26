@@ -73,11 +73,11 @@ public class MyObservableModel extends ObservableCommonModel {
 			
 			if(tmpMaze != null)
 			{
-				controller.display(arrIntToString(tmpMaze.getCrossSectionByX(index)));	
+				//controller.display(arrIntToString(tmpMaze.getCrossSectionByX(index)));	
 			}
 			else
 			{
-				controller.display("Unavailable maze!");
+				//controller.display("Unavailable maze!");
 			}		
 		}
 
@@ -88,11 +88,11 @@ public class MyObservableModel extends ObservableCommonModel {
 			
 			if(tmpMaze != null)
 			{
-				controller.display(arrIntToString(tmpMaze.getCrossSectionByY(index)));	
+				//controller.display(arrIntToString(tmpMaze.getCrossSectionByY(index)));	
 			}
 			else
 			{
-				controller.display("Unavailable maze!");
+				//controller.display("Unavailable maze!");
 			}		
 			
 		}
@@ -103,11 +103,11 @@ public class MyObservableModel extends ObservableCommonModel {
 			
 			if(tmpMaze != null)
 			{
-				controller.display(arrIntToString(tmpMaze.getCrossSectionByZ(index)));	
+				//controller.display(arrIntToString(tmpMaze.getCrossSectionByZ(index)));	
 			}
 			else
 			{
-				controller.display("Unavailable maze!");
+				//controller.display("Unavailable maze!");
 			}		
 			
 		}
@@ -142,18 +142,18 @@ public class MyObservableModel extends ObservableCommonModel {
 				try {
 					MyCompressorOutputStream tmpCompressor = new MyCompressorOutputStream(new FileOutputStream(fileName));
 					tmpCompressor.write(tmpMaze.toByteArray());
-					tmpCompressor.close();									//compressing the maze into and writing it to the file.
-					controller.display(name + " maze saved to " + fileName + ".");
+					tmpCompressor.close();								//compressing the maze into and writing it to the file.
+					//controller.display(name + " maze saved to " + fileName + ".");
 				} catch (FileNotFoundException e) {
-					controller.display("wrong file path");
+					//controller.display("wrong file path");
 				} catch (IOException e)
 				{
-					controller.display("general error");
+					//controller.display("general error");
 				}
 			}
 			else
 			{
-				controller.display("Unavailable maze!");
+				//controller.display("Unavailable maze!");
 			}				
 		}
 
@@ -166,21 +166,21 @@ public class MyObservableModel extends ObservableCommonModel {
 					{
 						Maze3d  tmpMaze = new Maze3d(buffer);
 						mazeMap.put(name, tmpMaze);
-						controller.display(name + " maze loaded.");
+						//controller.display(name + " maze loaded.");
 						tmpDecompressor.close();
 					}
 					else
 					{
-						controller.display("the requsted maze is too big!");
+						//controller.display("the requsted maze is too big!");
 					}
 				} 
 				catch (FileNotFoundException e) 
 				{
-					controller.display("wrong file path");
+					//controller.display("wrong file path");
 				} 
 				catch (IOException e)
 				{
-					controller.display("general error");
+					//controller.display("general error");
 				}
 				
 		}
@@ -192,11 +192,11 @@ public class MyObservableModel extends ObservableCommonModel {
 			Maze3d tempMaze = mazeMap.get(name);
 			if(tempMaze!=null)
 			{
-				controller.display("the size of " + name  + " maze in the memory is: "+(tempMaze.getxAxis()* tempMaze.getyAxis()*tempMaze.getzAxis()+9)+".");
+				//controller.display("the size of " + name  + " maze in the memory is: "+(tempMaze.getxAxis()* tempMaze.getyAxis()*tempMaze.getzAxis()+9)+".");
 			}
 			else
 			{
-				controller.display(name+" is Unavailable!");
+				//controller.display(name+" is Unavailable!");
 			}
 			
 		}
@@ -212,10 +212,10 @@ public class MyObservableModel extends ObservableCommonModel {
 				try 
 				{
 					compress.write(tmpMaze.toByteArray());    //trying to compress the maze into the buffer.
-					controller.display("the size of " + name + " maze in file is: " + buffer.size());
+					//controller.display("the size of " + name + " maze in file is: " + buffer.size());
 				} 
 				catch (IOException e) {
-					controller.display("general error");
+					//controller.display("general error");
 				}
 				finally {
 					try 
@@ -229,7 +229,7 @@ public class MyObservableModel extends ObservableCommonModel {
 			}
 			else
 			{
-				controller.display("Unavailable maze!");
+				//controller.display("Unavailable maze!");
 			}	
 			
 		}
@@ -258,15 +258,15 @@ public class MyObservableModel extends ObservableCommonModel {
 							break;
 							
 						default :
-							controller.display(algorithm+" is not a valid algorithm! \nValid algorithms are : <BFS>, <AstarManhattan>, <AstarAirDistance>.");
+							//controller.display(algorithm+" is not a valid algorithm! \nValid algorithms are : <BFS>, <AstarManhattan>, <AstarAirDistance>.");
 							return;
 						}
 						solutionMap.put(name,alg.search(new MazeDomain(tmpMaze)));		//inserting the Solution into the solution map.
-						controller.display("solution for " +name+ " is ready");
+						//controller.display("solution for " +name+ " is ready");
 					}
 					else
 					{
-						controller.display(name+ " maze is unavailable!");
+						//controller.display(name+ " maze is unavailable!");
 					}
 					
 								
@@ -296,10 +296,10 @@ public class MyObservableModel extends ObservableCommonModel {
 				if (!threadPool.awaitTermination(5,TimeUnit.SECONDS ))
 				{
 					threadPool.shutdownNow();
-//					presenter.get.display("threads terminated violently!");
+					//presenter.get.display("threads terminated violently!");
 				}
 				//else
-//					controller.display("all threads terminated!");
+					//controller.display("all threads terminated!");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}	

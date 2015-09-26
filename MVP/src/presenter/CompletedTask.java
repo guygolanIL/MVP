@@ -4,7 +4,7 @@ import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
 
-public class CompletedTask extends CommonCommand implements Command {
+public class CompletedTask extends CommonCommand {
 
 	public CompletedTask(Presenter presenter) {
 		super(presenter);
@@ -13,7 +13,7 @@ public class CompletedTask extends CommonCommand implements Command {
 
 	@Override
 	public void doCommand(String param) {
-			String[] s = param.split(" ");
+		String[] s = param.split(" ");
 		if ((s[0].equals("maze"))&&(s.length > 2))		//validates if there are no missing parameters
 		{
 			Maze3d maze = presenter.getModel().getMaze(s[2]);

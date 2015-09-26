@@ -43,5 +43,4 @@ public abstract class BasicWindow implements Runnable{
 		shell.dispose(); 
 	}
 	
-
 }

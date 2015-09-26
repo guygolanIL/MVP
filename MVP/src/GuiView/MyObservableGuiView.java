@@ -8,9 +8,10 @@ import algorithms.mazeGenerators.Position;
 
 public class MyObservableGuiView extends ObservableCommonGuiView {
 
-	MazeWindow mainWindow;
-	public MyObservableGuiView(String title, int width, int hight) {
-		mainWindow = new MazeWindow(title, width, hight);
+	protected MazeWindow mainWindow;
+	
+	public MyObservableGuiView(String title, int width, int height) {
+		mainWindow = new MazeWindow(title, width, height);
 		mainWindow.setExitListener(new SelectionListener() {
 			
 			@Override

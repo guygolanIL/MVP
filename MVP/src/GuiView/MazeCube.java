@@ -7,12 +7,7 @@ import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
@@ -42,7 +37,7 @@ public class MazeCube extends MazeDisplayer {
 				int canvasHeight = getSize().y;
 				
 				int[] points = {(int)(canvasWidth*0.5),0 ,canvasWidth,(int)(canvasHeight*0.2),(int)(canvasWidth*0.6),(int)(canvasHeight*0.4),0,(int)(canvasHeight*0.2)};
-			//	int[] x = {(int)(canvasWidth*0.5),0,canvasWidth,(int)(canvasWidth*0.5)} ;
+				//int[] x = {(int)(canvasWidth*0.5),0,canvasWidth,(int)(canvasWidth*0.5)} ;
 				//int[] y = {0,(int)(canvasHeight*0.2),(int)(canvasHeight*0.2),(int)(canvasHeight*0.4)};
 				e.gc.drawPolygon(points);
 				int[] points2 = {0,(int)(canvasHeight*0.2),0,(int)(canvasHeight*0.8),(int)(canvasWidth*0.6),canvasHeight,canvasWidth,(int)(canvasHeight*0.8),(int)(canvasWidth*0.5),(int)(canvasHeight*0.6),0,(int)(canvasHeight*0.8),(int)(canvasWidth*0.5),(int)(canvasHeight*0.6),(int)(canvasWidth*0.5),0,(int)(canvasWidth*0.6),(int)(canvasHeight*0.4),(int)(canvasWidth*0.5),0,(int)(canvasHeight*0.8)};
@@ -50,20 +45,14 @@ public class MazeCube extends MazeDisplayer {
 				e.gc.drawLine((int)(canvasWidth*0.6), canvasHeight, (int)(canvasWidth*0.6), (int)(canvasHeight*0.4));
 				e.gc.drawPolygon(points2);
 				
-				 Image image = new Image(getDisplay(),"resources/locationIcon.png");
-				  int imageWidth = image.getBounds().width;
-				     int imageHeight = image.getBounds().height;
-				     int width = (int) Math.round(getSize().x*0.1);
-				     int height = (int) Math.round(getSize().y*0.2);
-				     e.gc.drawImage(image,0,0,imageWidth,imageHeight,(int)Math.round(getSize().x*0.5),(int)Math.round(getSize().y*0.5),width,height);
-						
-					 				        	  
-		          
-				
+				Image image = new Image(getDisplay(),"resources/locationIcon.png");
+				int imageWidth = image.getBounds().width;
+				int imageHeight = image.getBounds().height;
+				int width = (int) Math.round(getSize().x*0.1);
+				int height = (int) Math.round(getSize().y*0.2);
+				e.gc.drawImage(image,0,0,imageWidth,imageHeight,(int)Math.round(getSize().x*0.5),(int)Math.round(getSize().y*0.5),width,height);
 				
 			}
 		});
 	}
-
-
 }
