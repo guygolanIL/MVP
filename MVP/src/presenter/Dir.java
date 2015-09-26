@@ -23,11 +23,14 @@ public class Dir extends CommonCommand{
 		if(param != null)
 		{
 			String[] n = new File(param).list();
-			
+			if(n!=null)
+				presenter.getView().display(n);
+			else
+				presenter.getView().displayError("path error.");
 		}
 		else
 		{
-			Presenter.display("Missing parameters");
+			presenter.getView().displayError("Missing parameters");
 		}
 		
 	}

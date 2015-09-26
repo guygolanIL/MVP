@@ -7,8 +7,8 @@ package presenter;
  */
 public class Display extends CommonCommand {
 
-	public Display(Controller controller) {		//Ctor
-		super(controller);
+	public Display(Presenter presenter) {		//Ctor
+		super(presenter);
 	}
 	
 	/**
@@ -21,36 +21,36 @@ public class Display extends CommonCommand {
 		if ((s[0].equals("cross"))&&(s.length > 5))		//validates if there are no missing parameters
 		{
 			try{
-			switch (s[3])
-			{
-			case "x":
-			case "X":
-				controller.displayCrossSectionByX(Integer.parseInt(s[4]),s[6]);
-				break;
-			case "y":
-			case "Y":
-				controller.displayCrossSectionByY(Integer.parseInt(s[4]),s[6]);
-				break;
-			case "z":		
-			case "Z":
-				controller.displayCrossSectionByZ(Integer.parseInt(s[4]),s[6]);
-				break;
-			default:
-				controller.display("Invalid parameter");
-			}
+				switch (s[3])
+				{
+				case "x":
+				case "X":
+					presenter.getView().displayCrossSectionByX(Integer.parseInt(s[4]),s[6]);
+					break;
+				case "y":
+				case "Y":
+					presenter.getView().displayCrossSectionByY(Integer.parseInt(s[4]),s[6]);
+					break;
+				case "z":		
+				case "Z":
+					presenter.getView().displayCrossSectionByZ(Integer.parseInt(s[4]),s[6]);
+					break;
+				default:
+					presenter.getView().displayError("Invalid parameter");
+				}
 			}catch (NumberFormatException e) {
 				
-				controller.display("Invalid parameters.");
+				presenter.getView().displayError("Invalid parameters.");
 
 			}
 				 
 		}
 		else if ((s[0].equals("solution"))&&(s.length > 1))		//checks if the first parameter is "solution"
 		{
-			controller.displaySolution(s[1]);
+			presenter.getView().displaySolution(presenter.getModel().getSolution(s[1]));
 		}
 		else
-		controller.mazeDisplay(param);
+			presenter.getView().display(presenter.getModel().getMaze(param));
 	}
 
 }

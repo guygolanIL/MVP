@@ -2,6 +2,7 @@ package view;
 
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
+import algorithms.search.Solution;
 
 public interface View {
 
@@ -12,6 +13,11 @@ public interface View {
 	public void start();
 	void exitRequest();
 	public void display(Position charPosition);
+	public void displayError(String string);
+	public void displayCrossSectionByX(int parseInt, String string);
+	public void displayCrossSectionByY(int parseInt, String string);
+	public void displayCrossSectionByZ(int parseInt, String string);
+	public void displaySolution(Solution<Position> result);
 	
 
 }

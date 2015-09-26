@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import algorithms.mazeGenerators.Maze3d;
@@ -180,5 +181,11 @@ public class MazeWindow extends BasicWindow{
 		this.charPosition = charPosition;
 		widgetsRefresh();
 		
+	}
+	public void displayError(String string) {
+		
+		MessageBox errorBox =  new MessageBox(this.shell, SWT.ICON_ERROR); 
+		errorBox.setMessage(string);
+		errorBox.open();
 	}
 }

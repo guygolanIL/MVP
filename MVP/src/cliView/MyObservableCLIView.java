@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
+import algorithms.search.Solution;
 
 public class MyObservableCLIView extends ObservableCommonCLIView {
 
@@ -40,10 +41,17 @@ public class MyObservableCLIView extends ObservableCommonCLIView {
 
 	@Override
 	public void display(String[] strings) {
-		for (String string : strings) 
-			out.println(string);
-		
-		out.flush();
+		if(strings.length > 0 )
+		{
+			for (String string : strings) 
+				out.println(string);
+			
+			out.flush();
+		}
+		else
+		{
+			display("Empty Directory.");
+		}
 	}
 
 	@Override
@@ -65,13 +73,47 @@ public class MyObservableCLIView extends ObservableCommonCLIView {
 
 	@Override
 	public void display(Maze3d maze) {
-		// TODO Auto-generated method stub
+		out.println(maze);
+		out.flush();
 		
 	}
 
 	@Override
 	public void display(Position charPosition) {
+		out.println(charPosition);
+		out.flush();
+		
+	}
+
+	@Override
+	public void displayError(String string) {
+		out.println("Error: "+string);
+		out.flush();
+	}
+
+	@Override
+	public void displayCrossSectionByX(int parseInt, String string) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayCrossSectionByY(int parseInt, String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayCrossSectionByZ(int parseInt, String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void displaySolution(Solution<Position> result) {
+		out.println(result);
+		out.flush();
 		
 	}
 	

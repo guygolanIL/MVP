@@ -83,4 +83,10 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 		
 	}
 
+	@Override
+	public void displayError(String string) {
+		mainWindow.displayError(string);
+		
+	}
+
 }

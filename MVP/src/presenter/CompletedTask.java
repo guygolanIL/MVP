@@ -24,16 +24,20 @@ public class CompletedTask extends CommonCommand {
 				presenter.getView().display(presenter.getModel().getCharPosition(s[2]));
 			}
 			else
-				presenter.getView().display("Unavailable maze!");
+				presenter.getView().displayError("Unavailable maze!");
 				 
 		}
 		else if ((s[0].equals("solution"))&&(s.length > 3))		//checks if the first parameter is "solution"
 		{
 			Solution<Position> result = presenter.getModel().getSolution(s[1]);
 			if (result != null)
-				presenter.getView().display(result.toString());
+				presenter.getView().displaySolution(result);
 			else
-				presenter.getView().display("Unavailable solution!");
+				presenter.getView().displayError("Unavailable solution!");
+		}
+		else if((s[0].equals("fileSize"))&&(s.length > 2))
+		{
+			presenter.getView().display(s[1]+ " file size is: "+s[2]);
 		}
 		
 	}

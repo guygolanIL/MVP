@@ -30,7 +30,7 @@ public class Generate extends CommonCommand {
 		}
 		else
 		{
-			presenter.getView().display("Missing parameters.");
+			presenter.getView().displayError("Missing parameters.");
 		}
 		
 

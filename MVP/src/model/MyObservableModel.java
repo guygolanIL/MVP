@@ -212,6 +212,8 @@ public class MyObservableModel extends ObservableCommonModel {
 				try 
 				{
 					compress.write(tmpMaze.toByteArray());    //trying to compress the maze into the buffer.
+					setChanged();
+					notifyObservers("completedTask fileSize "+name+" "+buffer.size());
 					//controller.display("the size of " + name + " maze in file is: " + buffer.size());
 				} 
 				catch (IOException e) {

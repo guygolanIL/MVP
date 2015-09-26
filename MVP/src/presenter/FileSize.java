@@ -7,8 +7,8 @@ package presenter;
  */
 public class FileSize extends CommonCommand {
 
-	public FileSize(Controller controller) {	//Ctor
-		super(controller);
+	public FileSize(Presenter presenter) {	//Ctor
+		super(presenter);
 	}
 
 	/**
@@ -22,11 +22,11 @@ public class FileSize extends CommonCommand {
 		
 		if(s.length > 1)
 		{
-			controller.fileSize(s[1]);
+			presenter.getModel().fileSize(s[1]);
 		}
 		else
 		{
-			controller.display("Missing parameters.");
+			presenter.getView().displayError("Missing parameters.");
 		}
 
 	}

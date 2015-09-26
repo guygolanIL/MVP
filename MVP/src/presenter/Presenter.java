@@ -21,14 +21,13 @@ public class Presenter implements Observer {
 		this.setView(view);
 		
 		this.commandMap = new HashMap<String , Command>();		//inserting all the Commands into the map
-		//commandMap.put("test", new TestCommand(this));
 		commandMap.put("dir", new Dir(this));
 		commandMap.put("generate", new Generate(this));
-		//commandMap.put("display", new Display(this));
+		commandMap.put("display", new Display(this));
 //		commandMap.put("save", new Save(this));
 //		commandMap.put("load", new Load(this));
 //		commandMap.put("maze", new Size(this));
-//		commandMap.put("file", new FileSize(this));
+		commandMap.put("file", new FileSize(this));
 //		commandMap.put("solve", new Solve(this));
 		commandMap.put("exit", new Exit(this));
 		commandMap.put("completedTask", new CompletedTask(this));
@@ -48,7 +47,7 @@ public class Presenter implements Observer {
 			}
 			else if (!identifier.equals("exit"))
 			{
-				getView().display("Missing parameters.");
+				getView().displayError("Missing parameters.");
 			}
 			else
 			{
@@ -57,12 +56,10 @@ public class Presenter implements Observer {
 		}
 		else
 		{
-			
-			getView().display(identifier + " is not a valid command.");
-			
+			getView().display(identifier + " is not a valid command.");	
 		}
 		
-}
+	}
 
 	public Model getModel() {
 		return model;
@@ -79,10 +76,8 @@ public class Presenter implements Observer {
 	public void setView(View view) {
 		this.view = view;
 	}
-			
-		
-			
-	}
+					
+}
 	
 
 
