@@ -264,14 +264,20 @@ public class MyObservableModel extends ObservableCommonModel {
 							break;
 							
 						default :
+							setChanged();
+							notifyObservers("completedTask error "+algorithm+" is not a valid algorithm!\n Valid algorithms are: <BFS>, <AstarManhattan>, <AstarAirDistance>. ");
 							//controller.display(algorithm+" is not a valid algorithm! \nValid algorithms are : <BFS>, <AstarManhattan>, <AstarAirDistance>.");
 							return;
 						}
 						solutionMap.put(name,alg.search(new MazeDomain(tmpMaze)));		//inserting the Solution into the solution map.
+						setChanged();
+						notifyObservers("completedTask solution "+name);
 						//controller.display("solution for " +name+ " is ready");
 					}
 					else
 					{
+						setChanged();
+						notifyObservers("completedTask error '"+name+"' is unavailable maze");
 						//controller.display(name+ " maze is unavailable!");
 					}
 					
@@ -281,8 +287,8 @@ public class MyObservableModel extends ObservableCommonModel {
 		}
 
 		@Override
-		public Solution<Position> getSolution(String name) {
-			Solution<Position>  tmp = solutionMap.get(name);
+		public Solution<Position> getSolution(String mazeName) {
+			Solution<Position>  tmp = solutionMap.get(mazeName);
 			
 			if(tmp != null)
 			{

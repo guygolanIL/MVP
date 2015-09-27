@@ -7,8 +7,8 @@ package presenter;
  */
 public class Solve extends CommonCommand {
 
-	public Solve(Controller controller) {		//Ctor
-		super(controller);
+	public Solve(Presenter presenter) {		//Ctor
+		super(presenter);
 	}
 
 	/**
@@ -22,11 +22,11 @@ public class Solve extends CommonCommand {
 		
 		if(s.length > 1)
 		{
-			controller.solve(s[0],s[1]);
+			presenter.getModel().solve(s[0],s[1]);
 		}
 		else
 		{
-			controller.display("Missing parameters.");
+			presenter.getView().displayError("Missing parameters.");
 		}
 	}
 

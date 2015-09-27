@@ -28,7 +28,7 @@ public class Presenter implements Observer {
 //		commandMap.put("load", new Load(this));
 		commandMap.put("maze", new Size(this));
 		commandMap.put("file", new FileSize(this));
-//		commandMap.put("solve", new Solve(this));
+		commandMap.put("solve", new Solve(this));
 		commandMap.put("exit", new Exit(this));
 		commandMap.put("completedTask", new CompletedTask(this));
 	}

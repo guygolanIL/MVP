@@ -27,7 +27,7 @@ public class CompletedTask extends CommonCommand {
 				presenter.getView().displayError("Unavailable maze!");
 				 
 		}
-		else if ((s[0].equals("solution"))&&(s.length > 3))		//checks if the first parameter is "solution"
+		else if ((s[0].equals("solution"))&&(s.length > 1))		//checks if the first parameter is "solution"
 		{
 			Solution<Position> result = presenter.getModel().getSolution(s[1]);
 			if (result != null)
