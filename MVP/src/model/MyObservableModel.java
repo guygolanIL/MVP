@@ -169,25 +169,33 @@ public class MyObservableModel extends ObservableCommonModel {
 		public void load(String fileName, String name) {
 			try {
 					MyDecompressorInputStream tmpDecompressor = new MyDecompressorInputStream(new FileInputStream(fileName));
-					byte [] buffer = new byte[35*35*35]; 	//15 is the maximum supported maze in the compressor
+					byte [] buffer = new byte[35*35*35]; 	//35*35*35 is the maximum supported maze in the compressor
 					if (tmpDecompressor.read(buffer)==-1)
 					{
 						Maze3d  tmpMaze = new Maze3d(buffer);
 						mazeMap.put(name, tmpMaze);
+						setChanged();
+						notifyObservers("completedTask load");
 						//controller.display(name + " maze loaded.");
 						tmpDecompressor.close();
 					}
 					else
 					{
+						setChanged();
+						notifyObservers("completedTask error The requsted maze is too big!");
 						//controller.display("the requsted maze is too big!");
 					}
 				} 
 				catch (FileNotFoundException e) 
 				{
+					setChanged();
+					notifyObservers("completedTask error wrong file path.");
 					//controller.display("wrong file path");
 				} 
 				catch (IOException e)
 				{
+					setChanged();
+					notifyObservers("completedTask error IO error.");
 					//controller.display("general error");
 				}
 				

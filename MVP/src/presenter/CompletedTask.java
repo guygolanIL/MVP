@@ -39,6 +39,10 @@ public class CompletedTask extends CommonCommand {
 		{
 			presenter.getView().display("Save completed.");
 		}
+		else if(s[0].equals("load"))
+		{
+			presenter.getView().display("Load completed.");
+		}
 		else if((s[0].equals("fileSize"))&&(s.length > 2))
 		{
 			presenter.getView().display(s[1]+ " file size is: "+s[2]);

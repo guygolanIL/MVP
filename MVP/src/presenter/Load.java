@@ -7,8 +7,8 @@ package presenter;
  */
 public class Load extends CommonCommand {
 
-	public Load(Controller controller) {	//Ctor
-		super(controller);
+	public Load(Presenter presenter) {	//Ctor
+		super(presenter);
 	}
 
 	/**
@@ -21,11 +21,11 @@ public class Load extends CommonCommand {
 		
 		if(s.length > 2)
 		{
-			controller.load(s[1],s[2]);
+			presenter.getModel().load(s[1],s[2]);
 		}
 		else
 		{
-			controller.display("Missing parameters.");
+			presenter.getView().displayError("Missing parameters.");
 		}
 
 	}
