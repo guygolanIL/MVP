@@ -143,16 +143,24 @@ public class MyObservableModel extends ObservableCommonModel {
 					MyCompressorOutputStream tmpCompressor = new MyCompressorOutputStream(new FileOutputStream(fileName));
 					tmpCompressor.write(tmpMaze.toByteArray());
 					tmpCompressor.close();								//compressing the maze into and writing it to the file.
+					setChanged();
+					notifyObservers("completedTask save");
 					//controller.display(name + " maze saved to " + fileName + ".");
 				} catch (FileNotFoundException e) {
+					setChanged();
+					notifyObservers("completedTask error '"+fileName+"' is not a valid file name.");
 					//controller.display("wrong file path");
 				} catch (IOException e)
 				{
+					setChanged();
+					notifyObservers("completedTask error IO error.");
 					//controller.display("general error");
 				}
 			}
 			else
 			{
+				setChanged();
+				notifyObservers("completedTask error '"+name+"' is unavailable maze");
 				//controller.display("Unavailable maze!");
 			}				
 		}
@@ -199,7 +207,7 @@ public class MyObservableModel extends ObservableCommonModel {
 			else
 			{
 				setChanged();
-				notifyObservers("completedTask error unavailable Maze");
+				notifyObservers("completedTask error '"+name+"' is unavailable maze");
 			}
 			
 		}
@@ -234,7 +242,7 @@ public class MyObservableModel extends ObservableCommonModel {
 			else
 			{
 				setChanged();
-				notifyObservers("completedTask error unavailable Maze");
+				notifyObservers("completedTask error '"+name+"' is unavailable maze");
 				//controller.display("Unavailable maze!");
 			}	
 			

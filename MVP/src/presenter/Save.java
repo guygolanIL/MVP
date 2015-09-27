@@ -7,8 +7,8 @@ package presenter;
  */
 public class Save extends CommonCommand {
 
-	public Save(Controller controller) {	//Ctor
-		super(controller);
+	public Save(Presenter presenter) {	//Ctor
+		super(presenter);
 	}
 
 	
@@ -22,11 +22,11 @@ public class Save extends CommonCommand {
 		
 		if(s.length > 2)
 		{
-			controller.save(s[1],s[2]);
+			presenter.getModel().save(s[1],s[2]);
 		}
 		else
 		{
-			controller.display("Missing parameters.");
+			presenter.getView().displayError("Missing parameters.");
 		}
 		
 	}
