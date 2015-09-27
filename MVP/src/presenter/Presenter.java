@@ -26,7 +26,7 @@ public class Presenter implements Observer {
 		commandMap.put("display", new Display(this));
 //		commandMap.put("save", new Save(this));
 //		commandMap.put("load", new Load(this));
-//		commandMap.put("maze", new Size(this));
+		commandMap.put("maze", new Size(this));
 		commandMap.put("file", new FileSize(this));
 //		commandMap.put("solve", new Solve(this));
 		commandMap.put("exit", new Exit(this));
@@ -56,7 +56,7 @@ public class Presenter implements Observer {
 		}
 		else
 		{
-			getView().display(identifier + " is not a valid command.");	
+			getView().displayError(identifier + " is not a valid command.");	
 		}
 		
 	}

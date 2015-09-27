@@ -11,6 +11,7 @@ public class Maze3D extends MazeDisplayer {
 	public int characterY=2;
 	public int exitX=0;
 	public int exitY=2;
+	public int[][] mazeData;
 	
 	private void paintCube(double[] p,double h,PaintEvent e){
         int[] f=new int[p.length];
@@ -136,7 +137,7 @@ public class Maze3D extends MazeDisplayer {
 		characterY=row;
 		moveCharacter(col,row);
 	}
-	@Override
+	
 	public void setCurrentPosition(int x, int y, int z) {
 		// TODO Auto-generated method stub
 		

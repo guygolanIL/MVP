@@ -39,9 +39,13 @@ public class CompletedTask extends CommonCommand {
 		{
 			presenter.getView().display(s[1]+ " file size is: "+s[2]);
 		}
-		
+		else if((s[0].equals("mazeSize")) && (s.length > 1))
+		{
+			presenter.getView().display("maze size is: "+s[1]);
+		}
+		else if(s[0].equals("error") && (s.length > 1))
+		{
+			presenter.getView().displayError(param.substring(6));
+		}
 	}
-
-	
-
 }

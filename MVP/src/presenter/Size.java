@@ -7,8 +7,8 @@ package presenter;
  */
 public class Size extends CommonCommand {
 
-	public Size(Controller controller) {	//Ctor
-		super(controller);
+	public Size(Presenter presenter) {	//Ctor
+		super(presenter);
 	}
 
 	/**
@@ -22,11 +22,11 @@ public class Size extends CommonCommand {
 		
 		if(s.length > 1)
 		{
-			controller.size(s[1]);
+			presenter.getModel().mazeSize(s[1]);
 		}
 		else
 		{
-			controller.display("Missing parameters.");
+			presenter.getView().displayError("Missing parameters.");
 		}
 
 	}

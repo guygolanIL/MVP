@@ -55,12 +55,12 @@ public interface Model {
 	 * Checks the memory size of a Maze3d.
 	 * @param name - Maze3d's name.
 	 */
-	void size(String name);
+	void mazeSize(String name);
 	/**
 	 * Checks the compressed size of a Maze3d in a file.
 	 * @param name - the Maze3d's name.
 	 */
-	void fileSize(String name);
+	void calculateFileSize(String name);
 	/**
 	 * Solve a Maze3d.
 	 * @param name - Maze3d's name.

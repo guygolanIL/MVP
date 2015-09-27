@@ -54,11 +54,6 @@ public class MyObservableCLIView extends ObservableCommonCLIView {
 		}
 	}
 
-	@Override
-	public void display(String string) {
-		out.println(string);
-		out.flush();
-	}
 
 	@Override
 	public void exit() {
@@ -72,17 +67,21 @@ public class MyObservableCLIView extends ObservableCommonCLIView {
 	}
 
 	@Override
+	public void display(String string) {
+		out.println(string);
+		out.flush();
+	}
+	
+	@Override
 	public void display(Maze3d maze) {
 		out.println(maze);
 		out.flush();
-		
 	}
 
 	@Override
 	public void display(Position charPosition) {
 		out.println(charPosition);
 		out.flush();
-		
 	}
 
 	@Override

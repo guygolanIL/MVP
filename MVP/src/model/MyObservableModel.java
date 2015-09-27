@@ -186,23 +186,26 @@ public class MyObservableModel extends ObservableCommonModel {
 		}
 
 		@Override
-		public void size(String name) {
+		public void mazeSize(String name) {
 			
 			
 			Maze3d tempMaze = mazeMap.get(name);
 			if(tempMaze!=null)
 			{
-				//controller.display("the size of " + name  + " maze in the memory is: "+(tempMaze.getxAxis()* tempMaze.getyAxis()*tempMaze.getzAxis()+9)+".");
+				int size = tempMaze.getxAxis()* tempMaze.getyAxis()*tempMaze.getzAxis()+9;
+				setChanged();
+				notifyObservers("completedTask mazeSize "+size);
 			}
 			else
 			{
-				//controller.display(name+" is Unavailable!");
+				setChanged();
+				notifyObservers("completedTask error unavailable Maze");
 			}
 			
 		}
 
 		@Override
-		public void fileSize(String name) {
+		public void calculateFileSize(String name) {
 			Maze3d  tmpMaze = mazeMap.get(name);
 			
 			if(tmpMaze != null)
@@ -214,7 +217,6 @@ public class MyObservableModel extends ObservableCommonModel {
 					compress.write(tmpMaze.toByteArray());    //trying to compress the maze into the buffer.
 					setChanged();
 					notifyObservers("completedTask fileSize "+name+" "+buffer.size());
-					//controller.display("the size of " + name + " maze in file is: " + buffer.size());
 				} 
 				catch (IOException e) {
 					//controller.display("general error");
@@ -231,6 +233,8 @@ public class MyObservableModel extends ObservableCommonModel {
 			}
 			else
 			{
+				setChanged();
+				notifyObservers("completedTask error unavailable Maze");
 				//controller.display("Unavailable maze!");
 			}	
 			

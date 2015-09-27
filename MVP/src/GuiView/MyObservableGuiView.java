@@ -5,6 +5,7 @@ import org.eclipse.swt.events.SelectionListener;
 
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
+import algorithms.search.Solution;
 
 public class MyObservableGuiView extends ObservableCommonGuiView {
 
@@ -86,6 +87,30 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 	@Override
 	public void displayError(String string) {
 		mainWindow.displayError(string);
+		
+	}
+
+	@Override
+	public void displayCrossSectionByX(int parseInt, String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayCrossSectionByY(int parseInt, String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayCrossSectionByZ(int parseInt, String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displaySolution(Solution<Position> result) {
+		// TODO Auto-generated method stub
 		
 	}
 

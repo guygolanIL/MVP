@@ -22,7 +22,7 @@ public class FileSize extends CommonCommand {
 		
 		if(s.length > 1)
 		{
-			presenter.getModel().fileSize(s[1]);
+			presenter.getModel().calculateFileSize(s[1]);
 		}
 		else
 		{
