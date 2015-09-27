@@ -28,6 +28,8 @@ public class MyObservableCLIView extends ObservableCommonCLIView {
 						String buffer;
 						
 						while(!exit){
+							out.print("Enter Command :> ");
+							out.flush();
 							buffer = in.readLine();
 							setChanged();
 							notifyObservers(buffer);	
