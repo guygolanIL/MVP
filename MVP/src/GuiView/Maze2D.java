@@ -7,11 +7,11 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 
 public class Maze2D extends MazeDisplayer{
-	char crosSection;
+	char crossSection;
 
 	public Maze2D(Composite parent,int style){
 	       super(parent, style);
-	       crosSection = 'x'; //default
+	       crossSection = 'x'; //default
 	       // set a white background   (red, green, blue)
 	       setBackground(new Color(null, 255, 255, 255));
 	       addPaintListener(new PaintListener() {
@@ -29,7 +29,7 @@ public class Maze2D extends MazeDisplayer{
 					{
 						int[][] maze2d = null;
 						int[] position2d = null;
-						switch (crosSection)
+						switch (crossSection)
 				    	{
 					    	case 'x':
 					    		maze2d = mazeData.getCrossSectionByX(charPosition.getX());
