@@ -19,6 +19,7 @@ public class Maze2D extends MazeDisplayer{
 				
 				@Override
 				public void paintControl(PaintEvent e) {
+					System.out.println("Maze2D paintControl");
 					   e.gc.setForeground(new Color(null,0,0,0));
 					   e.gc.setBackground(new Color(null,0,0,0));
 

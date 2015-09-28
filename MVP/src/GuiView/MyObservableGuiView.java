@@ -1,5 +1,8 @@
 package GuiView;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
@@ -13,6 +16,46 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 	
 	public MyObservableGuiView(String title, int width, int height) {
 		mainWindow = new MazeWindow(title, width, height);
+		mainWindow.setKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent key) {
+				switch(key.keyCode)
+				{
+				case SWT.ARROW_UP:
+					System.out.println("up");
+					mainWindow.moveUp();
+					break;
+				case SWT.ARROW_DOWN:
+					System.out.println("down");
+					mainWindow.moveDown();
+					break;
+				case SWT.ARROW_LEFT:
+					System.out.println("left");
+					mainWindow.moveLeft();
+					break;
+				case SWT.ARROW_RIGHT:
+					System.out.println("right");
+					mainWindow.moveRight();
+					break;
+				case SWT.PAGE_UP:
+					System.out.println("lvl up");
+					mainWindow.moveLVLUp();
+					break;
+				case SWT.PAGE_DOWN:
+					System.out.println("lvl down");
+					mainWindow.moveLVLDown();
+					break;
+				}
+				
+			}
+		});
 		mainWindow.setExitListener(new SelectionListener() {
 			
 			@Override
@@ -31,7 +74,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				setChanged();
-				notifyObservers("generate 3d maze gui 15 15 15");
+				notifyObservers("generate 3d maze gui 29 29 29");
 			}
 			
 			@Override
@@ -50,7 +93,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
+		mainWindow.display(string);
 
 	}
 

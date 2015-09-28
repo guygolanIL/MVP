@@ -13,9 +13,9 @@ public class MVPTest {
 
 	public static void main(String[] args) {
 		//CLI:
-		MyObservableCLIView view = new MyObservableCLIView(new BufferedReader(new InputStreamReader(System.in)) , new PrintWriter(System.out));
+		//MyObservableCLIView view = new MyObservableCLIView(new BufferedReader(new InputStreamReader(System.in)) , new PrintWriter(System.out));
 		//GUI:
-		//MyObservableGuiView view = new MyObservableGuiView("MAZE GAME", 800, 650);
+		MyObservableGuiView view = new MyObservableGuiView("MAZE GAME", 800, 650);
 		
 		MyObservableModel model = new MyObservableModel();
 		Presenter p = new Presenter(model,view);

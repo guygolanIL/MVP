@@ -30,6 +30,7 @@ public class MazeCube extends MazeDisplayer {
 			
 			@Override
 			public void paintControl(PaintEvent e) {
+				System.out.println("MazeCube paintControl");
 				Label title = new Label(canvas,SWT.TITLE);
 				title.setText("Your location");
 				//title.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 2));

@@ -25,7 +25,7 @@ public class Generate extends CommonCommand {
 				presenter.getModel().generate(s[2],Integer.parseInt(s[3]),Integer.parseInt(s[4]),Integer.parseInt(s[5]));
 			} catch (NumberFormatException e) {
 				
-				presenter.getView().display("Invalid parameters.");
+				presenter.getView().displayError("Invalid parameters.");
 			}
 		}
 		else

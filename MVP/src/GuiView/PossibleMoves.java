@@ -49,7 +49,7 @@ public class PossibleMoves extends MazeDisplayer {
 			
 			@Override
 			public void paintControl(PaintEvent e) {
-				System.out.println("paint control");
+				System.out.println("PossibleMoves paintControl");
 				
 				if ((charPosition!=null)&&(mazeData!=null))
 				{
@@ -65,31 +65,31 @@ public class PossibleMoves extends MazeDisplayer {
 						lvlUp.setState(false);
 	
 					if (moves.contains("FORWARD"))
-					 up.setState(true);
+						down.setState(true);
 					else
-					 up.setState(false);
+						down.setState(false);
 	
 					if (moves.contains("DOWN"))
-					lvlDown.setState(true);
+						lvlDown.setState(true);
 					else
-					lvlDown.setState(false);
+						lvlDown.setState(false);
 					
 	
 					if (moves.contains("LEFT"))
-					left.setState(true);
-					else
-					left.setState(false);
-					
-	
-					if (moves.contains("RIGHT"))
-					right.setState(true); 
+						right.setState(true);
 					else
 						right.setState(false);
 					
-					if (moves.contains("BACKWARD"))
-					down.setState(true);
+	
+					if (moves.contains("RIGHT"))
+						left.setState(true); 
 					else
-						down.setState(false);
+						left.setState(false);
+					
+					if (moves.contains("BACKWARD"))
+						up.setState(true);
+					else
+						up.setState(false);
 			
 				}
 			}

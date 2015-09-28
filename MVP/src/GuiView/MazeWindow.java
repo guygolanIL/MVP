@@ -2,11 +2,13 @@ package GuiView;
 
 import java.util.ArrayList;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
@@ -23,6 +25,7 @@ public class MazeWindow extends BasicWindow{
 	protected String selectedXMLpropertiesFile;
 	protected SelectionListener exitListener;
 	protected SelectionListener generateListener;
+	protected KeyListener keyListener;
 	ArrayList<MazeDisplayer> widgetsList;
 	
 	public void setMazeData(Maze3d maze)
@@ -34,7 +37,15 @@ public class MazeWindow extends BasicWindow{
 	public void setGenerateListener(SelectionListener generateListener) {
 		this.generateListener = generateListener;
 	}
+	
+	public void setKeyListener(KeyListener keyListener) {
+		this.keyListener = keyListener;
+		
+	}
 
+	public void setExitListener(SelectionListener exitListener) {
+		this.exitListener = exitListener;
+	}
 
 	public MazeWindow( String title, int width, int height) {
 		super(title, width, height);
@@ -43,11 +54,6 @@ public class MazeWindow extends BasicWindow{
 	}
 
 
-	public void setExitListener(SelectionListener exitListener) {
-		this.exitListener = exitListener;
-	}
-
-	
 
 	@Override
 	void initWidgets() {
@@ -159,6 +165,10 @@ public class MazeWindow extends BasicWindow{
 		possibleMoves.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, false, false, 1, 1));
 		widgetsList.add(possibleMoves);
 		
+		for (MazeDisplayer mazeDisplayer : widgetsList) {
+			mazeDisplayer.addKeyListener(keyListener);
+		}
+		
 	}
 	
 	protected void exitRequest() {
@@ -168,11 +178,11 @@ public class MazeWindow extends BasicWindow{
 	
 	public void widgetsRefresh()
 	{
-		for (MazeDisplayer canvas : widgetsList) {
+		for (MazeDisplayer canvasWidget : widgetsList) {
 			if(maze!=null)
-				canvas.setMazeData(maze);
+				canvasWidget.setMazeData(maze);
 			if(charPosition!=null)
-				canvas.setCharPosition(charPosition);
+				canvasWidget.setCharPosition(charPosition);
 			
 		}
 	}
@@ -183,9 +193,48 @@ public class MazeWindow extends BasicWindow{
 		
 	}
 	public void displayError(String string) {
-		
-		MessageBox errorBox =  new MessageBox(this.shell, SWT.ICON_ERROR); 
-		errorBox.setMessage(string);
-		errorBox.open();
+		Display.getDefault().syncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				MessageBox errorBox =  new MessageBox(shell, SWT.ICON_ERROR); 
+				errorBox.setMessage(string);
+				errorBox.setText("Error");
+				errorBox.open();				
+			}
+		});
 	}
+	public void display(String string) {
+		Display.getDefault().syncExec(new Runnable() {
+			
+			@Override
+		    public void run() {
+		    	MessageBox messageBox =  new MessageBox(shell, SWT.ICON_INFORMATION); 
+		    	messageBox.setMessage(string);
+		    	messageBox.setText("hi");
+		    	messageBox.open();		
+		    	
+		    }
+		});
+	}
+	public void moveUp() {
+		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY()-1, this.charPosition.getZ()));
+		
+	}
+	public void moveDown() {
+		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY()+1, this.charPosition.getZ()));		
+	}
+	public void moveLeft() {
+		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY(), this.charPosition.getZ()-1));		
+	}
+	public void moveRight() {
+		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY(), this.charPosition.getZ()+1));		
+	}
+	public void moveLVLUp() {
+		setPositionData(new Position(this.charPosition.getX()+1, this.charPosition.getY(), this.charPosition.getZ()));		
+	}
+	public void moveLVLDown() {
+		setPositionData(new Position(this.charPosition.getX()-1, this.charPosition.getY(), this.charPosition.getZ()));		
+	}
+	
 }
