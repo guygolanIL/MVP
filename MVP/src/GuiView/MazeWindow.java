@@ -151,7 +151,7 @@ public class MazeWindow extends BasicWindow{
 		
 		
 		Button stopButton=new Button(shell, SWT.PUSH);
-		stopButton.setText("  Stop  ");
+		stopButton.setText("  Solve  ");
 		stopButton.setLayoutData(new GridData(SWT.None, SWT.None, false, false, 1, 1));
 		stopButton.setEnabled(false);
 		
