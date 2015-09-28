@@ -17,7 +17,6 @@ public class MazeCube extends MazeDisplayer {
 	
 	public MazeCube(Composite parent, int style) {
 		super(parent, style);
-		borderColor = new Color(getDisplay(), new RGB(0, 0, 0));
 		
 		setBackground(new Color(null, 255, 255, 255));
 //		GridData data = new GridData();

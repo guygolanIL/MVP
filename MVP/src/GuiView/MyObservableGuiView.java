@@ -29,27 +29,27 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 				switch(key.keyCode)
 				{
 				case SWT.ARROW_UP:
-					System.out.println("up");
+					System.out.println("up key pressed");
 					mainWindow.moveUp();
 					break;
 				case SWT.ARROW_DOWN:
-					System.out.println("down");
+					System.out.println("down key pressed");
 					mainWindow.moveDown();
 					break;
 				case SWT.ARROW_LEFT:
-					System.out.println("left");
+					System.out.println("left key pressed");
 					mainWindow.moveLeft();
 					break;
 				case SWT.ARROW_RIGHT:
-					System.out.println("right");
+					System.out.println("right key pressed");
 					mainWindow.moveRight();
 					break;
 				case SWT.PAGE_UP:
-					System.out.println("lvl up");
+					System.out.println("lvl up key pressed");
 					mainWindow.moveLVLUp();
 					break;
 				case SWT.PAGE_DOWN:
-					System.out.println("lvl down");
+					System.out.println("lvl down key pressed");
 					mainWindow.moveLVLDown();
 					break;
 				}

@@ -6,10 +6,12 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 
 public class Arrow extends Canvas {
 	
 	protected boolean state;
+	protected Image image;
 
 	public boolean isState() {
 		return state;
@@ -17,10 +19,10 @@ public class Arrow extends Canvas {
 
 	public void setState(boolean state) {
 		this.state = state;
-//		Display.getDefault().syncExec(new Runnable() {
-//		    public void run() {
-//		    	redraw();
-//		    }});
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {
+		    	redraw();
+		    }});
 	}
 
 	public Arrow(Composite parent,String green ,String red,int style) {
@@ -36,8 +38,8 @@ public class Arrow extends Canvas {
 			
 			@Override
 			public void paintControl(PaintEvent e) {
-				System.out.println("Arror paintControl");
-				Image image;
+				System.out.println("Arrow paintControl");
+				
 				if(state == true)
 					   image = new Image(getDisplay(),green);
 				else
@@ -49,7 +51,7 @@ public class Arrow extends Canvas {
 			    int height = canvas.getSize().y;
 
 			    e.gc.drawImage(image,0,0,imageWidth,imageHeight,0,0,width,height);
-				canvas.getParent().redraw();
+				//canvas.getParent().redraw();
 				  
 			}
 		});
