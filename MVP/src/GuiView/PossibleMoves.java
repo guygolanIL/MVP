@@ -43,13 +43,13 @@ public class PossibleMoves extends MazeDisplayer {
 		Arrow down= new Arrow(this,"resources/downGreen.png","resources/downRed.png", SWT.FILL);
 		down.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 2, 1));
 		
-		ArrayList<String> moves = new ArrayList<String>();
 		
 		addPaintListener(new PaintListener() {
 			
 			@Override
 			public void paintControl(PaintEvent e) {
 				System.out.println("PossibleMoves paintControl");
+				ArrayList<String> moves = new ArrayList<String>();
 				
 				if ((charPosition!=null)&&(mazeData!=null))
 				{
@@ -90,7 +90,8 @@ public class PossibleMoves extends MazeDisplayer {
 						up.setState(true);
 					else
 						up.setState(false);
-			
+					
+					//redraw();
 				}
 			}
 		});

@@ -219,7 +219,6 @@ public class MazeWindow extends BasicWindow{
 	}
 	public void moveUp() {
 		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY()-1, this.charPosition.getZ()));
-		
 	}
 	public void moveDown() {
 		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY()+1, this.charPosition.getZ()));		
