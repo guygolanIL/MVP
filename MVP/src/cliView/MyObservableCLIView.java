@@ -19,7 +19,7 @@ public class MyObservableCLIView extends ObservableCommonCLIView {
 	public void start() {
 		exit = false;
 		
-		new Thread(new Runnable() {					//the user interface runs in an independant thread.
+		new Thread(new Runnable() {					//the user interface runs in an independent thread.
 					
 				@Override
 				public void run() {
@@ -28,7 +28,7 @@ public class MyObservableCLIView extends ObservableCommonCLIView {
 						String buffer;
 						
 						while(!exit){
-							out.print("Enter Command :> ");
+							out.print("Enter Command >> ");
 							out.flush();
 							buffer = in.readLine();
 							setChanged();
