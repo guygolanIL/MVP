@@ -28,12 +28,6 @@ public class MazeWindow extends BasicWindow{
 	protected KeyListener keyListener;
 	ArrayList<MazeDisplayer> widgetsList;
 	
-	public void setMazeData(Maze3d maze)
-	{
-		this.maze = maze;
-		widgetsRefresh();
-	
-	}
 	public void setGenerateListener(SelectionListener generateListener) {
 		this.generateListener = generateListener;
 	}
@@ -192,6 +186,13 @@ public class MazeWindow extends BasicWindow{
 		widgetsRefresh();
 		
 	}
+	
+	public void setMazeData(Maze3d maze){
+		this.maze = maze;
+		widgetsRefresh();
+	
+	}
+	
 	public void displayError(String string) {
 		Display.getDefault().syncExec(new Runnable() {
 			
