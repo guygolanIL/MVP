@@ -22,7 +22,7 @@ public class MVPTest {
 		MyObservableModel model = new MyObservableModel();
 		Presenter p = new Presenter(model,view);
 		
-			view.setDebugMode(true);
+		view.setDebugMode(true);
 		p.setDebugMode(true);
 		
 		model.addObserver(p);

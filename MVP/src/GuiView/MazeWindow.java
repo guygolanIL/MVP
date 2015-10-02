@@ -68,6 +68,7 @@ public class MazeWindow extends BasicWindow{
 		Image image= new Image(display,"resources/background.jpg");
 		shell.setBackgroundImage(image);
 		shell.setBackgroundMode(SWT.INHERIT_FORCE);
+		
 		Menu menuBar = new Menu(shell, SWT.BAR);
 		MenuItem fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 		fileMenuHeader.setText("&File");
