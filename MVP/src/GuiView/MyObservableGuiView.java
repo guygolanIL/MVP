@@ -14,7 +14,9 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 
 	protected MazeWindow mainWindow;
 	
+	
 	public MyObservableGuiView(String title, int width, int height) {
+		super(new Properties());
 		mainWindow = new MazeWindow(title, width, height);
 		mainWindow.setKeyListener(new KeyListener() {
 			
@@ -29,28 +31,40 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 				switch(key.keyCode)
 				{
 				case SWT.ARROW_UP:
-					System.out.println("up key pressed");
-					mainWindow.moveUp();
+					if (properties.isDebugMode() == true)
+						System.out.println("up key pressed");
+					setChanged();
+					notifyObservers("movementRequest UP " + properties.name);
 					break;
 				case SWT.ARROW_DOWN:
-					System.out.println("down key pressed");
-					mainWindow.moveDown();
+					if (properties.isDebugMode() == true)
+						System.out.println("down key pressed");
+					setChanged();
+					notifyObservers("movementRequest DOWN "+ properties.name);
 					break;
 				case SWT.ARROW_LEFT:
-					System.out.println("left key pressed");
-					mainWindow.moveLeft();
+					if (properties.isDebugMode() == true)
+						System.out.println("left key pressed");
+					setChanged();
+					notifyObservers("movementRequest LEFT "+ properties.name);
 					break;
 				case SWT.ARROW_RIGHT:
-					System.out.println("right key pressed");
-					mainWindow.moveRight();
+					if (properties.isDebugMode() == true)
+						System.out.println("right key pressed");
+					setChanged();
+					notifyObservers("movementRequest RIGHT "+ properties.name);
 					break;
 				case SWT.PAGE_UP:
-					System.out.println("lvl up key pressed");
-					mainWindow.moveLVLUp();
+					if (properties.isDebugMode() == true)
+						System.out.println("lvl up key pressed");
+					setChanged();
+					notifyObservers("movementRequest LVLUP "+ properties.name);
 					break;
 				case SWT.PAGE_DOWN:
-					System.out.println("lvl down key pressed");
-					mainWindow.moveLVLDown();
+					if (properties.isDebugMode() == true)
+						System.out.println("lvl down key pressed");
+					setChanged();
+					notifyObservers("movementRequest LVLDOWN "+ properties.name);
 					break;
 				}
 				
@@ -74,7 +88,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				setChanged();
-				notifyObservers("generate 3d maze guy 3 25 51"); //stub
+				notifyObservers("generate 3d maze "+ properties.getName()+ " 3 25 51"); //stub
 			}
 			
 			@Override

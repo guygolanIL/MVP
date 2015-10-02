@@ -55,5 +55,11 @@ public class CompletedTask extends CommonCommand {
 		{
 			presenter.getView().displayError(param.substring(6));
 		}
+		else if(s[0].equals("movement")&& (s.length > 1))
+		{
+			presenter.getView().display(presenter.getModel().getCharPosition(s[1]));
+			if (presenter.getProperties().isDebug()==true)
+				System.out.println("position updated");
+		}
 	}
 }

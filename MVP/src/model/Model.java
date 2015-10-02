@@ -77,5 +77,11 @@ public interface Model {
 	 */
 	void exit();
 	
-	Position getCharPosition(String string);
+	Position getCharPosition(String name);
+	void MoveUP(String name);
+	void MoveDOWN(String name);
+	void MoveLEFT(String name);
+	void MoveRIGHT(String name);
+	void MoveLVLUP(String name);
+	void MoveLVLDOWN(String name);
 }

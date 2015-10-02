@@ -11,6 +11,7 @@ import view.View;
 public class Presenter implements Observer {
 	private Model model;
 	private View view;
+	private Properties properties;
 	
 	private HashMap<String, Command> commandMap;
 	
@@ -19,6 +20,8 @@ public class Presenter implements Observer {
 		super();
 		this.setModel(model);
 		this.setView(view);
+		
+		properties = new Properties();
 		
 		this.commandMap = new HashMap<String , Command>();		//inserting all the Commands into the map
 		commandMap.put("dir", new Dir(this));
@@ -31,6 +34,9 @@ public class Presenter implements Observer {
 		commandMap.put("solve", new Solve(this));
 		commandMap.put("exit", new Exit(this));
 		commandMap.put("completedTask", new CompletedTask(this));
+		commandMap.put("movementRequest", new MovmentRequest(this));
+						
+		
 	}
 
 	@Override
@@ -75,6 +81,15 @@ public class Presenter implements Observer {
 
 	public void setView(View view) {
 		this.view = view;
+	}
+
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setDebugMode(boolean b) {
+		properties.setDebug(b);
+		
 	}
 					
 }

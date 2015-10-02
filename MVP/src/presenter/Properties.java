@@ -11,6 +11,7 @@ public class Properties implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	protected boolean debugMode;
 	protected int mazeMaxAxisX;
 	protected int mazeMaxAxisY;
 	protected int mazeMaxAxisZ;
@@ -18,6 +19,27 @@ public class Properties implements Serializable {
 	protected String solveAlgorithm;
 	
 	protected int maxThreads;
+
+	
+	
+	public Properties() {
+		super();
+		this.debugMode = false;
+		this.generateAlgorithm = "MyMaze3dGenerator";
+		this.solveAlgorithm = "AstarManhattan";
+		this.mazeMaxAxisX = 35;
+		this.mazeMaxAxisY = 35;
+		this.mazeMaxAxisZ = 35;
+		this.maxThreads = 10;
+	}
+
+	public boolean isDebug() {
+		return debugMode;
+	}
+
+	public void setDebug(boolean debug) {
+		this.debugMode = debug;
+	}
 
 	public int getMazeMaxAxisX() {
 		return mazeMaxAxisX;

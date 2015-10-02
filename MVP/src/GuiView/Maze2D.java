@@ -8,9 +8,11 @@ import org.eclipse.swt.widgets.Composite;
 
 public class Maze2D extends MazeDisplayer{
 	char crossSection;
-
+	protected int state;
+	
 	public Maze2D(Composite parent,int style){
 	       super(parent, style);
+	       state = 1;
 	       crossSection = 'x'; //default
 	       // set a white background   (red, green, blue)
 	       setBackground(new Color(null, 255, 255, 255));
@@ -58,7 +60,16 @@ public class Maze2D extends MazeDisplayer{
 						        	e.gc.fillRectangle(x,y,w,h);
 						    }
 						}
-						Image image = new Image(getDisplay(),"resources/pacman.png");
+						Image image;
+						if (state == 1){
+						 image= new Image(getDisplay(),"resources/pacman.png");
+						state=0;
+						}
+						else 
+						{
+						 image = new Image(getDisplay(),"resources/closedpacman.png");
+							state=1;
+						}
 						int imageWidth = image.getBounds().width;
 						int imageHeight = image.getBounds().height;
 						int resizeWidth = w;

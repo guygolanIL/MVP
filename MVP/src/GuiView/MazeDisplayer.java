@@ -39,7 +39,7 @@ public abstract class MazeDisplayer extends Canvas{
 		Display.getDefault().syncExec(new Runnable() {
 		    public void run() {
 		    	redraw();
-		    	update();
+		    	//update();
 		    }
 		});
 	}
@@ -49,7 +49,7 @@ public abstract class MazeDisplayer extends Canvas{
 		Display.getDefault().syncExec(new Runnable() {
 		    public void run() {
 		    	redraw();
-		    	update();
+		    	//update();
 		    }
 		});
 	}

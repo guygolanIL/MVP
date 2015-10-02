@@ -338,6 +338,100 @@ public class MyObservableModel extends ObservableCommonModel {
 		public Position getCharPosition(String name) {
 			return charPositionMap.get(name);
 		}
+
+		@Override
+		public void MoveUP(String name) {
+			Position current = charPositionMap.get(name);
+			String [] moves = mazeMap.get(name).getPossibleMoves(current);
+			for (String move : moves) {
+				if (move.equals("BACKWARD"))
+				{
+					current.setY(current.getY()-1);
+					charPositionMap.put(name,current );
+					setChanged();
+					notifyObservers("completedTask movement " + name);
+				}
+			}
+		}
+
+		@Override
+		public void MoveDOWN(String name) {
+			Position current = charPositionMap.get(name);
+			String [] moves = mazeMap.get(name).getPossibleMoves(current);
+			for (String move : moves) {
+				if (move.equals("FORWARD"))
+				{
+					current.setY(current.getY()+1);
+					charPositionMap.put(name,current );
+					setChanged();
+					notifyObservers("completedTask movement " + name);
+				}
+			}
+		}
+
+		@Override
+		public void MoveLEFT(String name) {
+			Position current = charPositionMap.get(name);
+			String [] moves = mazeMap.get(name).getPossibleMoves(current);
+			for (String move : moves) {
+				if (move.equals("RIGHT"))
+				{
+					current.setZ(current.getZ()-1);
+					charPositionMap.put(name,current );
+					setChanged();
+					notifyObservers("completedTask movement " + name);
+				}
+			}
+		}
+
+		@Override
+		public void MoveRIGHT(String name) {
+			Position current = charPositionMap.get(name);
+			String [] moves = mazeMap.get(name).getPossibleMoves(current);
+			for (String move : moves) {
+				if (move.equals("LEFT"))
+				{
+					current.setZ(current.getZ()+1);
+					charPositionMap.put(name,current );
+					setChanged();
+					notifyObservers("completedTask movement " + name);
+				}
+			}			
+		}
+
+		@Override
+		public void MoveLVLUP(String name) {
+			System.out.println("1");
+			Position current = charPositionMap.get(name);
+			System.out.println("2 "  + current);
+			String [] moves = mazeMap.get(name).getPossibleMoves(current);
+			for (String move : moves) {
+				if (move.equals("UP"))
+				{
+					current.setX(current.getX()+1);
+					charPositionMap.put(name,current );
+					System.out.println("3 "  + current);
+					setChanged();
+					notifyObservers("completedTask movement " + name);
+					System.out.println("4 " );
+				}
+			}			
+		}
+
+		@Override
+		public void MoveLVLDOWN(String name) {
+			Position current = charPositionMap.get(name);
+			String [] moves = mazeMap.get(name).getPossibleMoves(current);
+			for (String move : moves) {
+				if (move.equals("DOWN"))
+				{
+					current.setX(current.getX()-1);
+					charPositionMap.put(name,current );
+					setChanged();
+					notifyObservers("completedTask movement " + name);
+				}
+			}			
+		}
 	}
 
 	
