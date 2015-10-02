@@ -5,6 +5,7 @@ import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 
 public class Maze2D extends MazeDisplayer{
 	char crossSection;
@@ -80,5 +81,20 @@ public class Maze2D extends MazeDisplayer{
 				}
 			});
 	 }
+
+	public void setCrossSection(char cross) {
+		if ((cross== 'x')||(cross== 'X')||(cross== 'y')||(cross== 'Y')||(cross== 'z')||(cross== 'Z'))
+		{
+			this.crossSection=cross;
+			Display.getDefault().syncExec(new Runnable() {
+			    public void run() {
+			    	redraw();
+			    	//update();
+			    }
+			});
+		}
+		//TODO add exeption
+		
+	}
 
 }

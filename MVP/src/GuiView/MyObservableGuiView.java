@@ -88,7 +88,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				setChanged();
-				notifyObservers("generate 3d maze "+ properties.getName()+ " 3 25 51"); //stub
+				notifyObservers("generate 3d maze "+ properties.getName()+ " 15 15 15"); //stub
 			}
 			
 			@Override

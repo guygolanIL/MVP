@@ -53,7 +53,6 @@ public class MazeWindow extends BasicWindow{
 	void initWidgets() {
 		shell.setLayout(new GridLayout(2,false));		
 		
-	
 		Menu menuBar = new Menu(shell, SWT.BAR);
 		MenuItem fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 		fileMenuHeader.setText("&File");
@@ -137,9 +136,9 @@ public class MazeWindow extends BasicWindow{
 		generateButton.setLayoutData(new GridData(SWT.NONE, SWT.None, false, false, 1, 1));
 		generateButton.addSelectionListener(generateListener);		
 		
-		MazeDisplayer mazeWidget=new Maze2D(shell, SWT.BORDER);	
+		//MazeDisplayer mazeWidget=new Maze2D(shell, SWT.BORDER);	
+		Maze3D mazeWidget=new Maze3D(shell, SWT.BORDER);
 		widgetsList.add(mazeWidget);
-		//Maze3D mazeWidget=new Maze3D(shell, SWT.BORDER);
 		mazeWidget.setFocus();
 		mazeWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,1,5));
 		
