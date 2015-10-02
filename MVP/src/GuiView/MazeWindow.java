@@ -2,6 +2,8 @@ package GuiView;
 
 import java.util.ArrayList;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -63,8 +65,9 @@ public class MazeWindow extends BasicWindow{
 	@Override
 	void initWidgets() {
 		shell.setLayout(new GridLayout(2,false));	
-		Image image= new Image(display,"resources/background.png");
+		Image image= new Image(display,"resources/background.jpg");
 		shell.setBackgroundImage(image);
+		shell.setBackgroundMode(SWT.INHERIT_FORCE);
 		Menu menuBar = new Menu(shell, SWT.BAR);
 		MenuItem fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 		fileMenuHeader.setText("&File");

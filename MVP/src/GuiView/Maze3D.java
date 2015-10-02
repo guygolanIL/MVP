@@ -23,8 +23,7 @@ public class Maze3D extends MazeDisplayer {
 
 	public Maze3D(Composite parent, int style) {
 		super(parent, style);
-
-		setBackground(new Color(null, 255, 255, 255));
+		//setBackground(new Color(null, 255, 255, 255));
 		setLayout(new GridLayout(2,true));
 		
 		Label title = new Label(this, SWT.TITLE);
