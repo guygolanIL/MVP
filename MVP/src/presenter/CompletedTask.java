@@ -31,7 +31,7 @@ public class CompletedTask extends CommonCommand {
 		{
 			Solution<Position> result = presenter.getModel().getSolution(s[1]);
 			if (result != null)
-				presenter.getView().displaySolution(result);
+				presenter.getView().display(result);
 			else
 				presenter.getView().displayError("Unavailable solution!");
 		}

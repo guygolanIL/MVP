@@ -47,7 +47,7 @@ public class Display extends CommonCommand {
 		}
 		else if ((s[0].equals("solution"))&&(s.length > 1))		//checks if the first parameter is "solution"
 		{
-			presenter.getView().displaySolution(presenter.getModel().getSolution(s[1]));
+			presenter.getView().display(presenter.getModel().getSolution(s[1]));
 		}
 		else
 			presenter.getView().display(presenter.getModel().getMaze(param));

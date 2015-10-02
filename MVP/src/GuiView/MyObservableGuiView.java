@@ -18,6 +18,21 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 	public MyObservableGuiView(String title, int width, int height) {
 		super(new Properties());
 		mainWindow = new MazeWindow(title, width, height);
+		mainWindow.setSolveListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				setChanged();
+				notifyObservers("solve "+properties.getName()+" "+properties.getSolveAlgorithm());
+				
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		mainWindow.setKeyListener(new KeyListener() {
 			
 			@Override
@@ -166,9 +181,11 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 	}
 
 	@Override
-	public void displaySolution(Solution<Position> result) {
-		// TODO Auto-generated method stub
+	public void display(Solution<Position> solution) {
+		mainWindow.setSolution(solution);
 		
 	}
+
+	
 
 }

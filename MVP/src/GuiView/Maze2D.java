@@ -1,11 +1,17 @@
 package GuiView;
 
+import java.util.ArrayList;
+
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+
+import algorithms.mazeGenerators.Position;
+import algorithms.search.State;
 
 public class Maze2D extends MazeDisplayer{
 	char crossSection;
@@ -22,7 +28,7 @@ public class Maze2D extends MazeDisplayer{
 				
 				@Override
 				public void paintControl(PaintEvent e) {
-					System.out.println("Maze2D paintControl");
+					//System.out.println("Maze2D paintControl");
 					e.gc.setForeground(new Color(null,10,36,106));
 					e.gc.setBackground(new Color(null,10,36,106));
 
@@ -36,10 +42,26 @@ public class Maze2D extends MazeDisplayer{
 				    	{
 					    	case 'x':
 					    		maze2d = mazeData.getCrossSectionByX(charPosition.getX());
+//					    		for(int i = 0 ; i <maze2d.length;i++)
+//					    		{
+//					    			for(int j =0 ; j <maze2d[i].length ; j++)
+//					    			{
+//					    				System.out.print(maze2d[i][j] + " ");
+//					    			}
+//					    			System.out.println("");
+//					    		}
 					    		position2d = new int [] {charPosition.getZ(),charPosition.getY()};
 					    		break;
 					    	case 'y':
 					    		maze2d = mazeData.getCrossSectionByY(charPosition.getY());
+//					    		for(int i = 0 ; i <maze2d.length;i++)
+//					    		{
+//					    			for(int j =0 ; j <maze2d[i].length ; j++)
+//					    			{
+//					    				System.out.print(maze2d[i][j] + " ");
+//					    			}
+//					    			System.out.println("");
+//					    		}
 					    		position2d = new int [] {charPosition.getZ(),charPosition.getX()};
 					    		break;
 					    	case 'z':
@@ -59,6 +81,39 @@ public class Maze2D extends MazeDisplayer{
 						        int y=i*h;
 						        if(maze2d[i][j]!=0)
 						        	e.gc.fillRectangle(x,y,w,h);
+						        else if(solution!=null)
+						        {
+						        	int flag = 0;
+						        	
+						        	
+						        	switch(crossSection)
+						        	{
+							        	case 'x':
+								        	if(solution.contains(new Position(charPosition.getX(),i,j))){
+								        		 flag = 1 ;
+								        	}
+							        		break;
+							        	case 'y':
+							        		if(solution.contains(new Position(i,charPosition.getY(),j))){
+							        			flag = 1;
+							        		}
+							        		break;
+							        	case 'z':
+							        		if(solution.contains(new Position(i,j,charPosition.getZ()))){
+							        			flag =1;
+							        		}
+							        		break;
+						        	}	
+						        	if(flag == 1)
+						        	{
+						        		System.out.println("soulotion print");
+						        		e.gc.setBackground(new Color(null,255,255,255));
+						        		e.gc.fillOval(x+w/2, y+h/2, w/4, h/4);//  (i, j, w, h);
+						        		//e.gc.fillRectangle(x, y, 8, 8);
+						        		e.gc.setBackground(new Color(null,10,36,106));
+						        	}
+						        }
+						        	
 						    }
 						}
 						Image image;

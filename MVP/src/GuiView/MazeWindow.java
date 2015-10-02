@@ -18,14 +18,19 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
+import algorithms.search.Solution;
+import algorithms.search.State;
 
 public class MazeWindow extends BasicWindow{
 	protected Maze3d maze;
 	protected Position charPosition;
+	protected ArrayList<Position> solution;
 	protected String selectedXMLpropertiesFile;
+	protected Button solveButton;
 	protected SelectionListener exitListener;
 	protected SelectionListener generateListener;
 	protected KeyListener keyListener;
+	protected SelectionListener solveListener;
 	ArrayList<MazeDisplayer> widgetsList;
 	
 	public void setGenerateListener(SelectionListener generateListener) {
@@ -34,6 +39,11 @@ public class MazeWindow extends BasicWindow{
 	
 	public void setKeyListener(KeyListener keyListener) {
 		this.keyListener = keyListener;
+		
+	}
+	
+	public void setSolveListener(SelectionListener selectionListener) {
+		this.solveListener = selectionListener;
 		
 	}
 
@@ -143,10 +153,11 @@ public class MazeWindow extends BasicWindow{
 		mazeWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,1,5));
 		
 		
-		Button stopButton=new Button(shell, SWT.PUSH);
-		stopButton.setText("  Solve  ");
-		stopButton.setLayoutData(new GridData(SWT.None, SWT.None, false, false, 1, 1));
-		stopButton.setEnabled(false);
+		solveButton=new Button(shell, SWT.PUSH);
+		solveButton.setText("  Solve  ");
+		solveButton.setLayoutData(new GridData(SWT.None, SWT.None, false, false, 1, 1));
+		solveButton.setEnabled(false);
+		solveButton.addSelectionListener(solveListener);
 		
 		// cube widget
 		MazeCube mazeCube = new MazeCube(shell, SWT.BORDER);
@@ -177,6 +188,7 @@ public class MazeWindow extends BasicWindow{
 			if(charPosition!=null)
 				canvasWidget.setCharPosition(charPosition);
 			
+			canvasWidget.setSolution(solution);
 		}
 	}
 	
@@ -188,8 +200,24 @@ public class MazeWindow extends BasicWindow{
 	
 	public void setMazeData(Maze3d maze){
 		this.maze = maze;
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {
+		    	solveButton.setEnabled(true);
+		    }
+		});
+		
 		widgetsRefresh();
 	
+	}
+	
+	public void setSolution(Solution<Position> solution) {
+		ArrayList<Position> arr= new ArrayList<Position>();
+    	for ( State<Position> s: solution.getArr()) {
+			arr.add(s.getState());
+		}
+		this.solution= arr;
+		widgetsRefresh();
+		
 	}
 	
 	public void displayError(String string) {
@@ -235,5 +263,9 @@ public class MazeWindow extends BasicWindow{
 	public void moveLVLDown() {
 		setPositionData(new Position(this.charPosition.getX()-1, this.charPosition.getY(), this.charPosition.getZ()));		
 	}
+
+	
+
+	
 	
 }

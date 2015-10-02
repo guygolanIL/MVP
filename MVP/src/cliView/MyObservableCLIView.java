@@ -110,12 +110,14 @@ public class MyObservableCLIView extends ObservableCommonCLIView {
 		
 	}
 
-
 	@Override
-	public void displaySolution(Solution<Position> result) {
-		out.println(result);
+	public void display(Solution<Position> result) {
+		 out.println(result);
 		out.flush();
 		
 	}
+
+
+	
 	
 }

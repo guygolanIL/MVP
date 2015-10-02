@@ -17,7 +17,7 @@ public interface View {
 	public void displayCrossSectionByX(int parseInt, String string);
 	public void displayCrossSectionByY(int parseInt, String string);
 	public void displayCrossSectionByZ(int parseInt, String string);
-	public void displaySolution(Solution<Position> result);
+	public void display(Solution<Position> result);
 	
 
 }

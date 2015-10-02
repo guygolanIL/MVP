@@ -38,7 +38,7 @@ public class Arrow extends Canvas {
 			
 			@Override
 			public void paintControl(PaintEvent e) {
-				System.out.println("Arrow paintControl");
+				//System.out.println("Arrow paintControl");
 				
 				if(state == true)
 					   image = new Image(getDisplay(),green);

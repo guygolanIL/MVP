@@ -48,7 +48,7 @@ public class PossibleMoves extends MazeDisplayer {
 			
 			@Override
 			public void paintControl(PaintEvent e) {
-				System.out.println("PossibleMoves paintControl");
+				//System.out.println("PossibleMoves paintControl");
 				ArrayList<String> moves = new ArrayList<String>();
 				
 				if ((charPosition!=null)&&(mazeData!=null))

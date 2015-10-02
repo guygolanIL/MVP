@@ -1,5 +1,7 @@
 package GuiView;
 
+import java.util.ArrayList;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
@@ -12,6 +14,7 @@ import org.eclipse.swt.widgets.Label;
 
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
+import algorithms.search.Solution;
 
 public class Maze3D extends MazeDisplayer {
 	
@@ -42,7 +45,7 @@ public class Maze3D extends MazeDisplayer {
 			@Override
 			public void paintControl(PaintEvent e) {
 				
-				}
+			}
 			
 		});
 	
@@ -73,11 +76,21 @@ public class Maze3D extends MazeDisplayer {
 		widgetsRefresh();
 		
 	}
+	@Override
+	public void setSolution(ArrayList<Position> solution)
+	{
+		this.solution = solution;
+		leftDisplay.setSolution(solution);
+		rightDisplay.setSolution( solution);
+		widgetsRefresh();
+		
+	}
 	public void widgetsRefresh()
 	{
 			if((mazeData !=null)&&(charPosition!=null))
 				Display.getDefault().syncExec(new Runnable() {
 				    public void run() {
+				    	
 				    	redraw();
 				    }
 				});
