@@ -5,6 +5,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -61,8 +62,9 @@ public class MazeWindow extends BasicWindow{
 
 	@Override
 	void initWidgets() {
-		shell.setLayout(new GridLayout(2,false));		
-		
+		shell.setLayout(new GridLayout(2,false));	
+		Image image= new Image(display,"resources/background.png");
+		shell.setBackgroundImage(image);
 		Menu menuBar = new Menu(shell, SWT.BAR);
 		MenuItem fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 		fileMenuHeader.setText("&File");
