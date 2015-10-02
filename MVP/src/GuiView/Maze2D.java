@@ -16,15 +16,15 @@ public class Maze2D extends MazeDisplayer{
 	       state = 1;
 	       crossSection = 'x'; //default
 	       // set a white background   (red, green, blue)
-	       setBackground(new Color(null, 255, 255, 255));
+	       setBackground(new Color(null, 0, 0, 0));
 	       addPaintListener(new PaintListener() {
 	    		
 				
 				@Override
 				public void paintControl(PaintEvent e) {
 					System.out.println("Maze2D paintControl");
-					e.gc.setForeground(new Color(null,0,0,0));
-					e.gc.setBackground(new Color(null,0,0,0));
+					e.gc.setForeground(new Color(null,10,36,106));
+					e.gc.setBackground(new Color(null,10,36,106));
 
 					int width=getSize().x;
 					int height=getSize().y;
