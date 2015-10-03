@@ -9,7 +9,28 @@ public class Properties {
 	protected String GUItype;
 	protected String solveAlgorithm;
 	protected String generateAlgorithm;
+	protected int xAxis;
+	protected int yAxis;
+	protected int zAxis;
 	
+	public int getxAxis() {
+		return xAxis;
+	}
+	public void setxAxis(int xAxis) {
+		this.xAxis = xAxis;
+	}
+	public int getyAxis() {
+		return yAxis;
+	}
+	public void setyAxis(int yAxis) {
+		this.yAxis = yAxis;
+	}
+	public int getzAxis() {
+		return zAxis;
+	}
+	public void setzAxis(int zAxis) {
+		this.zAxis = zAxis;
+	}
 	public String getSolveAlgorithm() {
 		return solveAlgorithm;
 	}
@@ -29,6 +50,9 @@ public class Properties {
 		name = "Default";
 		solveAlgorithm = "AstarManhattan";
 		generateAlgorithm = "MyMaze3dGenerator";
+		xAxis = 5;
+		yAxis = 5;
+		zAxis = 5;
 		
 	}
 	public String getName() {
@@ -49,6 +73,7 @@ public class Properties {
 	public void setGUItype(String gUItype) {
 		GUItype = gUItype;
 	}
+
 	
 	
 	

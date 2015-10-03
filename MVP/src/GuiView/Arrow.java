@@ -29,7 +29,7 @@ public class Arrow extends Canvas {
 		super(parent, style);
 		state = false;
 		
-		setBackground(new Color(null, 255, 255, 255));
+	//	setBackground(new Color(null, 255, 255, 255));
 		Canvas canvas = this;
 		
 		

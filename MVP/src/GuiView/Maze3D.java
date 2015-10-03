@@ -30,10 +30,10 @@ public class Maze3D extends MazeDisplayer {
 		title.setText("3d maze display by cross sections");
 		title.setLayoutData(new GridData(SWT.TOP, SWT.TOP, false, false, 2, 1));
 		
-		rightDisplay = new Maze2D(this, SWT.BORDER);
+		rightDisplay = new Maze2D(this, SWT.NULL);
 		rightDisplay.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		rightDisplay.setCrossSection('x');
-		leftDisplay = new Maze2D(this, SWT.BORDER);
+		leftDisplay = new Maze2D(this, SWT.NULL);
 		leftDisplay.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		leftDisplay.setCrossSection('y');
 		

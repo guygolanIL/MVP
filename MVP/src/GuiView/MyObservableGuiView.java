@@ -5,6 +5,7 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.widgets.Display;
 
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
@@ -17,7 +18,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 	
 	public MyObservableGuiView(String title, int width, int height) {
 		super(new Properties());
-		mainWindow = new MazeWindow(title, width, height);
+		mainWindow = new MazeWindow(title, width, height , properties);
 		mainWindow.setSolveListener(new SelectionListener() {
 			
 			@Override
@@ -102,9 +103,17 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				setChanged();
-				notifyObservers("generate 3d maze "+ properties.getName()+ " 15 15 15"); //stub
-			}
+				Display.getDefault().syncExec(new Runnable() {
+				    public void run() {
+				    	
+				 		
+				    	
+				    	setChanged();
+				    	notifyObservers("generate 3d maze "+ properties.getName()+" "+ properties.getxAxis()+" "+ properties.getyAxis()+" "+ properties.getzAxis());
+				    }
+				});
+				    
+			 }
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {

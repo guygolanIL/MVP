@@ -34,7 +34,8 @@ public class MazeWindow extends BasicWindow{
 	protected SelectionListener generateListener;
 	protected KeyListener keyListener;
 	protected SelectionListener solveListener;
-	ArrayList<MazeDisplayer> widgetsList;
+	protected ArrayList<MazeDisplayer> widgetsList;
+	protected Properties properties;
 	
 	public void setGenerateListener(SelectionListener generateListener) {
 		this.generateListener = generateListener;
@@ -54,8 +55,9 @@ public class MazeWindow extends BasicWindow{
 		this.exitListener = exitListener;
 	}
 
-	public MazeWindow( String title, int width, int height) {
+	public MazeWindow( String title, int width, int height , Properties properties) {
 		super(title, width, height);
+		this.properties= properties;
 		selectedXMLpropertiesFile = null;
 		widgetsList = new ArrayList<MazeDisplayer>();
 	}
@@ -150,10 +152,22 @@ public class MazeWindow extends BasicWindow{
 		Button generateButton=new Button(shell, SWT.PUSH);
 		generateButton.setText("  Generate new maze  ");
 		generateButton.setLayoutData(new GridData(SWT.NONE, SWT.None, false, false, 1, 1));
-		generateButton.addSelectionListener(generateListener);		
+		generateButton.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				PropertiesWindow propwindow = new PropertiesWindow(shell,properties,generateListener);
+		    	propwindow.open();
+			}
+				
+			@Override				
+			public void widgetDefaultSelected(SelectionEvent arg0) {}
+			
+		});
+		//generateButton.addSelectionListener(generateListener);		
 		
 		//MazeDisplayer mazeWidget=new Maze2D(shell, SWT.BORDER);	
-		Maze3D mazeWidget=new Maze3D(shell, SWT.BORDER);
+		Maze3D mazeWidget=new Maze3D(shell, SWT.NULL);
 		widgetsList.add(mazeWidget);
 		mazeWidget.setFocus();
 		mazeWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,1,5));
@@ -206,6 +220,7 @@ public class MazeWindow extends BasicWindow{
 	
 	public void setMazeData(Maze3d maze){
 		this.maze = maze;
+		this.solution = new ArrayList<Position>();
 		Display.getDefault().syncExec(new Runnable() {
 		    public void run() {
 		    	solveButton.setEnabled(true);
@@ -251,24 +266,24 @@ public class MazeWindow extends BasicWindow{
 		    }
 		});
 	}
-	public void moveUp() {
-		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY()-1, this.charPosition.getZ()));
-	}
-	public void moveDown() {
-		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY()+1, this.charPosition.getZ()));		
-	}
-	public void moveLeft() {
-		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY(), this.charPosition.getZ()-1));		
-	}
-	public void moveRight() {
-		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY(), this.charPosition.getZ()+1));		
-	}
-	public void moveLVLUp() {
-		setPositionData(new Position(this.charPosition.getX()+1, this.charPosition.getY(), this.charPosition.getZ()));		
-	}
-	public void moveLVLDown() {
-		setPositionData(new Position(this.charPosition.getX()-1, this.charPosition.getY(), this.charPosition.getZ()));		
-	}
+//	public void moveUp() {
+//		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY()-1, this.charPosition.getZ()));
+//	}
+//	public void moveDown() {
+//		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY()+1, this.charPosition.getZ()));		
+//	}
+//	public void moveLeft() {
+//		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY(), this.charPosition.getZ()-1));		
+//	}
+//	public void moveRight() {
+//		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY(), this.charPosition.getZ()+1));		
+//	}
+//	public void moveLVLUp() {
+//		setPositionData(new Position(this.charPosition.getX()+1, this.charPosition.getY(), this.charPosition.getZ()));		
+//	}
+//	public void moveLVLDown() {
+//		setPositionData(new Position(this.charPosition.getX()-1, this.charPosition.getY(), this.charPosition.getZ()));		
+//	}
 
 	
 

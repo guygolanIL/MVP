@@ -6,10 +6,12 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
 public class PossibleMoves extends MazeDisplayer {
@@ -18,7 +20,11 @@ public class PossibleMoves extends MazeDisplayer {
 		super(parent, style);
 		
 		//MazeDisplayer canvas = this;
-		setBackground(new Color(null, 255, 255, 255));
+		Image image = new Image(this.getDisplay(), "resources/bckrnd.jpeg");
+		
+		setBackgroundImage(image);
+		setBackgroundMode(SWT.INHERIT_FORCE);
+		//setBackground(new Color(null, 255, 255, 255));
 		setLayout(new GridLayout(3,false));
 		
 		Label title = new Label(this, SWT.TITLE);
