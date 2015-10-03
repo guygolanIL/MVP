@@ -220,7 +220,7 @@ public class MazeWindow extends BasicWindow{
 	
 	public void setMazeData(Maze3d maze){
 		this.maze = maze;
-		this.solution = new ArrayList<Position>();
+		this.solution = new ArrayList<Position>(); //reset the solution map
 		Display.getDefault().syncExec(new Runnable() {
 		    public void run() {
 		    	solveButton.setEnabled(true);
