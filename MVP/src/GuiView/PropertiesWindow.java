@@ -23,39 +23,50 @@ public class PropertiesWindow {
 	
 	public PropertiesWindow(Shell parent, Properties properties , SelectionListener generateListener)
 	{
-		 main = new Shell(parent);
-		 this.properties = properties;
+		main = new Shell(parent);
+		this.properties = properties;
+		
 		main.setText("Maze Properties");
-		main.setSize(250, 250);
-		main.setLayout(new GridLayout(6, false));
+		main.setSize(160, 250);
+		main.setLayout(new GridLayout(6, true));
+		
 		Label nameTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
 		nameTitle.setText("Maze name: ");
-		nameTitle.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 6, 1));
+		nameTitle.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 3, 1));
+		
 		Text nameBox = new Text(main, SWT.BORDER);
 		nameBox.setText(""+properties.getName());
-		nameBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 6, 1));
+		nameBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 3, 1));
+		
+		Label dimensionsTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
+		dimensionsTitle.setText("Dimensions: ");
+		dimensionsTitle.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 6, 1));
 		
 		Label xTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
-		xTitle.setText("Dimensions: ");
-		xTitle.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 6, 1));
-		Label xxTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
-		xxTitle.setText(" X");
+		xTitle.setText(" X");
+		
 		Text xTextBox = new Text(main, SWT.BORDER);
 		xTextBox.setText(""+properties.getxAxis());
-		Label yyTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
-		yyTitle.setText("Y");
+		xTextBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		xTextBox.setToolTipText("numbers only, greater than 3");
+		
+		Label yTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
+		yTitle.setText("Y");
+		
 		Text yTextBox = new Text(main, SWT.BORDER);
 		yTextBox.setText(""+properties.getyAxis());
-		Label ZZTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
-		ZZTitle.setText("Z");
+		yTextBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		yTextBox.setToolTipText("numbers only, greater than 3");
+		
+		Label zTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
+		zTitle.setText("Z");
+		
 		Text zTextBox = new Text(main, SWT.BORDER);
 		zTextBox.setText(""+properties.getzAxis());
 		zTextBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		zTextBox.setToolTipText("numbers only, greater than 3");
-		xTextBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
-		xTextBox.setToolTipText("numbers only, greater than 3");
-		yTextBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
-		yTextBox.setToolTipText("numbers only, greater than 3");
+		
+		
 		
 		Label generateTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
 		generateTitle.setText("Generate Algorithm: ");
@@ -145,11 +156,7 @@ public class PropertiesWindow {
 				if(properties.isDebugMode()==true)
 					e.printStackTrace();
 				}
-				
-
 	
-		
-				
 			}
 			
 			@Override
