@@ -39,6 +39,7 @@ public class Maze3D extends MazeDisplayer {
 		leftDisplayOptions.setItems(new String[] { "x", "y", "z" });
 		leftDisplayOptions.select(0);
 		leftDisplayOptions.setBackground(new Color(getDisplay(), 255, 255, 255));
+		
 
 		Combo rightDisplayOptions = new Combo(this, SWT.DROP_DOWN);
 		rightDisplayOptions.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
