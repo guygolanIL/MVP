@@ -53,19 +53,19 @@ public class Maze2D extends MazeDisplayer {
 						int[] position2d = null;
 						switch (crossSection) {
 						case 'x':
-							maze2d = mazeData.getCrossSectionByX(charPosition.getX());							///
+							maze2d = mazeData.getCrossSectionByX(charPosition.getX());	
 							position2d = new int[] { charPosition.getZ(), charPosition.getY() };				///
 							goal2d = new int[] { mazeData.getExit().getZ(), mazeData.getExit().getY() };		/// 
 							break;																				///
 						case 'y':																				///
 							maze2d = mazeData.getCrossSectionByY(charPosition.getY());							///	
-							position2d = new int[] { charPosition.getZ(), charPosition.getX() };				///
-							goal2d = new int[] { mazeData.getExit().getZ(), mazeData.getExit().getX() };		/// NEED FIX!
+							position2d = new int[] { charPosition.getZ(),mazeData.getxAxis()-1- charPosition.getX() };				///
+							goal2d = new int[] { mazeData.getExit().getZ(),mazeData.getxAxis()-1- mazeData.getExit().getX() };		/// NEED FIX!
 							break;																				///
 						case 'z':																				///
 							maze2d = mazeData.getCrossSectionByZ(charPosition.getZ());							///
-							position2d = new int[] { charPosition.getY(), charPosition.getX() };				///
-							goal2d = new int[] { mazeData.getExit().getY(), mazeData.getExit().getX() };		///
+							position2d = new int[] { charPosition.getY(),mazeData.getxAxis()-1- charPosition.getX() };				///
+							goal2d = new int[] { mazeData.getExit().getY(),mazeData.getxAxis()-1- mazeData.getExit().getX() };		///
 							break;																				///
 						default:
 							// TODO
