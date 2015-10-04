@@ -34,24 +34,24 @@ public class Maze3D extends MazeDisplayer {
 		title.setText("3D maze display by cross sections");
 		title.setLayoutData(new GridData(SWT.TOP, SWT.TOP, false, false, 2, 1));
 
-		Combo leftDisplayOptions = new Combo(this, SWT.DROP_DOWN);
-		leftDisplayOptions.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		leftDisplayOptions.setItems(new String[] { "x", "y", "z" });
-		leftDisplayOptions.select(0);
-		leftDisplayOptions.setBackground(new Color(getDisplay(), 255, 255, 255));
-
-		Combo rightDisplayOptions = new Combo(this, SWT.DROP_DOWN);
-		rightDisplayOptions.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		rightDisplayOptions.setItems(new String[] { "x", "y", "z" });
-		rightDisplayOptions.select(1);
-		rightDisplayOptions.setBackground(new Color(getDisplay(), 255, 255, 255));
+//		Combo leftDisplayOptions = new Combo(this, SWT.DROP_DOWN);
+//		leftDisplayOptions.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+//		leftDisplayOptions.setItems(new String[] { "x", "y", "z" });
+//		leftDisplayOptions.select(0);
+//		leftDisplayOptions.setBackground(new Color(getDisplay(), 255, 255, 255));
+//
+//		Combo rightDisplayOptions = new Combo(this, SWT.DROP_DOWN);
+//		rightDisplayOptions.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+//		rightDisplayOptions.setItems(new String[] { "x", "y", "z" });
+//		rightDisplayOptions.select(1);
+//		rightDisplayOptions.setBackground(new Color(getDisplay(), 255, 255, 255));
 
 		leftDisplay = new Maze2D(this, SWT.NULL);
 		leftDisplay.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		leftDisplay.setCrossSection(leftDisplayOptions.getText().charAt(0));
+		leftDisplay.setCrossSection('x');
 		rightDisplay = new Maze2D(this, SWT.NULL);
 		rightDisplay.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		rightDisplay.setCrossSection(rightDisplayOptions.getText().charAt(0));
+		rightDisplay.setCrossSection('y');
 
 		addPaintListener(new PaintListener() {
 

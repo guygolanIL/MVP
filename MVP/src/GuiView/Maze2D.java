@@ -53,20 +53,20 @@ public class Maze2D extends MazeDisplayer {
 						int[] position2d = null;
 						switch (crossSection) {
 						case 'x':
-							maze2d = mazeData.getCrossSectionByX(charPosition.getX());
-							position2d = new int[] { charPosition.getZ(), charPosition.getY() };
-							goal2d = new int[] { mazeData.getExit().getZ(), mazeData.getExit().getY() };
-							break;
-						case 'y':
-							maze2d = mazeData.getCrossSectionByY(charPosition.getY());
-							position2d = new int[] { charPosition.getZ(), charPosition.getX() };
-							goal2d = new int[] { mazeData.getExit().getZ(), mazeData.getExit().getX() };
-							break;
-						case 'z':
-							maze2d = mazeData.getCrossSectionByZ(charPosition.getZ());
-							position2d = new int[] { charPosition.getY(), charPosition.getX() };
-							goal2d = new int[] { mazeData.getExit().getY(), mazeData.getExit().getX() };
-							break;
+							maze2d = mazeData.getCrossSectionByX(charPosition.getX());							///
+							position2d = new int[] { charPosition.getZ(), charPosition.getY() };				///
+							goal2d = new int[] { mazeData.getExit().getZ(), mazeData.getExit().getY() };		/// 
+							break;																				///
+						case 'y':																				///
+							maze2d = mazeData.getCrossSectionByY(charPosition.getY());							///	
+							position2d = new int[] { charPosition.getZ(), charPosition.getX() };				///
+							goal2d = new int[] { mazeData.getExit().getZ(), mazeData.getExit().getX() };		/// NEED FIX!
+							break;																				///
+						case 'z':																				///
+							maze2d = mazeData.getCrossSectionByZ(charPosition.getZ());							///
+							position2d = new int[] { charPosition.getY(), charPosition.getX() };				///
+							goal2d = new int[] { mazeData.getExit().getY(), mazeData.getExit().getX() };		///
+							break;																				///
 						default:
 							// TODO
 						}
@@ -135,8 +135,7 @@ public class Maze2D extends MazeDisplayer {
 							image = new Image(getDisplay(), "resources/pacmanwoman.png");
 							imageWidth = image.getBounds().width;
 							imageHeight = image.getBounds().height;
-							e.gc.drawImage(image, 0, 0, imageWidth, imageHeight, goal2d[0] * w, goal2d[1] * h,
-									resizeWidth, resizeHeight);
+							e.gc.drawImage(image, 0, 0, imageWidth, imageHeight, goal2d[0] * w, goal2d[1] * h,resizeWidth, resizeHeight);
 
 						}
 
@@ -150,8 +149,7 @@ public class Maze2D extends MazeDisplayer {
 						imageWidth = image.getBounds().width;
 						imageHeight = image.getBounds().height;
 
-						e.gc.drawImage(image, 0, 0, imageWidth, imageHeight, position2d[0] * w, position2d[1] * h,
-								resizeWidth, resizeHeight);
+						e.gc.drawImage(image, 0, 0, imageWidth, imageHeight, position2d[0] * w, position2d[1] * h,resizeWidth, resizeHeight);
 					}
 				}
 			}

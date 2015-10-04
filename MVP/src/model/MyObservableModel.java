@@ -41,6 +41,7 @@ public class MyObservableModel extends ObservableCommonModel {
 				@Override
 				public void run() {
 					Maze3d maze = new MyMaze3dGenerator().generate(x, y, z);
+					System.out.println(maze);
 					mazeMap.put(name, maze);
 					charPositionMap.put(name, maze.getEntrance());
 					setChanged();
