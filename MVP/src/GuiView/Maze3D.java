@@ -27,7 +27,7 @@ public class Maze3D extends MazeDisplayer {
 
 	public Maze3D(Composite parent, int style) {
 		super(parent, style);
-		// setBackground(new Color(null, 255, 255, 255));
+		
 		setLayout(new GridLayout(2, true));
 
 		Label title = new Label(this, SWT.TITLE);
@@ -51,7 +51,7 @@ public class Maze3D extends MazeDisplayer {
 		leftDisplay.setCrossSection('x');
 		rightDisplay = new Maze2D(this, SWT.NULL);
 		rightDisplay.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		rightDisplay.setCrossSection('z');
+		rightDisplay.setCrossSection('y');
 
 		addPaintListener(new PaintListener() {
 
