@@ -164,9 +164,8 @@ public class MazeWindow extends BasicWindow{
 			public void widgetDefaultSelected(SelectionEvent arg0) {}
 			
 		});
-		//generateButton.addSelectionListener(generateListener);		
 		
-		//MazeDisplayer mazeWidget=new Maze2D(shell, SWT.BORDER);	
+		//Main Maze display widget.
 		Maze3D mazeWidget=new Maze3D(shell, SWT.NULL);
 		widgetsList.add(mazeWidget);
 		mazeWidget.setFocus();
@@ -179,12 +178,12 @@ public class MazeWindow extends BasicWindow{
 		solveButton.setEnabled(false);
 		solveButton.addSelectionListener(solveListener);
 		
-		// cube widget
+		// cube widget.
 		MazeCube mazeCube = new MazeCube(shell, SWT.BORDER);
 		mazeCube.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 2));
 		widgetsList.add(mazeCube);
 		
-		// possibleMoves widget
+		// possibleMoves widget.
 		MazeDisplayer possibleMoves=new PossibleMoves(shell,SWT.BORDER);
 		possibleMoves.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, false, false, 1, 1));
 		widgetsList.add(possibleMoves);
