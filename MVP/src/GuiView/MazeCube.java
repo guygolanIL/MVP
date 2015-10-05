@@ -14,6 +14,9 @@ public class MazeCube extends MazeDisplayer {
 	protected int xAxis;
 	protected int yAxis;
 	protected int zAxis;
+	protected double ratioxAxis;
+	protected double ratioyAxis;
+	protected double ratiozAxis;
 	protected double mainAngle;
 	protected double viewAngle;
 	protected int[] canvasCenter;
@@ -32,6 +35,7 @@ public class MazeCube extends MazeDisplayer {
 		xAxis = 10;//default
 		yAxis = 10;//default
 		zAxis = 10;//default
+		
 		canvasCenter = new int[2];
 		canvasCenter[0] = 50 ;
 		canvasCenter[1] = 50;
@@ -53,7 +57,12 @@ public class MazeCube extends MazeDisplayer {
 					xAxis = mazeData.getxAxis();	
 					yAxis = mazeData.getyAxis();
 					zAxis = mazeData.getzAxis();
+					int sumAxis = xAxis + yAxis + zAxis;
+					double  ratioMultiplier = 100 / sumAxis;
 					
+					ratioxAxis = ratioMultiplier * xAxis;
+					ratioyAxis = ratioMultiplier * yAxis;
+					ratiozAxis = ratioMultiplier * zAxis;
 					
 	//				xAxis = 21;		//STUB
 	//				yAxis = 51;
@@ -71,20 +80,21 @@ public class MazeCube extends MazeDisplayer {
 					
 					pointA[0] = canvasCenter[0];
 					pointA[1] = canvasCenter[1];
-					pointB[0] = canvasCenter[0] + zAxis*Math.sin(viewAngle);
-					pointB[1] = canvasCenter[1] - zAxis*Math.cos(viewAngle);
-					pointC[0] = pointB[0] - yAxis*Math.sin(viewAngle);
-					pointC[1] = pointB[1] - yAxis*Math.cos(viewAngle);
-					pointD[0] = canvasCenter[0] - yAxis*Math.sin(viewAngle);
-					pointD[1] = canvasCenter[1] - yAxis*Math.cos(viewAngle);
+					pointB[0] = canvasCenter[0] + ratiozAxis*Math.sin(viewAngle);
+					pointB[1] = canvasCenter[1] - ratiozAxis*Math.cos(viewAngle);
+					pointC[0] = pointB[0] - ratioyAxis*Math.sin(viewAngle);
+					pointC[1] = pointB[1] - ratioyAxis*Math.cos(viewAngle);
+					pointD[0] = canvasCenter[0] - ratioyAxis*Math.sin(viewAngle);
+					pointD[1] = canvasCenter[1] - ratioyAxis*Math.cos(viewAngle);
 					pointG[0] = pointC[0];
-					pointG[1] = pointC[1] + xAxis;
+					pointG[1] = pointC[1] + ratioxAxis;
 					pointE[0] = pointA[0];
-					pointE[1] = pointA[1] + xAxis;
+					pointE[1] = pointA[1] + ratioxAxis;
 					pointF[0] = pointB[0];
-					pointF[1] = pointB[1] + xAxis; 
+					pointF[1] = pointB[1] + ratioxAxis; 
 					pointH[0] =	pointD[0];
-					pointH[1] = pointD[1] + xAxis;
+					pointH[1] = pointD[1] + ratioxAxis;
+					
 					shapeCenter[1] = pointC[1]	+ (pointE[1] - pointC[1])/2;
 					shapeCenter[0] = pointD[0] + (pointB[0] - pointD[0])/2;
 					deflection[0] = shapeCenter[0] - canvasCenter[0];
@@ -107,7 +117,7 @@ public class MazeCube extends MazeDisplayer {
 					pointH[0] = pointH[0] - deflection[0];
 					pointH[1] = pointH[1] - deflection[1];
 					
-					upperShapeVertices[0] = (int) ( canvasWidth*(pointA[0]/100));
+					upperShapeVertices[0] = (int) (canvasWidth*(pointA[0]/100));
 					upperShapeVertices[1] = (int) (canvasHeight*(pointA[1]/100));
 					upperShapeVertices[2] = (int) (canvasWidth*(pointB[0]/100));
 					upperShapeVertices[3] = (int) (canvasHeight*(pointB[1]/100));
