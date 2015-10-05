@@ -54,19 +54,19 @@ public class Maze2D extends MazeDisplayer {
 						switch (crossSection) {
 						case 'x':
 							maze2d = mazeData.getCrossSectionByX(charPosition.getX());	
-							position2d = new int[] { charPosition.getZ(), charPosition.getY() };				///
-							goal2d = new int[] { mazeData.getExit().getZ(), mazeData.getExit().getY() };		/// 
-							break;																				///
-						case 'y':																				///
-							maze2d = mazeData.getCrossSectionByY(charPosition.getY());							///	
-							position2d = new int[] { charPosition.getZ(),mazeData.getxAxis()-1- charPosition.getX() };				///
-							goal2d = new int[] { mazeData.getExit().getZ(),mazeData.getxAxis()-1- mazeData.getExit().getX() };		/// NEED FIX!
-							break;																				///
-						case 'z':																				///
-							maze2d = mazeData.getCrossSectionByZ(charPosition.getZ());							///
-							position2d = new int[] { charPosition.getY(),mazeData.getxAxis()-1- charPosition.getX() };				///
-							goal2d = new int[] { mazeData.getExit().getY(),mazeData.getxAxis()-1- mazeData.getExit().getX() };		///
-							break;																				///
+							position2d = new int[] { charPosition.getZ(), charPosition.getY() };				
+							goal2d = new int[] { mazeData.getExit().getZ(), mazeData.getExit().getY() };		 
+							break;																				
+						case 'y':																				
+							maze2d = mazeData.getCrossSectionByY(charPosition.getY());								
+							position2d = new int[] { charPosition.getZ(),mazeData.getxAxis()-1- charPosition.getX() };				
+							goal2d = new int[] { mazeData.getExit().getZ(),mazeData.getxAxis()-1- mazeData.getExit().getX() };		
+							break;																				
+						case 'z':																				
+							maze2d = mazeData.getCrossSectionByZ(charPosition.getZ());							
+							position2d = new int[] { charPosition.getY(),mazeData.getxAxis()-1- charPosition.getX() };				
+							goal2d = new int[] { mazeData.getExit().getY(),mazeData.getxAxis()-1- mazeData.getExit().getX() };		
+							break;																				
 						default:
 							// TODO
 						}
@@ -103,35 +103,31 @@ public class Maze2D extends MazeDisplayer {
 									if (flag == 1) {
 										System.out.println("solution print");
 										e.gc.setBackground(new Color(null, 255, 255, 255));
-										e.gc.fillOval(x + w / 2, y + h / 2, w / 4, h / 4);// (i,
-																							// j,
-																							// w,
-																							// h);
-										// e.gc.fillRectangle(x, y, 8, 8);
+										e.gc.fillOval(x + w / 2, y + h / 2, w / 4, h / 4);
 										e.gc.setBackground(new Color(null, 10, 36, 106));
 									}
 								}
 
 							}
 						}
-						int flag = 0;
+						boolean shouldShowExit = false;
 						resizeWidth = w;
 						resizeHeight = h;
 						switch (crossSection) {
 						case 'x':
 							if (mazeData.getExit().getX() == charPosition.getX())
-								flag = 1;
+								shouldShowExit = true;
 							break;
 						case 'y':
 							if (mazeData.getExit().getY() == charPosition.getY())
-								flag = 1;
+								shouldShowExit = true;
 							break;
 						case 'z':
 							if (mazeData.getExit().getZ() == charPosition.getZ())
-								flag = 1;
+								shouldShowExit = true;
 							break;
 						}
-						if (flag == 1) {
+						if (shouldShowExit == true) {
 							image = new Image(getDisplay(), "resources/pacmanwoman.png");
 							imageWidth = image.getBounds().width;
 							imageHeight = image.getBounds().height;
