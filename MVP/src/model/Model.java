@@ -3,6 +3,7 @@ package model;
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
+import presenter.Properties;
 
 /**
  * Defines what every Model can do.
@@ -84,4 +85,6 @@ public interface Model {
 	void MoveRIGHT(String name);
 	void MoveLVLUP(String name);
 	void MoveLVLDOWN(String name);
+	void setProperties(Properties properties);
+	Properties getProperties();
 }

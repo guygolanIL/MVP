@@ -171,6 +171,7 @@ public class PropertiesWindow {
 		yTextBox.addModifyListener(checkAxisData);
 		zTextBox.addModifyListener(checkAxisData);
 
+		////////////Save sequence/////////////////////////////////////////////////////////////////////////////
 		saveButton.addSelectionListener(new SelectionListener() {
 
 			@Override
@@ -181,6 +182,22 @@ public class PropertiesWindow {
 					properties.setyAxis(Integer.parseInt(yTextBox.getText()));
 					properties.setzAxis(Integer.parseInt(zTextBox.getText()));
 					properties.setName(nameBox.getText());
+					properties.setGenerateAlgorithm(generateBox.getText());
+					switch (searchBox.getText()) {
+					case ("BFS"):
+						properties.setSolveAlgorithm("BFS");
+					break;
+					case ("A* manhattan"):
+						properties.setSolveAlgorithm("AstarManhattan");	
+					break;
+					case ("A* air distance"):
+						properties.setSolveAlgorithm("AstarAirDistance");	
+					break;
+					default:
+						properties.setSolveAlgorithm("AstarAirDistance");	
+					}
+					
+					
 				} catch (NumberFormatException e) {
 					MessageBox err = new MessageBox(main, SWT.ICON_ERROR);
 					err.setText("Error ");
