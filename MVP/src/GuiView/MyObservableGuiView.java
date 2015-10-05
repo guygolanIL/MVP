@@ -1,6 +1,8 @@
 package GuiView;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
@@ -86,19 +88,15 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 				
 			}
 		});
-		mainWindow.setExitListener(new SelectionListener() {
+		mainWindow.setExitListener(new DisposeListener() {
 			
 			@Override
-			public void widgetSelected(SelectionEvent arg0) {
+			public void widgetDisposed(DisposeEvent arg0) {
 				exitRequest();
-			}
-			
-			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
 				
 			}
 		});
+		
 		mainWindow.setGenerateListener(new SelectionListener() {
 			
 			@Override

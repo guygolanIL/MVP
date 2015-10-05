@@ -6,8 +6,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -18,42 +16,44 @@ import org.eclipse.swt.widgets.Label;
 
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
-import algorithms.search.Solution;
 
 public class Maze3D extends MazeDisplayer {
 
+	
 	protected Maze2D leftDisplay;
 	protected Maze2D rightDisplay;
 
+		
 	public Maze3D(Composite parent, int style) {
 		super(parent, style);
-		
 		setLayout(new GridLayout(2, true));
 
 		Label title = new Label(this, SWT.TITLE);
 		title.setText("3D maze display by cross sections");
 		title.setLayoutData(new GridData(SWT.TOP, SWT.TOP, false, false, 2, 1));
-
-		Combo leftDisplayOptions = new Combo(this, SWT.DROP_DOWN);
-		leftDisplayOptions.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		leftDisplayOptions.setItems(new String[] { "x", "y", "z" });
-		leftDisplayOptions.select(0);
-		leftDisplayOptions.setBackground(new Color(getDisplay(), 255, 255, 255));
 		
-
-		Combo rightDisplayOptions = new Combo(this, SWT.DROP_DOWN);
+		CrossCombo leftDisplayOptions = new CrossCombo(this, SWT.DROP_DOWN, leftDisplay);
+		leftDisplayOptions.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		
+		CrossCombo rightDisplayOptions = new CrossCombo(this, SWT.DROP_DOWN, rightDisplay);
 		rightDisplayOptions.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		rightDisplayOptions.setItems(new String[] { "x", "y", "z" });
-		rightDisplayOptions.select(1);
-		rightDisplayOptions.setBackground(new Color(getDisplay(), 255, 255, 255));
+//		Combo rightDisplayOptions = new Combo(this, SWT.DROP_DOWN);
+//		rightDisplayOptions.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+//		rightDisplayOptions.setItems(new String[] { "x", "y", "z" });
+//		rightDisplayOptions.select(1);
+//		rightDisplayOptions.setBackground(new Color(getDisplay(), 255, 255, 255));
 
 		leftDisplay = new Maze2D(this, SWT.NULL);
 		leftDisplay.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		leftDisplay.setCrossSection('x');
+		
 		rightDisplay = new Maze2D(this, SWT.NULL);
 		rightDisplay.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		rightDisplay.setCrossSection('y');
-
+		
+		leftDisplayOptions.setSlave(leftDisplay);
+		rightDisplayOptions.setSlave(rightDisplay);
+		
 		addPaintListener(new PaintListener() {
 
 			@Override

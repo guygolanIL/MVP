@@ -8,7 +8,6 @@ import org.eclipse.swt.widgets.Display;
 
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
-import algorithms.search.Solution;
 
 
 

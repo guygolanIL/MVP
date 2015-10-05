@@ -2,7 +2,6 @@ package GuiView;
 
 import java.util.ArrayList;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
@@ -30,30 +29,13 @@ public class MazeWindow extends BasicWindow{
 	protected ArrayList<Position> solution;
 	protected String selectedXMLpropertiesFile;
 	protected Button solveButton;
-	protected SelectionListener exitListener;
+	protected DisposeListener exitListener;
 	protected SelectionListener generateListener;
 	protected KeyListener keyListener;
 	protected SelectionListener solveListener;
 	protected ArrayList<MazeDisplayer> widgetsList;
 	protected Properties properties;
 	
-	public void setGenerateListener(SelectionListener generateListener) {
-		this.generateListener = generateListener;
-	}
-	
-	public void setKeyListener(KeyListener keyListener) {
-		this.keyListener = keyListener;
-		
-	}
-	
-	public void setSolveListener(SelectionListener selectionListener) {
-		this.solveListener = selectionListener;
-		
-	}
-
-	public void setExitListener(SelectionListener exitListener) {
-		this.exitListener = exitListener;
-	}
 
 	public MazeWindow( String title, int width, int height , Properties properties) {
 		super(title, width, height);
@@ -66,6 +48,7 @@ public class MazeWindow extends BasicWindow{
 
 	@Override
 	void initWidgets() {
+		shell.addDisposeListener(exitListener);
 		shell.setLayout(new GridLayout(2,false));	
 		Image image= new Image(display,"resources/background.jpg");
 		shell.setBackgroundImage(image);
@@ -101,7 +84,19 @@ public class MazeWindow extends BasicWindow{
 		    
 		MenuItem fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
 		fileExitItem.setText("Exit");
-		fileExitItem.addSelectionListener(exitListener);
+		fileExitItem.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				shell.dispose();
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				//  Auto-generated method stub
+				
+			}
+		});
 
 		MenuItem MazeMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 		MazeMenuHeader.setText("Maze");
@@ -265,6 +260,27 @@ public class MazeWindow extends BasicWindow{
 		    }
 		});
 	}
+	
+
+	public void setGenerateListener(SelectionListener generateListener) {
+		this.generateListener = generateListener;
+	}
+	
+	public void setKeyListener(KeyListener keyListener) {
+		this.keyListener = keyListener;
+		
+	}
+	
+	public void setSolveListener(SelectionListener selectionListener) {
+		this.solveListener = selectionListener;
+		
+	}
+
+	public void setExitListener(DisposeListener exitListener) {
+		this.exitListener = exitListener;
+	}
+	
+	/////// stub movements////////////////////////
 //	public void moveUp() {
 //		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY()-1, this.charPosition.getZ()));
 //	}

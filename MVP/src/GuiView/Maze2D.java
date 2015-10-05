@@ -166,4 +166,8 @@ public class Maze2D extends MazeDisplayer {
 
 	}
 
+	public char getCrossSection() {
+		return crossSection;
+	}
+
 }
