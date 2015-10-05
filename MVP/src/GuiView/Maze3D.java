@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseWheelListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Color;
@@ -47,9 +49,11 @@ public class Maze3D extends MazeDisplayer {
 		leftDisplay.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		leftDisplay.setCrossSection('x');
 		
+		
 		rightDisplay = new Maze2D(this, SWT.NULL);
 		rightDisplay.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		rightDisplay.setCrossSection('y');
+		
 		
 		leftDisplayOptions.setSlave(leftDisplay);
 		rightDisplayOptions.setSlave(rightDisplay);

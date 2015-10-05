@@ -1,5 +1,7 @@
 package GuiView;
 
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseWheelListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Color;
@@ -11,15 +13,32 @@ import algorithms.mazeGenerators.Position;
 
 public class Maze2D extends MazeDisplayer {
 	char crossSection;
+	int zoomFactor;
 	protected int state;
 	protected int[] goal2d;
-
+	int width;
+	int height;
+	
 	public Maze2D(Composite parent, int style) {
 		super(parent, style);
 		state = 1;
+		zoomFactor = 0;
 		crossSection = 'x'; // default
-		// set a white background (red, green, blue)
-		// setBackground(new Color(null, 0, 0, 0));
+		
+		addMouseWheelListener(new MouseWheelListener() {
+			
+			
+			@Override
+			public void mouseScrolled(MouseEvent arg0) {
+				if(zoomFactor + arg0.count >= 0 && zoomFactor + arg0.count <=500)
+				{
+					zoomFactor = zoomFactor+arg0.count;
+					redraw();
+				}
+				
+				
+			}
+		});
 		addPaintListener(new PaintListener() {
 
 			@Override
@@ -29,8 +48,8 @@ public class Maze2D extends MazeDisplayer {
 				e.gc.setForeground(new Color(null, 10, 36, 106));
 				e.gc.setBackground(new Color(null, 10, 36, 106));
 
-				int width = getSize().x;
-				int height = getSize().y;
+				width = getSize().x +zoomFactor*4;
+				height = getSize().y +zoomFactor*4;
 				if ((mazeData != null) && (charPosition != null)) {
 					Image image;
 
