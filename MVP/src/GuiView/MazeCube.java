@@ -32,6 +32,8 @@ public class MazeCube extends MazeDisplayer {
 		MazeDisplayer canvas= this;
 		canvasWidth = this.getSize().x ;
 		canvasHeight = this.getSize().y;
+		
+		
 		mainAngle = 120 ; //default
 		viewAngle = (180 - mainAngle)/2;
 		xAxis = 10;//default

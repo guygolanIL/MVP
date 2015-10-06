@@ -154,6 +154,7 @@ public class PropertiesWindow {
 		Button generateButton = new Button(main, SWT.PUSH);
 		generateButton.setText(" Generate ");
 		generateButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 3, 1));
+		generateButton.setFocus();
 
 		ModifyListener checkAxisData = new ModifyListener() {
 

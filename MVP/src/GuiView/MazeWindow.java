@@ -6,6 +6,7 @@ import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -164,7 +165,7 @@ public class MazeWindow extends BasicWindow{
 		Maze3D mazeWidget=new Maze3D(shell, SWT.NULL);
 		widgetsList.add(mazeWidget);
 		mazeWidget.setFocus();
-		mazeWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,1,5));
+		mazeWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,1,4));
 		
 		
 		solveButton=new Button(shell, SWT.PUSH);
@@ -175,12 +176,12 @@ public class MazeWindow extends BasicWindow{
 		
 		// cube widget.
 		MazeCube mazeCube = new MazeCube(shell, SWT.BORDER);
-		mazeCube.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 2));
+		mazeCube.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
 		widgetsList.add(mazeCube);
 		
 		// possibleMoves widget.
 		MazeDisplayer possibleMoves=new PossibleMoves(shell,SWT.BORDER);
-		possibleMoves.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, false, false, 1, 1));
+		possibleMoves.setLayoutData(new GridData(SWT.CENTER, SWT.BOTTOM, false, true, 1, 1));
 		widgetsList.add(possibleMoves);
 		
 		for (MazeDisplayer mazeDisplayer : widgetsList) {
