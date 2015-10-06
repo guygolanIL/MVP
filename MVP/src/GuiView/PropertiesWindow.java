@@ -7,6 +7,8 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Cursor;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -30,6 +32,7 @@ public class PropertiesWindow {
 		main.setText("Maze Properties");
 		main.setSize(200, 250);
 		main.setLayout(new GridLayout(6, true));
+		main.setCursor(new Cursor(parent.getDisplay(), new ImageData("resources/Cursor_Greylight.png").scaledTo(50, 50), 14, 0));
 		
 		
 		Label nameTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
