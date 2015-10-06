@@ -219,31 +219,31 @@ public class Maze2D extends MazeDisplayer {
 	public char getCrossSection() {
 		return crossSection;
 	}
-protected Image rotateImage(Image image)
-{
-	 ImageData sd = image.getImageData();
-
-     ImageData dd = new ImageData(sd.height, sd.width, sd.depth, sd.palette);
-
-     int style = SWT.UP;
-
-     boolean up = (style & SWT.UP) == SWT.UP;
-
-     // Run through the horizontal pixels
-     for (int sx = 0; sx < sd.width; sx++) {
-       // Run through the vertical pixels
-       for (int sy = 0; sy < sd.height; sy++) {
-         // Determine where to move pixel to in destination image data
-         int dx = up ? sy : sd.height - sy - 1;
-         int dy = up ? sd.width - sx - 1 : sx;
-         // Swap the x, y source data to y, x in the destination
-         dd.setPixel(dx, dy, sd.getPixel(sx, sy));
-       }
-     }
-
-     // Create the vertical image
-     return new Image(getDisplay(), dd);
-
-}
+	protected Image rotateImage(Image image)
+	{
+		 ImageData sd = image.getImageData();
+	
+	     ImageData dd = new ImageData(sd.height, sd.width, sd.depth, sd.palette);
+	
+	     int style = SWT.UP;
+	
+	     boolean up = (style & SWT.UP) == SWT.UP;
+	
+	     // Run through the horizontal pixels
+	     for (int sx = 0; sx < sd.width; sx++) {
+	       // Run through the vertical pixels
+	       for (int sy = 0; sy < sd.height; sy++) {
+	         // Determine where to move pixel to in destination image data
+	         int dx = up ? sy : sd.height - sy - 1;
+	         int dy = up ? sd.width - sx - 1 : sx;
+	         // Swap the x, y source data to y, x in the destination
+	         dd.setPixel(dx, dy, sd.getPixel(sx, sy));
+	       }
+	     }
+	
+	     // Create the vertical image
+	     return new Image(getDisplay(), dd);
+	
+	}
 }
 
