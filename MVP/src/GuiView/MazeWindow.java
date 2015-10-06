@@ -44,6 +44,7 @@ public class MazeWindow extends BasicWindow{
 		this.properties= properties;
 		selectedXMLpropertiesFile = null;
 		widgetsList = new ArrayList<MazeDisplayer>();
+		shell.setImage(new Image(display, "resources/pacman.png"));
 	}
 
 
