@@ -39,18 +39,18 @@ public class CrossCombo extends Canvas{
 				case "y":
 					slave.setCrossSection('y');
 					break;
-					case "z":
-						slave.setCrossSection('z');
-						break;
-						default:
-							
+				case "z":
+					slave.setCrossSection('z');
+					break;
+				default:
+					slave.setCrossSection('x');	
 				}
 				
 				Display.getDefault().syncExec(new Runnable() {
 				    public void run() {
 				    	redraw();
 				    }
-			});
+			    });
 				
 			}
 			
@@ -71,6 +71,7 @@ public class CrossCombo extends Canvas{
 	public void updateText()
 	{
 		if(slave!=null)
+		{
 			switch(slave.getCrossSection())
 			{
 			case 'x':
@@ -82,8 +83,9 @@ public class CrossCombo extends Canvas{
 			case 'z':
 				combo.select(3);
 				break;
-				default:
-					combo.select(0);	
+			default:
+				combo.select(0);	
 			}
+		}
 	}
 }

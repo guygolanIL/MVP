@@ -41,15 +41,6 @@ public class MyObservableModel extends ObservableCommonModel {
 		@Override
 		public void generate(String name, int x, int y, int z) {
 			
-//			threadPool.execute( new Runnable() {			//generating process occurs in a thread.
-//				
-//				@Override
-//				public void run() {
-//				
-//					
-//				}
-//			});
-			
 			 Future<Maze3d> maze = threadPool.submit(new Callable<Maze3d>() {
 	             
 				@Override
@@ -57,31 +48,36 @@ public class MyObservableModel extends ObservableCommonModel {
 					Maze3dGenerator generator;
 					switch (properties.getGenerateAlgorithm())
 					{
-					case ("MyMaze3dGenerator"):
-						generator = new MyMaze3dGenerator();
-					break;
-					case ("SimpleGenerator"):
-						generator = new SimpleMaze3dGenerator();
-					break;
-					default:
-						generator = new MyMaze3dGenerator();
+						case ("MyMaze3dGenerator"):
+							generator = new MyMaze3dGenerator();
+							break;
+						case ("SimpleGenerator"):
+							generator = new SimpleMaze3dGenerator();
+							break;
+						default:
+							generator = new MyMaze3dGenerator();
 					}
 					return generator.generate(x, y, z);
 				}
 			});
 			
-			 try
+			try
 			{
-							if (properties.isDebug())
-								System.out.println(maze.get()); 
-							mazeMap.put(name, maze.get());
-							charPositionMap.put(name, maze.get().getEntrance());
-							setChanged();
-							notifyObservers("completedTask maze generated " + name);
-						} catch (InterruptedException | ExecutionException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+				if (properties.isDebug())
+				{
+					System.out.println(maze.get()); 
+				}
+					
+				mazeMap.put(name, maze.get());
+				charPositionMap.put(name, maze.get().getEntrance());
+				setChanged();
+				notifyObservers("completedTask maze generated " + name);
+			} 
+			catch (InterruptedException | ExecutionException e) 
+			{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
 					 
 			
 		}
@@ -293,13 +289,13 @@ public class MyObservableModel extends ObservableCommonModel {
 
 		@Override
 		public void solve(String name, String algorithm) {
-		try
-				{
-			Future<Solution<Position>> solution = threadPool.submit((new Callable<Solution<Position>>() 
+			try
 			{
+				Future<Solution<Position>> solution = threadPool.submit((new Callable<Solution<Position>>() 
+				{
 				
 				@Override
-				public Solution<Position> call() throws IllegalArgumentException {
+					public Solution<Position> call() throws IllegalArgumentException {
 					Maze3d tmpMaze = mazeMap.get(name);
 					Searcher<Position> alg;
 					if(tmpMaze!=null)
@@ -317,47 +313,48 @@ public class MyObservableModel extends ObservableCommonModel {
 							alg = new AStar<Position>(new MazeAirDistance(new State<Position>(tmpMaze.getExit())));
 							break;
 							
-						default :
+						default:
 							throw new IllegalArgumentException("invalid search algorithm");  //new Throwable("invalid search algorithm"); //ExecutionException("invalid search algorithm", new Throwable(arg0));
 						}
 					}else
 						throw new IllegalArgumentException("unavailable maze"); //new Throwable("unavailable maze");
 					
 						return alg.search(new MazeDomain(tmpMaze));	
-				}}));
+				}
+				}));
 					
 				
 					
-						solutionMap.put(name,solution.get());		//inserting the Solution into the solution map.
-						setChanged();
-						notifyObservers("completedTask solution "+name);
+				solutionMap.put(name,solution.get());		//inserting the Solution into the solution map.
+				setChanged();
+				notifyObservers("completedTask solution "+name);
 						
-				}catch(IllegalArgumentException t)
-					{
-						setChanged();
-						switch(t.getMessage())
-						{
-						case ("invalid search algorithm"):
-								notifyObservers("completedTask error "+algorithm + " is not a valid algorithm!\nvalid algorithms are: BFS, AstarManhattan, AstarAirDistance.");
-						case ("unavailable maze"):
-							notifyObservers("completedTask error '"+name+"' is unavailable maze");
-						default:
-							notifyObservers("completedTask error general error!!");
-					}
-								
-				} catch (InterruptedException e) {
-					if(properties.isDebug())
-					{
-						System.out.println("solve methud interpted:");
-					e.printStackTrace();
-					}
-				} catch (ExecutionException e) {
-					if(properties.isDebug())
-					{
-						System.out.println("solve methud general error:");
-					e.printStackTrace();
-					}
+			}catch(IllegalArgumentException t)
+			{
+				setChanged();
+				switch(t.getMessage())
+				{
+					case ("invalid search algorithm"):
+						notifyObservers("completedTask error "+algorithm + " is not a valid algorithm!\nvalid algorithms are: BFS, AstarManhattan, AstarAirDistance.");
+					case ("unavailable maze"):
+						notifyObservers("completedTask error '"+name+"' is unavailable maze");
+					default:
+						notifyObservers("completedTask error general error!!");
 				}
+								
+			}catch (InterruptedException e) {
+				if(properties.isDebug())
+				{
+					System.out.println("solve methud interpted:");
+					e.printStackTrace();
+				}
+			} catch (ExecutionException e) {
+				if(properties.isDebug())
+				{
+					System.out.println("solve methud general error:");
+					e.printStackTrace();
+				}
+			}
 		}
 
 		@Override
