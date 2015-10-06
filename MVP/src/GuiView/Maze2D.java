@@ -1,11 +1,13 @@
 package GuiView;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseWheelListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
@@ -16,6 +18,7 @@ public class Maze2D extends MazeDisplayer {
 	int zoomFactor;
 	protected int state;
 	protected int[] goal2d;
+	protected int[] position2d;
 	int width;
 	int height;
 	
@@ -69,7 +72,8 @@ public class Maze2D extends MazeDisplayer {
 						setBackground(new Color(null, 0, 0, 0));
 
 						int[][] maze2d = null;
-						int[] position2d = null;
+					//	position2d = null;
+						int [] lastPosition = position2d;
 						switch (crossSection) {
 						case 'x':
 							maze2d = mazeData.getCrossSectionByX(charPosition.getX());	
@@ -163,8 +167,35 @@ public class Maze2D extends MazeDisplayer {
 						}
 						imageWidth = image.getBounds().width;
 						imageHeight = image.getBounds().height;
-
-						e.gc.drawImage(image, 0, 0, imageWidth, imageHeight, position2d[0] * w, position2d[1] * h,resizeWidth, resizeHeight);
+						if (lastPosition!=null)
+						{
+						if(lastPosition[0]>position2d[0])
+						{
+							Image vertical = rotateImage(rotateImage(image));
+						    	imageWidth = vertical.getBounds().width;
+								imageHeight = vertical.getBounds().height;
+						        e.gc.drawImage(vertical, 0, 0, imageWidth, imageHeight, position2d[0] * w, position2d[1] * h,resizeWidth, resizeHeight);
+						}
+						else if(lastPosition[1]>position2d[1])
+						{
+							Image vertical = rotateImage(image);
+						    	imageWidth = vertical.getBounds().width;
+								imageHeight = vertical.getBounds().height;
+						        e.gc.drawImage(vertical, 0, 0, imageWidth, imageHeight, position2d[0] * w, position2d[1] * h,resizeWidth, resizeHeight);
+						}
+						else if(lastPosition[1]<position2d[1])
+						{
+							Image vertical = rotateImage(rotateImage(rotateImage(image)));
+						    	imageWidth = vertical.getBounds().width;
+								imageHeight = vertical.getBounds().height;
+						        e.gc.drawImage(vertical, 0, 0, imageWidth, imageHeight, position2d[0] * w, position2d[1] * h,resizeWidth, resizeHeight);
+						}else
+							e.gc.drawImage(image, 0, 0, imageWidth, imageHeight, position2d[0] * w, position2d[1] * h,resizeWidth, resizeHeight);
+						
+						}
+						else
+							e.gc.drawImage(image, 0, 0, imageWidth, imageHeight, position2d[0] * w, position2d[1] * h,resizeWidth, resizeHeight);
+							
 					}
 				}
 			}
@@ -188,5 +219,31 @@ public class Maze2D extends MazeDisplayer {
 	public char getCrossSection() {
 		return crossSection;
 	}
+protected Image rotateImage(Image image)
+{
+	 ImageData sd = image.getImageData();
+
+     ImageData dd = new ImageData(sd.height, sd.width, sd.depth, sd.palette);
+
+     int style = SWT.UP;
+
+     boolean up = (style & SWT.UP) == SWT.UP;
+
+     // Run through the horizontal pixels
+     for (int sx = 0; sx < sd.width; sx++) {
+       // Run through the vertical pixels
+       for (int sy = 0; sy < sd.height; sy++) {
+         // Determine where to move pixel to in destination image data
+         int dx = up ? sy : sd.height - sy - 1;
+         int dy = up ? sd.width - sx - 1 : sx;
+         // Swap the x, y source data to y, x in the destination
+         dd.setPixel(dx, dy, sd.getPixel(sx, sy));
+       }
+     }
+
+     // Create the vertical image
+     return new Image(getDisplay(), dd);
 
 }
+}
+
