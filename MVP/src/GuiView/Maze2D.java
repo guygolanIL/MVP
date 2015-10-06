@@ -8,6 +8,7 @@ import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.Transform;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
@@ -21,12 +22,18 @@ public class Maze2D extends MazeDisplayer {
 	protected int[] position2d;
 	int width;
 	int height;
+	int cursorX;
+	int cursorY;
+	int cubeWidth;
+	int cubeHeight;
+	
 	
 	public Maze2D(Composite parent, int style) {
 		super(parent, style);
 		state = 1;
 		zoomFactor = 0;
 		crossSection = 'x'; // default
+		
 		
 		addMouseWheelListener(new MouseWheelListener() {
 			
@@ -36,6 +43,8 @@ public class Maze2D extends MazeDisplayer {
 				if(zoomFactor + arg0.count >= 0 && zoomFactor + arg0.count <=500)
 				{
 					zoomFactor = zoomFactor+arg0.count;
+					cursorX = arg0.x;
+					cursorY = arg0.y;
 					redraw();
 				}
 				
@@ -50,8 +59,8 @@ public class Maze2D extends MazeDisplayer {
 				// System.out.println("Maze2D paintControl");
 				e.gc.setForeground(new Color(null, 10, 36, 106));
 				e.gc.setBackground(new Color(null, 10, 36, 106));
-				width = getSize().x +zoomFactor*4;
-				height = getSize().y +zoomFactor*4;
+				width = getSize().x;// +zoomFactor*4;
+				height = getSize().y;// +zoomFactor*4;
 				if ((mazeData != null) && (charPosition != null)) {
 					Image image;
 
@@ -93,15 +102,15 @@ public class Maze2D extends MazeDisplayer {
 							// TODO
 						}
 
-						int w = width / maze2d[0].length;
-						int h = height / maze2d.length;
+						cubeWidth = width / maze2d[0].length;
+						cubeHeight = height / maze2d.length;
 
 						for (int i = 0; i < maze2d.length; i++) {
 							for (int j = 0; j < maze2d[i].length; j++) {
-								int x = j * w;
-								int y = i * h;
+								int x = j * cubeWidth;
+								int y = i * cubeHeight;
 								if (maze2d[i][j] != 0)
-									e.gc.fillRectangle(x, y, w, h);
+									e.gc.fillRectangle(x, y, cubeWidth, cubeHeight);
 								else if (solution != null) {
 									int flag = 0;
 
@@ -125,7 +134,7 @@ public class Maze2D extends MazeDisplayer {
 									if (flag == 1) {
 										System.out.println("solution print");
 										e.gc.setBackground(new Color(null, 255, 255, 255));
-										e.gc.fillOval(x + w / 2, y + h / 2, w / 4, h / 4);
+										e.gc.fillOval(x + cubeWidth / 2, y + cubeHeight / 2, cubeWidth / 4, cubeHeight / 4);
 										e.gc.setBackground(new Color(null, 10, 36, 106));
 									}
 								}
@@ -133,8 +142,8 @@ public class Maze2D extends MazeDisplayer {
 							}
 						}
 						boolean shouldShowExit = false;
-						resizeWidth = w;
-						resizeHeight = h;
+						resizeWidth = cubeWidth;
+						resizeHeight = cubeHeight;
 						switch (crossSection) {
 						case 'x':
 							if (mazeData.getExit().getX() == charPosition.getX())
@@ -153,7 +162,7 @@ public class Maze2D extends MazeDisplayer {
 							image = new Image(getDisplay(), "resources/pacmanwoman.png");
 							imageWidth = image.getBounds().width;
 							imageHeight = image.getBounds().height;
-							e.gc.drawImage(image, 0, 0, imageWidth, imageHeight, goal2d[0] * w, goal2d[1] * h,resizeWidth, resizeHeight);
+							e.gc.drawImage(image, 0, 0, imageWidth, imageHeight, goal2d[0] * cubeWidth, goal2d[1] * cubeHeight,resizeWidth, resizeHeight);
 
 						}
 
@@ -173,30 +182,32 @@ public class Maze2D extends MazeDisplayer {
 							Image vertical = rotateImage(rotateImage(image));
 						    	imageWidth = vertical.getBounds().width;
 								imageHeight = vertical.getBounds().height;
-						        e.gc.drawImage(vertical, 0, 0, imageWidth, imageHeight, position2d[0] * w, position2d[1] * h,resizeWidth, resizeHeight);
+						        e.gc.drawImage(vertical, 0, 0, imageWidth, imageHeight, position2d[0] * cubeWidth, position2d[1] * cubeHeight,resizeWidth, resizeHeight);
 						}
 						else if(lastPosition[1]>position2d[1])
 						{
 							Image vertical = rotateImage(image);
 						    	imageWidth = vertical.getBounds().width;
 								imageHeight = vertical.getBounds().height;
-						        e.gc.drawImage(vertical, 0, 0, imageWidth, imageHeight, position2d[0] * w, position2d[1] * h,resizeWidth, resizeHeight);
+						        e.gc.drawImage(vertical, 0, 0, imageWidth, imageHeight, position2d[0] * cubeWidth, position2d[1] * cubeHeight,resizeWidth, resizeHeight);
 						}
 						else if(lastPosition[1]<position2d[1])
 						{
 							Image vertical = rotateImage(rotateImage(rotateImage(image)));
 						    	imageWidth = vertical.getBounds().width;
 								imageHeight = vertical.getBounds().height;
-						        e.gc.drawImage(vertical, 0, 0, imageWidth, imageHeight, position2d[0] * w, position2d[1] * h,resizeWidth, resizeHeight);
+						        e.gc.drawImage(vertical, 0, 0, imageWidth, imageHeight, position2d[0] * cubeWidth, position2d[1] * cubeHeight,resizeWidth, resizeHeight);
 						}else
-							e.gc.drawImage(image, 0, 0, imageWidth, imageHeight, position2d[0] * w, position2d[1] * h,resizeWidth, resizeHeight);
+							e.gc.drawImage(image, 0, 0, imageWidth, imageHeight, position2d[0] * cubeWidth, position2d[1] * cubeHeight,resizeWidth, resizeHeight);
 						
 						}
 						else
-							e.gc.drawImage(image, 0, 0, imageWidth, imageHeight, position2d[0] * w, position2d[1] * h,resizeWidth, resizeHeight);
+							e.gc.drawImage(image, 0, 0, imageWidth, imageHeight, position2d[0] * cubeWidth, position2d[1] * cubeHeight,resizeWidth, resizeHeight);
 							
 					}
+					
 				}
+				
 			}
 		});
 	}
