@@ -55,7 +55,7 @@ public class MazeWindow extends BasicWindow{
 		Image image= new Image(display,"resources/background.jpg");
 		shell.setBackgroundImage(image);
 		shell.setBackgroundMode(SWT.INHERIT_FORCE);
-		shell.setCursor(new Cursor(shell.getDisplay(), new ImageData("resources/Cursor_Greylight.png").scaledTo(50, 50), 14, 0));
+		shell.setCursor(new Cursor(shell.getDisplay(), new ImageData("resources/Cursor_Greylight.png").scaledTo(27, 25), 16, 0));
 	
 		
 		Menu menuBar = new Menu(shell, SWT.BAR);

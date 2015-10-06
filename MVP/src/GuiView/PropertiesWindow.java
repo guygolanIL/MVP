@@ -32,7 +32,7 @@ public class PropertiesWindow {
 		main.setText("Maze Properties");
 		main.setSize(200, 250);
 		main.setLayout(new GridLayout(6, true));
-		main.setCursor(new Cursor(parent.getDisplay(), new ImageData("resources/Cursor_Greylight.png").scaledTo(50, 50), 14, 0));
+		main.setCursor(new Cursor(parent.getDisplay(), new ImageData("resources/Cursor_Greylight.png").scaledTo(27, 25), 16, 0));
 		
 		
 		Label nameTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
