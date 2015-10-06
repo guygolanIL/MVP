@@ -157,8 +157,8 @@ public class MazeCube extends MazeDisplayer {
 					Image image = new Image(getDisplay(),"resources/locationIcon.png");
 					int imageWidth = image.getBounds().width;
 					int imageHeight = image.getBounds().height;
-					int width = (int) Math.round(getSize().x*0.1);
-					int height = (int) Math.round(getSize().y*0.2);
+					int width = (int) Math.round(getSize().x*0.05);
+					int height = (int) Math.round(getSize().y*0.05);
 					event.gc.drawImage(image,0,0,imageWidth,imageHeight,0,0,width,height);
 				}
 			}
