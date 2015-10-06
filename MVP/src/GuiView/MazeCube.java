@@ -84,12 +84,12 @@ public class MazeCube extends MazeDisplayer {
 					
 					pointA[0] = canvasCenter[0];
 					pointA[1] = canvasCenter[1];
-					pointB[0] = canvasCenter[0] + ratiozAxis*Math.sin(viewAngle);
-					pointB[1] = canvasCenter[1] - ratiozAxis*Math.cos(viewAngle);
-					pointC[0] = pointB[0] - ratioyAxis*Math.sin(viewAngle);
-					pointC[1] = pointB[1] - ratioyAxis*Math.cos(viewAngle);
-					pointD[0] = canvasCenter[0] - ratioyAxis*Math.sin(viewAngle);
-					pointD[1] = canvasCenter[1] - ratioyAxis*Math.cos(viewAngle);
+					pointB[0] = canvasCenter[0] + ratioyAxis*Math.sin(viewAngle);
+					pointB[1] = canvasCenter[1] - ratioyAxis*Math.cos(viewAngle);
+					pointC[0] = pointB[0] - ratiozAxis*Math.sin(viewAngle);
+					pointC[1] = pointB[1] - ratiozAxis*Math.cos(viewAngle);
+					pointD[0] = canvasCenter[0] - ratiozAxis*Math.sin(viewAngle);
+					pointD[1] = canvasCenter[1] - ratiozAxis*Math.cos(viewAngle);
 					pointG[0] = pointC[0];
 					pointG[1] = pointC[1] + ratioxAxis;
 					pointE[0] = pointA[0];
@@ -151,7 +151,7 @@ public class MazeCube extends MazeDisplayer {
 					int imageHeight = image.getBounds().height;
 					int width = (int) Math.round(getSize().x*0.1);
 					int height = (int) Math.round(getSize().y*0.2);
-					event.gc.drawImage(image,0,0,imageWidth,imageHeight,(int)Math.round(getSize().x*0.1),(int)Math.round(getSize().y*0.5),width,height);
+					event.gc.drawImage(image,0,0,imageWidth,imageHeight,0,0,width,height);
 				}
 			}
 		});
