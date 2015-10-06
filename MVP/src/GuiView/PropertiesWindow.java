@@ -28,7 +28,7 @@ public class PropertiesWindow {
 		this.properties = properties;
 
 		main.setText("Maze Properties");
-		main.setSize(180, 250);
+		main.setSize(200, 250);
 		main.setLayout(new GridLayout(6, true));
 		
 		
@@ -52,6 +52,7 @@ public class PropertiesWindow {
 		xTextBox.setText("" + properties.getxAxis());
 		xTextBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		xTextBox.setToolTipText("numbers only, greater than 3");
+		xTextBox.setTextLimit(2);
 		xTextBox.addFocusListener(new FocusListener() {
 			
 			@Override
@@ -74,6 +75,7 @@ public class PropertiesWindow {
 		yTextBox.setText("" + properties.getyAxis());
 		yTextBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		yTextBox.setToolTipText("numbers only, greater than 3");
+		yTextBox.setTextLimit(2);
 		yTextBox.addFocusListener(new FocusListener() {
 					
 					@Override
@@ -96,6 +98,7 @@ public class PropertiesWindow {
 		zTextBox.setText("" + properties.getzAxis());
 		zTextBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		zTextBox.setToolTipText("numbers only, greater than 3");
+		zTextBox.setTextLimit(2);
 		zTextBox.addFocusListener(new FocusListener() {
 					
 					@Override
