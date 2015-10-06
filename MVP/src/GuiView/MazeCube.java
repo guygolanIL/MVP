@@ -139,6 +139,14 @@ public class MazeCube extends MazeDisplayer {
 					lowerShapeVertices[6] = (int) (canvasWidth*(pointH[0]/100));
 					lowerShapeVertices[7] = (int) (canvasHeight*(pointH[1]/100));
 					
+					
+					event.gc.setForeground(new Color(getDisplay(),255,0,0));
+					event.gc.drawRoundRectangle((int) (canvasWidth*(pointE[0]/100)-2.5), (int) (canvasHeight*(pointE[1]/100)-2.5), 5, 5, 5, 5);
+					event.gc.drawRoundRectangle((int) (canvasWidth*(pointH[0]/100)-2.5), (int) (canvasHeight*(pointH[1]/100)-2.5), 5, 5, 5, 5);
+					event.gc.drawRoundRectangle((int) (canvasWidth*(pointG[0]/100)-2.5), (int) (canvasHeight*(pointG[1]/100)-2.5), 5, 5, 5, 5);
+					event.gc.drawRoundRectangle((int) (canvasWidth*(pointF[0]/100)-2.5), (int) (canvasHeight*(pointF[1]/100)-2.5), 5, 5, 5, 5);
+					event.gc.setForeground(new Color(getDisplay(),0,0,0));
+					
 					event.gc.drawPolygon(upperShapeVertices);
 					event.gc.drawPolygon(lowerShapeVertices);
 					event.gc.drawLine((int)(canvasWidth*(pointA[0]/100)), (int)(canvasHeight*(pointA[1]/100)),(int)(canvasWidth*(pointE[0]/100)) ,(int)(canvasHeight*(pointE[1]/100)));
