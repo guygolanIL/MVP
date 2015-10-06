@@ -459,19 +459,19 @@ public class MyObservableModel extends ObservableCommonModel {
 
 		@Override
 		public void MoveLVLUP(String name) {
-			System.out.println("1");
+			
 			Position current = charPositionMap.get(name);
-			System.out.println("2 "  + current);
+			
 			String [] moves = mazeMap.get(name).getPossibleMoves(current);
 			for (String move : moves) {
 				if (move.equals("UP"))
 				{
 					current.setX(current.getX()+1);
 					charPositionMap.put(name,current );
-					System.out.println("3 "  + current);
+					
 					setChanged();
 					notifyObservers("completedTask movement " + name);
-					System.out.println("4 " );
+					
 				}
 			}			
 		}
