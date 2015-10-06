@@ -119,6 +119,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 				
 			}
 		});
+		
 	}
 
 	@Override
@@ -151,6 +152,12 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 		
 	}
 
+	@Override
+	public void display(Solution<Position> solution) {
+		mainWindow.setSolution(solution);
+		
+	}
+	
 	@Override
 	public void display(Maze3d maze) {
 		mainWindow.setMazeData(maze);
@@ -186,13 +193,5 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void display(Solution<Position> solution) {
-		mainWindow.setSolution(solution);
-		
-	}
-
-	
 
 }
