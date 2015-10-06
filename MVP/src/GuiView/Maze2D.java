@@ -8,6 +8,7 @@ import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.Transform;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
@@ -50,7 +51,6 @@ public class Maze2D extends MazeDisplayer {
 				// System.out.println("Maze2D paintControl");
 				e.gc.setForeground(new Color(null, 10, 36, 106));
 				e.gc.setBackground(new Color(null, 10, 36, 106));
-
 				width = getSize().x +zoomFactor*4;
 				height = getSize().y +zoomFactor*4;
 				if ((mazeData != null) && (charPosition != null)) {
