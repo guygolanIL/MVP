@@ -59,8 +59,8 @@ public class Maze2D extends MazeDisplayer {
 				// System.out.println("Maze2D paintControl");
 				e.gc.setForeground(new Color(null, 10, 36, 106));
 				e.gc.setBackground(new Color(null, 10, 36, 106));
-				width = getSize().x;// +zoomFactor*4;
-				height = getSize().y;// +zoomFactor*4;
+				width = getSize().x +zoomFactor*4;
+				height = getSize().y +zoomFactor*4;
 				if ((mazeData != null) && (charPosition != null)) {
 					Image image;
 
