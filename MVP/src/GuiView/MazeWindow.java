@@ -91,16 +91,16 @@ public class MazeWindow extends BasicWindow{
 			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
 
-		MenuItem fileEditPropItem = new MenuItem(fileMenu, SWT.PUSH);
+		MenuItem fileEditPropItem = new MenuItem(fileMenu, SWT.PUSH);		//button for editing an existing properties.
 		fileEditPropItem.setText("Edit properties");
 		    
 		MenuItem fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
-		fileExitItem.setText("Exit");
+		fileExitItem.setText("Exit");										//button for safe exit.
 		fileExitItem.addSelectionListener(new SelectionListener() {
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				shell.dispose();
+				shell.dispose();								//activates the DisposeListener.
 			}
 			
 			@Override
@@ -110,13 +110,13 @@ public class MazeWindow extends BasicWindow{
 			}
 		});
 
-		MenuItem MazeMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+		MenuItem MazeMenuHeader = new MenuItem(menuBar, SWT.CASCADE);		//window menu Maze header.
 		MazeMenuHeader.setText("Maze");
 
-		Menu MazeMenu = new Menu(shell, SWT.DROP_DOWN);
+		Menu MazeMenu = new Menu(shell, SWT.DROP_DOWN);						
 		MazeMenuHeader.setMenu(MazeMenu);
 
-		MenuItem mazePropItem = new MenuItem(MazeMenu, SWT.PUSH);
+		MenuItem mazePropItem = new MenuItem(MazeMenu, SWT.PUSH);			
 		mazePropItem.setText("Maze properties");
 		mazePropItem.addSelectionListener(new SelectionListener() {
 				
