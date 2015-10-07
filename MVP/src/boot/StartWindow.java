@@ -1,4 +1,4 @@
-package GuiView;
+package boot;
 
 
 import java.io.FileInputStream;
@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
-import boot.StartUpPropertiesWindow;
+import GuiView.BasicWindow;
 import presenter.Properties;
 
 public class StartWindow extends BasicWindow {

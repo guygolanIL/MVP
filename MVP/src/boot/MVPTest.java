@@ -8,20 +8,17 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import GuiView.MyObservableGuiView;
-import GuiView.StartWindow;
 import cliView.MyObservableCLIView;
 import model.MyObservableModel;
 import presenter.Presenter;
 import presenter.Properties;
-import view.CLI;
 import view.ObservableCommonView;
-import view.View;
 
 public class MVPTest {
 
 	public static void main(String[] args) {
 		
-Thread startWindowThread = new Thread(new Runnable() {
+		Thread startWindowThread = new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
@@ -35,12 +32,12 @@ Thread startWindowThread = new Thread(new Runnable() {
 					ObservableCommonView view = null;
 					switch (prop.getUi())
 					{
-					case "Command line":
-						view = new MyObservableCLIView(new BufferedReader(new InputStreamReader(System.in)) , new PrintWriter(System.out));
-						break;
-					case  "Graphic user interface":
-						view = new MyObservableGuiView("maze game", 800, 500);
-						break;
+						case "Command line":
+							view = new MyObservableCLIView(new BufferedReader(new InputStreamReader(System.in)) , new PrintWriter(System.out));
+							break;
+						case "Graphic user interface":
+							view = new MyObservableGuiView("maze game", 800, 500);
+							break;
 						default:
 							view = new MyObservableGuiView("maze game", 800, 500);	
 					}
