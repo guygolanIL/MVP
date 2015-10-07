@@ -4,13 +4,19 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 
+ 
+ /**
+  * BasicWindow represents what every window with event driven GUI should implement.
+  * @author Guy Golan & Amit Sandak
+  *
+  */
 public abstract class BasicWindow implements Runnable{
 	
-	Display display;
-	Shell shell;
+	protected Display display;
+	protected Shell shell;
 
 	
- 	public BasicWindow( String title, int width,int height) {
+ 	public BasicWindow( String title, int width,int height) {		//CTOR
  		display=new Display();
  		shell  = new Shell(display);
  		shell.setSize(width,height);
@@ -18,8 +24,10 @@ public abstract class BasicWindow implements Runnable{
  		
 	}
 
- 	
- 	abstract void initWidgets();
+ 	/**
+ 	 * Initializing each window's widgets.
+ 	 */
+ 	abstract void initWidgets();			//every window will implement its own widgets.
 
 	@Override
 	public void run() {
@@ -39,6 +47,10 @@ public abstract class BasicWindow implements Runnable{
 		 display.dispose(); // dispose OS components
 		 
 	}
+	
+	/**
+	 * Used to dispose the window manually. 
+	 */
 	public void exit()
 	{
 		shell.dispose(); 

@@ -6,9 +6,7 @@ import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -48,7 +46,7 @@ public class MazeWindow extends BasicWindow{
 	
 	
 
-	public MazeWindow( String title, int width, int height , Properties properties) {
+	public MazeWindow( String title, int width, int height , Properties properties) {		//Ctor
 		super(title, width, height);
 		this.properties= properties;
 		selectedXMLpropertiesFile = null;
@@ -60,7 +58,7 @@ public class MazeWindow extends BasicWindow{
 
 	@Override
 	void initWidgets() {
-		shell.addDisposeListener(exitListener);
+		shell.addDisposeListener(exitListener);			//for X button and 'Exit' button
 		shell.setLayout(new GridLayout(2,false));	
 		Image image= new Image(display,"resources/background.jpg");
 		shell.setBackgroundImage(image);
@@ -68,22 +66,22 @@ public class MazeWindow extends BasicWindow{
 		//shell.setCursor(new Cursor(shell.getDisplay(), new ImageData("resources/Cursor_Greylight.png").scaledTo(27, 25), 16, 0));
 	
 		
-		Menu menuBar = new Menu(shell, SWT.BAR);
-		MenuItem fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+		Menu menuBar = new Menu(shell, SWT.BAR);			//the main window menu bar.
+		MenuItem fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);		//menu bar header button.
 		fileMenuHeader.setText("&File");
 
 		Menu fileMenu = new Menu(shell, SWT.DROP_DOWN);
 		fileMenuHeader.setMenu(fileMenu);
 
-		MenuItem fileOpenPropItem = new MenuItem(fileMenu, SWT.PUSH);
+		MenuItem fileOpenPropItem = new MenuItem(fileMenu, SWT.PUSH);   //button used to load new properties during runtime.
 		fileOpenPropItem.setText("Open properties file");
 		fileOpenPropItem.addSelectionListener(new SelectionListener() {
 				
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				FileDialog fd=new FileDialog(shell,SWT.OPEN);
+				FileDialog fd=new FileDialog(shell,SWT.OPEN);			//opening a new file dialog widget.
 				fd.setText("open");
-				String[] filterExt = { ".xml" };
+				String[] filterExt = { "*.xml" };
 				fd.setFilterExtensions(filterExt);
 				selectedXMLpropertiesFile = fd.open();
 						// TODO connect to mvp

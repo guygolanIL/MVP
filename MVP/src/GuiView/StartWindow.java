@@ -62,8 +62,8 @@ public class StartWindow extends BasicWindow {
 			public void widgetSelected(SelectionEvent arg0) {
 				FileDialog fd=new FileDialog(shell,SWT.OPEN);
 				fd.setText("open XML properties file");
-				//String[] filterExt = { ".xml" };
-				//fd.setFilterExtensions(filterExt);
+				String[] filterExt = { "*.xml" };
+				fd.setFilterExtensions(filterExt);
 				selectedXMLpropertiesFile = fd.open();
 			}
 				
