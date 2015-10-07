@@ -20,10 +20,16 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+
+import abstracts.MazeDisplayer;
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
 import algorithms.search.State;
+import mainMaze.Maze3D;
+import mazeCube.MazeCube;
+import mazePossibleMoves.PossibleMoves;
+
 
 public class MazeWindow extends BasicWindow{
 	protected Maze3d maze;
@@ -59,7 +65,7 @@ public class MazeWindow extends BasicWindow{
 		Image image= new Image(display,"resources/background.jpg");
 		shell.setBackgroundImage(image);
 		shell.setBackgroundMode(SWT.INHERIT_FORCE);
-		shell.setCursor(new Cursor(shell.getDisplay(), new ImageData("resources/Cursor_Greylight.png").scaledTo(27, 25), 16, 0));
+		//shell.setCursor(new Cursor(shell.getDisplay(), new ImageData("resources/Cursor_Greylight.png").scaledTo(27, 25), 16, 0));
 	
 		
 		Menu menuBar = new Menu(shell, SWT.BAR);
@@ -169,7 +175,8 @@ public class MazeWindow extends BasicWindow{
 		});
 		
 		//Main Maze display widget.
-		Maze3D mazeWidget=new Maze3D(shell, SWT.NULL);
+		
+		MazeDisplayer mazeWidget=new Maze3D(shell, SWT.NULL);
 		widgetsList.add(mazeWidget);
 		mazeWidget.setFocus();
 		mazeWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,1,5));

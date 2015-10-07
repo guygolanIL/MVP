@@ -10,6 +10,7 @@
 	<classpathentry kind="lib" path="lib/connectors/sqljdbc41.jar"/>
 	<classpathentry kind="lib" path="lib/connectors/sqljdbc42.jar"/>
 	<classpathentry kind="lib" path="lib/MyAlgorithms.jar"/>
+	<classpathentry kind="lib" path="lib/MyMazeWidgets.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/hibernate"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate lib"/>

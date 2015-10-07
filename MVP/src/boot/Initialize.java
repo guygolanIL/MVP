@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import GuiView.MyObservableGuiView;
+import GuiView.StartWindow;
 import model.MyObservableModel;
 import presenter.Presenter;
 import presenter.Properties;

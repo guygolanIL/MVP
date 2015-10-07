@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import GuiView.MyObservableGuiView;
+import GuiView.StartWindow;
 import cliView.MyObservableCLIView;
 import model.MyObservableModel;
 import presenter.Presenter;

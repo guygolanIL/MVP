@@ -1,4 +1,4 @@
-package boot;
+package GuiView;
 
 
 import java.io.FileInputStream;
@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
-import GuiView.BasicWindow;
+import boot.StartUpPropertiesWindow;
 import presenter.Properties;
 
 public class StartWindow extends BasicWindow {
@@ -30,7 +30,7 @@ public class StartWindow extends BasicWindow {
 	
 	
 	public StartWindow() {
-		super("initialization", 250, 250);
+		super("initialization", 335, 250);
 
 	}
 	@Override
@@ -40,7 +40,7 @@ public class StartWindow extends BasicWindow {
 		Image image= new Image(shell.getDisplay(),"resources/background.jpg");
 		shell.setBackgroundImage(image);
 		shell.setBackgroundMode(SWT.INHERIT_FORCE);
-		shell.setCursor(new Cursor(shell.getDisplay(), new ImageData("resources/Cursor_Greylight.png").scaledTo(27, 25), 16, 0));
+		//shell.setCursor(new Cursor(shell.getDisplay(), new ImageData("resources/Cursor_Greylight.png").scaledTo(27, 25), 16, 0));
 	
 		Label label1 =new Label(shell,SWT.NULL);
 		label1.setText("To start the the program we need some properties:");
