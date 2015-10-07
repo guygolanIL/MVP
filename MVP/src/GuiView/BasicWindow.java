@@ -17,6 +17,7 @@ public abstract class BasicWindow implements Runnable{
  		shell.setText(title);
  		
 	}
+
  	
  	abstract void initWidgets();
 

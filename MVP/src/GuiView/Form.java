@@ -10,14 +10,17 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-public class Form<T> extends BasicWindow {
+public class Form<T> {//extends BasicWindow {
 
 	protected T created;
+	Shell shell;
 	
-	public Form(T classObject, String title, int width, int height) {
-		super(title, width, height);
+	public Form(Shell parent, T classObject, String title, int width, int height) {
+	//	super(title, width, height);
+		shell = new Shell(parent.getDisplay());
 		created = null;
 		shell.setLayout(new GridLayout(2,false));
 		Class<? extends Object> format = classObject.getClass();
@@ -77,17 +80,16 @@ public class Form<T> extends BasicWindow {
 						
 					}
 				});	
+		shell.pack();
 	}
 
-	@Override
-	void initWidgets() {
-			//shell.setLayout(new GridLayout(2,false));		
 	
-	}
-
 	public T getObject() {
 		return created;
 		
 	}
-
+public void run()
+{
+	shell.open();
+}
 }

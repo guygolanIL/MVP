@@ -5,10 +5,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.zip.GZIPOutputStream;
 
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Maze3dGenerator;
@@ -386,8 +388,24 @@ public class MyObservableModel extends ObservableCommonModel {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}	
-				
-		}
+			  ObjectOutputStream oos = null;
+		        try {
+		            oos = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream("solutionMap.zip")));
+		            oos.writeObject(mazeMap);
+		        } catch (IOException e) {
+		        	
+		        		System.out.println("errr");
+		        		e.printStackTrace();
+		        } finally {
+		            try {
+		                oos.flush();
+		                oos.close();
+		            } catch (IOException e) {
+		                // TODO Auto-generated catch block
+		                e.printStackTrace();
+		            }  
+		        }
+		        }
 
 		@Override
 		public Position getCharPosition(String name) {

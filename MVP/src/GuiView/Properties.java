@@ -1,9 +1,13 @@
 package GuiView;
 
-import java.util.Random;
+import java.io.Serializable;
 
-public class Properties {
+public class Properties implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String name;
 	protected boolean debugMode;
 	protected String GUItype;

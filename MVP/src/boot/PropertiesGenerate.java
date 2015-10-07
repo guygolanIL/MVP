@@ -7,12 +7,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import GuiView.StartApp;
 import presenter.Properties;
 
 public class PropertiesGenerate {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		
+		StartApp start =	new StartApp();
+		start.start();
 		Properties p = new Properties();
 		p.setMaxThreads(10);
 		p.setMazeMaxAxisX(15);
@@ -21,11 +23,11 @@ public class PropertiesGenerate {
 		p.setSolveAlgorithm("BFS");
 		p.setGenerateAlgorithm("MyMaze3dGenerator");
 		
-		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.save(p);
-		session.getTransaction().commit();
+//		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+//		Session session = sessionFactory.openSession();
+//		session.beginTransaction();
+//		session.save(p);
+//		session.getTransaction().commit();
 		
 		
 		FileOutputStream file;
