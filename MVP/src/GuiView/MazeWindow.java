@@ -30,13 +30,16 @@ public class MazeWindow extends BasicWindow{
 	protected Position charPosition;
 	protected ArrayList<Position> solution;
 	protected String selectedXMLpropertiesFile;
-	protected Button solveButton;
 	protected DisposeListener exitListener;
 	protected SelectionListener generateListener;
 	protected KeyListener keyListener;
 	protected SelectionListener solveListener;
+	protected SelectionListener clueListener;
 	protected ArrayList<MazeDisplayer> widgetsList;
 	protected Properties properties;
+	protected Button clueButton;
+	protected Button solveButton;
+	
 	
 
 	public MazeWindow( String title, int width, int height , Properties properties) {
@@ -169,11 +172,18 @@ public class MazeWindow extends BasicWindow{
 		Maze3D mazeWidget=new Maze3D(shell, SWT.NULL);
 		widgetsList.add(mazeWidget);
 		mazeWidget.setFocus();
-		mazeWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,1,4));
+		mazeWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,1,5));
 		
 		
+		clueButton=new Button(shell, SWT.PUSH);
+		clueButton.setText("        give a clue         ");
+		clueButton.setLayoutData(new GridData(SWT.None, SWT.None, false, false, 1, 1));
+		clueButton.setEnabled(false);
+		clueButton.addSelectionListener(clueListener);
+		
+
 		solveButton=new Button(shell, SWT.PUSH);
-		solveButton.setText("  Solve  ");
+		solveButton.setText("     Solve the maze     ");
 		solveButton.setLayoutData(new GridData(SWT.None, SWT.None, false, false, 1, 1));
 		solveButton.setEnabled(false);
 		solveButton.addSelectionListener(solveListener);
@@ -223,6 +233,7 @@ public class MazeWindow extends BasicWindow{
 		Display.getDefault().syncExec(new Runnable() {
 		    public void run() {
 		    	solveButton.setEnabled(true);
+		    	clueButton.setEnabled(true);
 		    }
 		});
 		
@@ -284,29 +295,11 @@ public class MazeWindow extends BasicWindow{
 	public void setExitListener(DisposeListener exitListener) {
 		this.exitListener = exitListener;
 	}
-	
-	/////// stub movements////////////////////////
-//	public void moveUp() {
-//		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY()-1, this.charPosition.getZ()));
-//	}
-//	public void moveDown() {
-//		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY()+1, this.charPosition.getZ()));		
-//	}
-//	public void moveLeft() {
-//		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY(), this.charPosition.getZ()-1));		
-//	}
-//	public void moveRight() {
-//		setPositionData(new Position(this.charPosition.getX(), this.charPosition.getY(), this.charPosition.getZ()+1));		
-//	}
-//	public void moveLVLUp() {
-//		setPositionData(new Position(this.charPosition.getX()+1, this.charPosition.getY(), this.charPosition.getZ()));		
-//	}
-//	public void moveLVLDown() {
-//		setPositionData(new Position(this.charPosition.getX()-1, this.charPosition.getY(), this.charPosition.getZ()));		
-//	}
 
-	
 
-	
-	
+
+	public void setClueListener(SelectionListener selectionListener) {
+		this.clueListener = selectionListener;
+		
+	}
 }

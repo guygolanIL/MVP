@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -315,73 +317,12 @@ public class MyObservableModel extends ObservableCommonModel {
 		}
 
 		@Override
-		public void solve(String name, String algorithm) {
-			try
-			{
-				Future<Solution<Position>> solution = threadPool.submit((new Callable<Solution<Position>>() 
-				{
-				
-				@Override
-					public Solution<Position> call() throws IllegalArgumentException {
-					Maze3d tmpMaze = mazeMap.get(name);
-					Searcher<Position> alg;
-					if(tmpMaze!=null)
-					{
-						
-						switch(algorithm)							//generating a Searcher according to the parameters.
-						{
-						case "BFS":
-							alg = new BFS<Position>();
-							break;
-						case "AstarManhattan":
-							alg = new AStar<Position>(new MazeManhattanDistance(new State<Position>(tmpMaze.getExit())));
-							break;
-						case "AstarAirDistance":
-							alg = new AStar<Position>(new MazeAirDistance(new State<Position>(tmpMaze.getExit())));
-							break;
-							
-						default:
-							throw new IllegalArgumentException("invalid search algorithm");  //new Throwable("invalid search algorithm"); //ExecutionException("invalid search algorithm", new Throwable(arg0));
-						}
-					}else
-						throw new IllegalArgumentException("unavailable maze"); //new Throwable("unavailable maze");
-					
-						return alg.search(new MazeDomain(tmpMaze));	
-				}
-				}));
-					
-				
-					
-				solutionMap.put(name,solution.get());		//inserting the Solution into the solution map.
+		public void clue(String name, String algorithm) {
+				solve( name,  algorithm);
+				System.out.println("dsdf");
 				setChanged();
-				notifyObservers("completedTask solution "+name);
-						
-			}catch(IllegalArgumentException t)
-			{
-				setChanged();
-				switch(t.getMessage())
-				{
-					case ("invalid search algorithm"):
-						notifyObservers("completedTask error "+algorithm + " is not a valid algorithm!\nvalid algorithms are: BFS, AstarManhattan, AstarAirDistance.");
-					case ("unavailable maze"):
-						notifyObservers("completedTask error '"+name+"' is unavailable maze");
-					default:
-						notifyObservers("completedTask error general error!!");
-				}
-								
-			}catch (InterruptedException e) {
-				if(properties.isDebug())
-				{
-					System.out.println("solve methud interpted:");
-					e.printStackTrace();
-				}
-			} catch (ExecutionException e) {
-				if(properties.isDebug())
-				{
-					System.out.println("solve methud general error:");
-					e.printStackTrace();
-				}
-			}
+				notifyObservers("completedTask clue "+name);
+		
 		}
 
 		@Override
@@ -549,7 +490,102 @@ public class MyObservableModel extends ObservableCommonModel {
 				}
 			}			
 		}
+
+		
+		protected void solve(String name, String algorithm) {
+			try
+			{
+				Future<Solution<Position>> solution = threadPool.submit((new Callable<Solution<Position>>() 
+				{
+				
+				@Override
+					public Solution<Position> call() throws IllegalArgumentException {
+					Maze3d tmpMaze = mazeMap.get(name);
+					Searcher<Position> alg;
+					if(tmpMaze!=null)
+					{
+						
+						switch(algorithm)							//generating a Searcher according to the parameters.
+						{
+						case "BFS":
+							alg = new BFS<Position>();
+							break;
+						case "AstarManhattan":
+							alg = new AStar<Position>(new MazeManhattanDistance(new State<Position>(tmpMaze.getExit())));
+							break;
+						case "AstarAirDistance":
+							alg = new AStar<Position>(new MazeAirDistance(new State<Position>(tmpMaze.getExit())));
+							break;
+							
+						default:
+							throw new IllegalArgumentException("invalid search algorithm");  //new Throwable("invalid search algorithm"); //ExecutionException("invalid search algorithm", new Throwable(arg0));
+						}
+					}else
+						throw new IllegalArgumentException("unavailable maze"); //new Throwable("unavailable maze");
+					
+						return alg.search(new MazeDomain(tmpMaze));	
+				}
+				}));
+					
+				
+				solutionMap.put(name,solution.get());		//inserting the Solution into the solution map.
+
+						
+			}catch(IllegalArgumentException t)
+			{
+				setChanged();
+				switch(t.getMessage())
+				{
+					case ("invalid search algorithm"):
+						notifyObservers("completedTask error "+algorithm + " is not a valid algorithm!\nvalid algorithms are: BFS, AstarManhattan, AstarAirDistance.");
+					case ("unavailable maze"):
+						notifyObservers("completedTask error '"+name+"' is unavailable maze");
+					default:
+						notifyObservers("completedTask error general error!!");
+				}
+								
+			}catch (InterruptedException e) {
+				if(properties.isDebug())
+				{
+					System.out.println("solve methud interpted:");
+					e.printStackTrace();
+				}
+			} catch (ExecutionException e) {
+				if(properties.isDebug())
+				{
+					System.out.println("solve methud general error:");
+					e.printStackTrace();
+				}
+			}
 	}
+
+		
+		@Override
+		public void solution(String name, String algorithm) {
+			solve( name,  algorithm);
+			Solution<Position> course = solutionMap.get(name);
+			
+			Timer timer=new Timer();
+			
+			TimerTask task=new TimerTask() {
+				int i =0;
+				@Override
+				public void run() {
+					if(i == course.getArr().size()-1)
+						this.cancel();
+					
+					charPositionMap.put(name,course.getArr().get(i++).getState() );
+					setChanged();
+					notifyObservers("completedTask movement " + name);
+				}
+					
+			};
+						
+			timer.scheduleAtFixedRate(task, 0, 100);				
+		
+			
+		}
+}
 
 	
 	

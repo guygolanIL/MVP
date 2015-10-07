@@ -7,14 +7,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import GuiView.StartApp;
+import GuiView.StartWindow;
 import presenter.Properties;
 
 public class PropertiesGenerate {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		StartApp start =	new StartApp();
-		start.start();
+	
 		Properties p = new Properties();
 		p.setMaxThreads(10);
 		p.setMazeMaxAxisX(15);

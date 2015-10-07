@@ -19,6 +19,7 @@ public class Properties implements Serializable {
 	protected String solveAlgorithm;
 	
 	protected int maxThreads;
+	protected String ui;
 
 	
 	
@@ -31,6 +32,7 @@ public class Properties implements Serializable {
 		this.mazeMaxAxisY = 35;
 		this.mazeMaxAxisZ = 35;
 		this.maxThreads = 10;
+		this.ui = "Graphic user interface";
 	}
 
 	public boolean isDebug() {
@@ -87,6 +89,10 @@ public class Properties implements Serializable {
 
 	public void setMaxThreads(int maxThreads) {
 		this.maxThreads = maxThreads;
+	}
+
+	public String getUi() {
+		return ui;
 	}
 
 	

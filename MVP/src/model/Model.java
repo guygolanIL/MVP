@@ -63,12 +63,6 @@ public interface Model {
 	 */
 	void calculateFileSize(String name);
 	/**
-	 * Solve a Maze3d.
-	 * @param name - Maze3d's name.
-	 * @param algorithm - the Search algorithm.
-	 */
-	void solve(String name, String algorithm);
-	/**
 	 * Display the solution (using the controller) of a Maze3d (by its name).
 	 * @param name - Maze3d's name
 	 */
@@ -87,4 +81,6 @@ public interface Model {
 	void MoveLVLDOWN(String name);
 	void setProperties(Properties properties);
 	Properties getProperties();
+	void clue(String name, String algorithm);
+	void solution(String name, String algorithm);
 }

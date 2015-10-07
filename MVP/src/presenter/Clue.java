@@ -1,13 +1,8 @@
 package presenter;
 
-/**
- * Defines what the Command Solve should do.
- * @author Guy Golan & Amit Sandak.
- *
- */
-public class Solve extends CommonCommand {
+public class Clue extends CommonCommand {
 
-	public Solve(Presenter presenter) {		//Ctor
+	public Clue(Presenter presenter) {		//Ctor
 		super(presenter);
 	}
 
@@ -22,12 +17,13 @@ public class Solve extends CommonCommand {
 		
 		if(s.length > 1)
 		{
-			presenter.getModel().solution(s[0],s[1]);
+			presenter.getModel().clue(s[0],s[1]);
 		}
 		else
 		{
 			presenter.getView().displayError("Missing parameters.");
 		}
 	}
+
 
 }
