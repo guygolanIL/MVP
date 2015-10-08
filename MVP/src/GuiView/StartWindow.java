@@ -1,27 +1,16 @@
 package GuiView;
 
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Shell;
-
 import boot.StartUpPropertiesWindow;
-import presenter.Properties;
 
 public class StartWindow extends BasicWindow {
 	
@@ -84,14 +73,14 @@ public class StartWindow extends BasicWindow {
 					
 					@Override
 					public void run() {
-						try {
-							propWindow.join();
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						selectedXMLpropertiesFile = propWindow.getXMLpath();
-						
+//						try {
+//							propWindow.join();
+//						} catch (InterruptedException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//						selectedXMLpropertiesFile = propWindow.getXMLpath();
+//						
 					}
 				}).start();
 			

@@ -4,6 +4,7 @@ import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
 import presenter.Presenter;
+import presenter.Properties;
 
 public interface View {
 
@@ -19,6 +20,7 @@ public interface View {
 	public void displayCrossSectionByY(int parseInt, String string);
 	public void displayCrossSectionByZ(int parseInt, String string);
 	public void display(Solution<Position> result);
+	public void setProperties(Properties prop);
 	
 
 }

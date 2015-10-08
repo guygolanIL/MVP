@@ -1,6 +1,7 @@
 package GuiView;
 
 
+import presenter.Properties;
 import view.ObservableCommonView;
 
 public abstract class ObservableCommonGuiView extends ObservableCommonView {
@@ -12,7 +13,7 @@ public abstract class ObservableCommonGuiView extends ObservableCommonView {
 	}
 	
 	public void setDebugMode(boolean debug) {
-		properties.setDebugMode(debug);
+		properties.setDebug(debug);
 		
 	}
 	

@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import GuiView.MyObservableGuiView;
-import GuiView.StartWindow;
 import cliView.MyObservableCLIView;
 import model.MyObservableModel;
 import presenter.Presenter;
@@ -18,67 +17,42 @@ import view.ObservableCommonView;
 public class MVPTest {
 
 	public static void main(String[] args) {
-		
-		Thread startWindowThread = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				StartWindow startWindow = new StartWindow();
-				startWindow.run();
+	String defaultXMLname = "properties.xml";
+				Properties prop;
 				try {
-					FileInputStream in = new FileInputStream(startWindow.getSelectedXMLpropertiesFile());
+					FileInputStream in = new FileInputStream(defaultXMLname);
 					XMLDecoder decoder = new XMLDecoder(in);
-					Properties prop = (Properties)decoder.readObject();
+					 prop = (Properties)decoder.readObject();
 					decoder.close();
-					ObservableCommonView view = null;
-					switch (prop.getUi())
-					{
-						case "Command line":
-							view = new MyObservableCLIView(new BufferedReader(new InputStreamReader(System.in)) , new PrintWriter(System.out));
-							break;
-						case "Graphic user interface":
-							view = new MyObservableGuiView("maze game", 800, 500);
-							break;
-						default:
-							view = new MyObservableGuiView("maze game", 800, 500);	
-					}
-					
-					MyObservableModel model = new MyObservableModel();
-					Presenter p = new Presenter(model,view);
-					
-					p.setProperties(prop);
-					//view.setDebugMode(true);
-					p.setDebugMode(true);
-					
-					model.addObserver(p);
-					view.addObserver(p);
-					
-					view.start();
 					
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("file not found, default properties will be loaded");
+					prop = new Properties();
 				}
-			}
-		});
-		
-		Thread mainView = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				try {
-					startWindowThread.join();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				ObservableCommonView view = null;
+				switch (prop.getUi())
+				{
+					case "Command line":
+						view = new MyObservableCLIView(new BufferedReader(new InputStreamReader(System.in)) , new PrintWriter(System.out));
+						break;
+					case "Graphic user interface":
+						view = new MyObservableGuiView("maze game", 800, 500);
+						break;
+					default:
+						view = new MyObservableGuiView("maze game", 800, 500);	
 				}
-				// TODO Auto-generated method stub
 				
+				MyObservableModel model = new MyObservableModel();
+				Presenter p = new Presenter(model,view);
+				
+				p.setProperties(prop);
+				//view.setDebugMode(true);
+				p.setDebugMode(true);
+				
+				model.addObserver(p);
+				view.addObserver(p);
+				
+				view.start();
 			}
-		});
-		
-		startWindowThread.start();
-		mainView.start();
-    }
 
 }

@@ -37,6 +37,8 @@ public class Presenter implements Observer {
 		commandMap.put("completedTask", new CompletedTask(this));
 		commandMap.put("movementRequest", new MovmentRequest(this));
 		commandMap.put("clue", new Clue(this));
+		commandMap.put("propertiesUpdate", new PropertiesUpdate(this));
+		commandMap.put("switchUi", new SwitchUi(this));
 						
 		
 	}
@@ -98,6 +100,13 @@ public class Presenter implements Observer {
 		this.properties = prop;
 		if (model != null)
 			this.model.setProperties(prop);
+		if (view!=null)
+			this.view.setProperties(prop);
+		
+	}
+
+	public void closeView() {
+		view.exit();
 		
 	}
 					

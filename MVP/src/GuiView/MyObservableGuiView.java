@@ -1,5 +1,9 @@
 package GuiView;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -8,10 +12,14 @@ import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Display;
-
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
+import cliView.MyObservableCLIView;
+import model.MyObservableModel;
+import presenter.Presenter;
+import presenter.Properties;
+import view.ObservableCommonView;
 
 public class MyObservableGuiView extends ObservableCommonGuiView {
 
@@ -26,8 +34,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				setChanged();
-				notifyObservers("clue "+properties.getName()+" "+properties.getSolveAlgorithm());
-				System.out.println(" fdf");
+				notifyObservers("clue "+mainWindow.mazeProperties.getName()+" "+properties.getSolveAlgorithm());
 				
 			}
 			
@@ -43,7 +50,7 @@ mainWindow.setSolveListener(new SelectionListener() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				setChanged();
-				notifyObservers("solve "+properties.getName()+" "+properties.getSolveAlgorithm());
+				notifyObservers("solve "+mainWindow.mazeProperties.getName()+" "+properties.getSolveAlgorithm());
 				
 			}
 			
@@ -53,7 +60,22 @@ mainWindow.setSolveListener(new SelectionListener() {
 				
 			}
 		});
+mainWindow.setPropertiesUpdateListener(new SelectionListener() {
+	
+	@Override
+	public void widgetSelected(SelectionEvent arg0) {
+	
+		setChanged();
+		notifyObservers("propertiesUpdate "+mainWindow.getSelectedXMLpropertiesFile());
+	}
 
+	@Override
+	public void widgetDefaultSelected(SelectionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+		
+	}
+});
 
 		mainWindow.setKeyListener(new KeyListener() {
 			
@@ -68,40 +90,40 @@ mainWindow.setSolveListener(new SelectionListener() {
 				switch(key.keyCode)
 				{
 				case SWT.ARROW_UP:
-					if (properties.isDebugMode() == true)
+					if (properties.isDebug() == true)
 						System.out.println("up key pressed");
 					setChanged();
-					notifyObservers("movementRequest UP " + properties.name);
+					notifyObservers("movementRequest UP " + mainWindow.mazeProperties.name);
 					break;
 				case SWT.ARROW_DOWN:
-					if (properties.isDebugMode() == true)
+					if (properties.isDebug() == true)
 						System.out.println("down key pressed");
 					setChanged();
-					notifyObservers("movementRequest DOWN "+ properties.name);
+					notifyObservers("movementRequest DOWN "+ mainWindow.mazeProperties.name);
 					break;
 				case SWT.ARROW_LEFT:
-					if (properties.isDebugMode() == true)
+					if (properties.isDebug() == true)
 						System.out.println("left key pressed");
 					setChanged();
-					notifyObservers("movementRequest LEFT "+ properties.name);
+					notifyObservers("movementRequest LEFT "+ mainWindow.mazeProperties.name);
 					break;
 				case SWT.ARROW_RIGHT:
-					if (properties.isDebugMode() == true)
+					if (properties.isDebug() == true)
 						System.out.println("right key pressed");
 					setChanged();
-					notifyObservers("movementRequest RIGHT "+ properties.name);
+					notifyObservers("movementRequest RIGHT "+ mainWindow.mazeProperties.name);
 					break;
 				case SWT.PAGE_UP:
-					if (properties.isDebugMode() == true)
+					if (properties.isDebug() == true)
 						System.out.println("lvl up key pressed");
 					setChanged();
-					notifyObservers("movementRequest LVLUP "+ properties.name);
+					notifyObservers("movementRequest LVLUP "+ mainWindow.mazeProperties.name);
 					break;
 				case SWT.PAGE_DOWN:
-					if (properties.isDebugMode() == true)
+					if (properties.isDebug() == true)
 						System.out.println("lvl down key pressed");
 					setChanged();
-					notifyObservers("movementRequest LVLDOWN "+ properties.name);
+					notifyObservers("movementRequest LVLDOWN "+ mainWindow.mazeProperties.name);
 					break;
 				}
 				
@@ -126,7 +148,7 @@ mainWindow.setSolveListener(new SelectionListener() {
 				 		
 				    	
 				    	setChanged();
-				    	notifyObservers("generate 3d maze "+ properties.getName()+" "+ properties.getxAxis()+" "+ properties.getyAxis()+" "+ properties.getzAxis());
+				    	notifyObservers("generate 3d maze "+ mainWindow.mazeProperties.getName()+" "+ mainWindow.mazeProperties.getxAxis()+" "+ mainWindow.mazeProperties.getyAxis()+" "+ mainWindow.mazeProperties.getzAxis());
 				    }
 				});
 				    
@@ -210,6 +232,18 @@ mainWindow.setSolveListener(new SelectionListener() {
 	@Override
 	public void displayCrossSectionByZ(int parseInt, String string) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setProperties(presenter.Properties prop) {
+		if (properties.getUi()!=prop.getUi())
+		{
+			setChanged();
+			notifyObservers("switchUi");
+		}
+		else
+			this.properties = prop;
 		
 	}
 

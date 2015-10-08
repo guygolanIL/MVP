@@ -2,7 +2,7 @@ package GuiView;
 
 import java.io.Serializable;
 
-public class Properties implements Serializable {
+public class MazeProperties implements Serializable {
 	
 	/**
 	 * 
@@ -47,7 +47,7 @@ public class Properties implements Serializable {
 	public void setGenerateAlgorithm(String generateAlgorithm) {
 		this.generateAlgorithm = generateAlgorithm;
 	}
-	public Properties() {
+	public MazeProperties() {
 		super();
 		debugMode = false;
 		GUItype = "GUI";

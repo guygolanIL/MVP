@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
+import presenter.Properties;
 
 public class MyObservableCLIView extends ObservableCommonCLIView {
 
@@ -114,6 +115,12 @@ public class MyObservableCLIView extends ObservableCommonCLIView {
 	public void display(Solution<Position> result) {
 		 out.println(result);
 		out.flush();
+		
+	}
+
+	@Override
+	public void setProperties(Properties prop) {
+		// TODO Auto-generated method stub
 		
 	}
 

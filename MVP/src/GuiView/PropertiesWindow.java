@@ -23,9 +23,9 @@ import org.eclipse.swt.widgets.Text;
 public class PropertiesWindow {
 
 	protected Shell main;
-	protected Properties properties;
+	protected MazeProperties properties;
 
-	public PropertiesWindow(Shell parent, Properties properties, SelectionListener generateListener) {
+	public PropertiesWindow(Shell parent, MazeProperties properties, SelectionListener generateListener) {
 		main = new Shell(parent);
 		this.properties = properties;
 

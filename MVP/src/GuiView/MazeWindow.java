@@ -27,6 +27,7 @@ import algorithms.search.State;
 import mainMaze.Maze3D;
 import mazeCube.MazeCube;
 import mazePossibleMoves.PossibleMoves;
+import presenter.Properties;
 
 
 public class MazeWindow extends BasicWindow{
@@ -40,9 +41,11 @@ public class MazeWindow extends BasicWindow{
 	protected SelectionListener solveListener;
 	protected SelectionListener clueListener;
 	protected ArrayList<MazeDisplayer> widgetsList;
+	protected MazeProperties mazeProperties;
 	protected Properties properties;
 	protected Button clueButton;
 	protected Button solveButton;
+	protected SelectionListener propertiesUpdateListener;
 	
 	
 
@@ -84,7 +87,7 @@ public class MazeWindow extends BasicWindow{
 				String[] filterExt = { "*.xml" };
 				fd.setFilterExtensions(filterExt);
 				selectedXMLpropertiesFile = fd.open();
-						// TODO connect to mvp
+				propertiesUpdateListener.widgetSelected(arg0);
 			}
 				
 			@Override
@@ -163,7 +166,7 @@ public class MazeWindow extends BasicWindow{
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				PropertiesWindow propwindow = new PropertiesWindow(shell,properties,generateListener);
+				PropertiesWindow propwindow = new PropertiesWindow(shell,mazeProperties,generateListener);
 		    	propwindow.open();
 			}
 				
@@ -305,6 +308,20 @@ public class MazeWindow extends BasicWindow{
 
 	public void setClueListener(SelectionListener selectionListener) {
 		this.clueListener = selectionListener;
+		
+	}
+
+
+
+	public void setPropertiesUpdateListener(SelectionListener selectionListener) {
+		this.propertiesUpdateListener = selectionListener;
+		
+	}
+
+
+
+	public String getSelectedXMLpropertiesFile() {
+		return selectedXMLpropertiesFile;
 		
 	}
 }
