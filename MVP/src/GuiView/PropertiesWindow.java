@@ -256,8 +256,8 @@ public class PropertiesWindow {
 						FileOutputStream out = new FileOutputStream(fd.open());
 						XMLpath = fd.getFileName();
 						XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(out));
-						System.out.println("ff");
-						System.out.println(properties.getMaxThreads());
+						
+						
 						encoder.writeObject(properties);
 						encoder.flush();
 						encoder.close();
@@ -267,7 +267,6 @@ public class PropertiesWindow {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
 				} catch (NumberFormatException e) {
 					MessageBox err = new MessageBox(main, SWT.ICON_ERROR);
 					err.setText("Error ");

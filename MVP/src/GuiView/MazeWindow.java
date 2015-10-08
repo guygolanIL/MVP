@@ -185,8 +185,10 @@ public class MazeWindow extends BasicWindow{
 			public void widgetSelected(SelectionEvent arg0) {
 				FileDialog fd = new FileDialog(shell,SWT.SAVE);
 				mazePath = fd.open();
-				saveListener.widgetSelected(arg0);
-				
+				if(mazePath!=null)
+					saveListener.widgetSelected(arg0);
+				else
+					displayError("Save canceled.");
 				
 			}
 			
@@ -206,7 +208,10 @@ public class MazeWindow extends BasicWindow{
 			public void widgetSelected(SelectionEvent arg0) {
 				FileDialog fd = new FileDialog(shell,SWT.OPEN);
 				mazePath = fd.open();
-				loadListener.widgetSelected(arg0);				
+				if(mazePath!=null)
+					loadListener.widgetSelected(arg0);				
+				else
+					displayError("Load canceled.");
 			}
 			
 			@Override
