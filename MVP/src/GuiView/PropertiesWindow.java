@@ -252,12 +252,13 @@ public class PropertiesWindow {
 
 					FileDialog fd = new FileDialog(main, SWT.SAVE);
 					
+					
 					try {
 						FileOutputStream out = new FileOutputStream(fd.open());
 						XMLpath = fd.getFileName();
 						XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(out));
-						
-						
+							
+							
 						encoder.writeObject(properties);
 						encoder.flush();
 						encoder.close();
@@ -267,6 +268,7 @@ public class PropertiesWindow {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					
 				} catch (NumberFormatException e) {
 					MessageBox err = new MessageBox(main, SWT.ICON_ERROR);
 					err.setText("Error ");

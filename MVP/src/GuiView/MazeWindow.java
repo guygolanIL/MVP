@@ -91,7 +91,9 @@ public class MazeWindow extends BasicWindow{
 				String[] filterExt = { "*.xml" };
 				fd.setFilterExtensions(filterExt);
 				selectedXMLpropertiesFile = fd.open();
-				propertiesUpdateListener.widgetSelected(arg0);
+				if(selectedXMLpropertiesFile!=null)
+					propertiesUpdateListener.widgetSelected(arg0);
+				
 			}
 				
 			@Override
@@ -106,7 +108,8 @@ public class MazeWindow extends BasicWindow{
 			public void widgetSelected(SelectionEvent arg0) {
 				PropertiesWindow window = new PropertiesWindow(shell);
 				selectedXMLpropertiesFile = window.open();
-				propertiesUpdateListener.widgetSelected(arg0);
+				if(selectedXMLpropertiesFile!=null)
+					propertiesUpdateListener.widgetSelected(arg0);
 			}
 			
 			@Override

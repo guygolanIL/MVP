@@ -12,31 +12,31 @@ public class PropertiesUpdate extends CommonCommand {
 		
 	}
 
-	@Override
-	public void doCommand(String param) {
-	String s[] = param.split(" ");
-	if(s.length > 0)
-		{
-		Properties prop ;
-		try {
-			FileInputStream in = new FileInputStream(s[0]);
-			XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(in));
-			prop = (Properties)decoder.readObject();
-			decoder.close();
-		
-		} catch (FileNotFoundException e) {
-			System.out.println("file not found, default properties will be loaded");
-			prop = new Properties();
-			prop.setDefaults();
-		}
-		presenter.setProperties(prop);
-		
-		}
+		@Override
+		public void doCommand(String param) {
+			String s[] = param.split(" ");
+			if(s.length > 0)
+			{
+				Properties prop ;
+				try {
+					FileInputStream in = new FileInputStream(s[0]);
+					XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(in));
+					prop = (Properties)decoder.readObject();
+					decoder.close();
+			
+				} catch (FileNotFoundException e) {
+					System.out.println("file not found, default properties will be loaded");
+					prop = new Properties();
+					prop.setDefaults();
+				}
+				presenter.setProperties(prop);
+			
+			}
 			else
 			{
-			presenter.getView().displayError("Missing parameters.");
+				presenter.getView().displayError("Missing parameters.");
 			}
-		
+			
 		}
 }
 
