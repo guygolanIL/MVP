@@ -1,7 +1,6 @@
 package model;
 
 import java.io.ByteArrayOutputStream;
-import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -320,7 +319,6 @@ public class MyObservableModel extends ObservableCommonModel {
 		@Override
 		public void clue(String name, String algorithm) {
 				solve( name,  algorithm);
-				System.out.println("dsdf");
 				setChanged();
 				notifyObservers("completedTask clue "+name);
 		
@@ -362,8 +360,7 @@ public class MyObservableModel extends ObservableCommonModel {
 		            oos.flush();
 		            oos.close();
 		        } catch (IOException e) {
-		        	
-		        		System.out.println("errr");
+		        	if(properties.isDebug())
 		        		e.printStackTrace();
 		        } finally {
 		        	 try {
@@ -380,7 +377,7 @@ public class MyObservableModel extends ObservableCommonModel {
 			            oos.writeObject(mazeMap);
 			        } catch (IOException e) {
 			        	
-			        		System.out.println("errr");
+			        	if(properties.isDebug())
 			        		e.printStackTrace();
 			        } finally {
 			            try {

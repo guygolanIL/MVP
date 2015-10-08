@@ -47,7 +47,6 @@ public class MVPTest {
 				Presenter p = new Presenter(model,view);
 				
 				p.setProperties(prop);
-				//view.setDebugMode(true);
 				p.setDebugMode(true);
 				
 				model.addObserver(p);

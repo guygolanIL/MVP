@@ -14,13 +14,11 @@ public class PropertiesUpdate extends CommonCommand {
 
 	@Override
 	public void doCommand(String param) {
-		System.out.println(param);
 	String s[] = param.split(" ");
 	if(s.length > 0)
 		{
 		Properties prop ;
 		try {
-			System.out.println(s[0]);
 			FileInputStream in = new FileInputStream(s[0]);
 			XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(in));
 			prop = (Properties)decoder.readObject();
