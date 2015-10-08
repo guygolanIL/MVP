@@ -10,7 +10,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
-import boot.StartUpPropertiesWindow;
 
 public class StartWindow extends BasicWindow {
 	
@@ -65,8 +64,8 @@ public class StartWindow extends BasicWindow {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				
-					StartUpPropertiesWindow propWindow = new StartUpPropertiesWindow(shell )	;
-					propWindow.open();
+					//PropertiesWindow propWindow = new PropertiesWindow(shell )	;
+					//propWindow.open();
 				
 				
 				new Thread(new Runnable() {

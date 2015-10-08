@@ -28,6 +28,7 @@ public class MVPTest {
 				} catch (FileNotFoundException e) {
 					System.out.println("file not found, default properties will be loaded");
 					prop = new Properties();
+					prop.setDefaults();
 				}
 				ObservableCommonView view = null;
 				switch (prop.getUi())

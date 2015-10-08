@@ -120,11 +120,18 @@ public class MyObservableCLIView extends ObservableCommonCLIView {
 
 	@Override
 	public void setProperties(Properties prop) {
-		// TODO Auto-generated method stub
+		if (!prop.getUi().equals("Command line"))
+		{
+			setChanged();
+			notifyObservers("switchUi switch");
+		}
+		
+		
+	}
 		
 	}
 
 
 	
 	
-}
+

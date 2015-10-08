@@ -25,6 +25,7 @@ public abstract class ObservableCommonModel extends Observable implements Model{
 		charPositionMap= new HashMap<String, Position>();
 		threadPool = Executors.newCachedThreadPool(); //default
 		properties = new Properties();
+		properties.setDefaults();
 		
 	}
 

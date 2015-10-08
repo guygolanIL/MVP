@@ -42,6 +42,8 @@ public class CompletedTask extends CommonCommand {
 		else if(s[0].equals("load"))
 		{
 			presenter.getView().display("Load completed.");
+			presenter.getView().display(presenter.getModel().getMaze(s[1]));
+			presenter.getView().display(presenter.getModel().getMaze(s[1]).getEntrance());
 		}
 		else if((s[0].equals("fileSize"))&&(s.length > 2))
 		{

@@ -22,6 +22,7 @@ public class Presenter implements Observer {
 		this.setView(view);
 		
 		properties = new Properties();
+		properties.setDefaults();
 		model.setProperties(properties);
 		
 		this.commandMap = new HashMap<String , Command>();		//inserting all the Commands into the map

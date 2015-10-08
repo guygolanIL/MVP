@@ -7,10 +7,8 @@ import javax.persistence.Id;
 
 public class Properties implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+//	private static final long serialVersionUID = 1L;
 	protected boolean debugMode;
 	protected int mazeMaxAxisX;
 	protected int mazeMaxAxisY;
@@ -25,18 +23,36 @@ public class Properties implements Serializable {
 	
 	public Properties() {
 		super();
-		this.debugMode = false;
-		this.generateAlgorithm = "MyMaze3dGenerator";
-		this.solveAlgorithm = "AstarManhattan";
-		this.mazeMaxAxisX = 35;
-		this.mazeMaxAxisY = 35;
-		this.mazeMaxAxisZ = 35;
-		this.maxThreads = 10;
-		this.ui = "Graphic user interface";
 	}
-
+public void setDefaults()
+{
+	this.debugMode = false;
+	this.generateAlgorithm = "MyMaze3dGenerator";
+	this.solveAlgorithm = "AstarManhattan";
+	this.mazeMaxAxisX = 35;
+	this.mazeMaxAxisY = 35;
+	this.mazeMaxAxisZ = 35;
+	this.maxThreads = 10;
+	this.ui = "Graphic user interface";
+}
 	public boolean isDebug() {
 		return debugMode;
+	}
+
+	public boolean isDebugMode() {
+		return debugMode;
+	}
+
+	public void setDebugMode(boolean debugMode) {
+		this.debugMode = debugMode;
+	}
+
+//	public static long getSerialversionuid() {
+//		return serialVersionUID;
+//	}
+
+	public void setUi(String ui) {
+		this.ui = ui;
 	}
 
 	public void setDebug(boolean debug) {

@@ -12,6 +12,8 @@ import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
+
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
@@ -28,6 +30,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 	
 	public MyObservableGuiView(String title, int width, int height) {
 		super(new Properties());
+		properties.setDefaults();
 		mainWindow = new MazeWindow(title, width, height , properties);
 		mainWindow.setClueListener(new SelectionListener() {
 			
@@ -144,9 +147,6 @@ mainWindow.setPropertiesUpdateListener(new SelectionListener() {
 			public void widgetSelected(SelectionEvent arg0) {
 				Display.getDefault().syncExec(new Runnable() {
 				    public void run() {
-				    	
-				 		
-				    	
 				    	setChanged();
 				    	notifyObservers("generate 3d maze "+ mainWindow.mazeProperties.getName()+" "+ mainWindow.mazeProperties.getxAxis()+" "+ mainWindow.mazeProperties.getyAxis()+" "+ mainWindow.mazeProperties.getzAxis());
 				    }
@@ -161,6 +161,39 @@ mainWindow.setPropertiesUpdateListener(new SelectionListener() {
 			}
 		});
 		
+		mainWindow.setSaveListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				setChanged();
+				notifyObservers("save maze "+ mainWindow.mazeProperties.getName()+" " + mainWindow.getMazePath());
+				
+				
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+mainWindow.setLoadListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				setChanged();
+				notifyObservers("load maze " + mainWindow.getMazePath()+ " " +mainWindow.mazeProperties.getName());
+				
+				
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 
 	@Override
@@ -237,13 +270,15 @@ mainWindow.setPropertiesUpdateListener(new SelectionListener() {
 
 	@Override
 	public void setProperties(presenter.Properties prop) {
-		if (properties.getUi()!=prop.getUi())
+		if(properties.getUi()!=null)
+		if (!properties.getUi().equals(prop.getUi()))
 		{
 			setChanged();
-			notifyObservers("switchUi");
+			notifyObservers("switchUi switch");
 		}
 		else
 			this.properties = prop;
+		
 		
 	}
 

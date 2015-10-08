@@ -235,15 +235,16 @@ public class MyObservableModel extends ObservableCommonModel {
 						Maze3d  tmpMaze = new Maze3d(buffer);
 						mazeMap.put(name, tmpMaze);
 						setChanged();
-						notifyObservers("completedTask load");
+						notifyObservers("completedTask load "+name);
 						//controller.display(name + " maze loaded.");
 						tmpDecompressor.close();
+						charPositionMap.put(name, tmpMaze.getEntrance());
 					}
 					else
 					{
 						setChanged();
 						notifyObservers("completedTask error The requsted maze is too big!");
-						//controller.display("the requsted maze is too big!");
+						//controller.display("the requested maze is too big!");
 					}
 				} 
 				catch (FileNotFoundException e) 
@@ -547,7 +548,7 @@ public class MyObservableModel extends ObservableCommonModel {
 			}catch (InterruptedException e) {
 				if(properties.isDebug())
 				{
-					System.out.println("solve methud interpted:");
+					System.out.println("solve method interpted:");
 					e.printStackTrace();
 				}
 			} catch (ExecutionException e) {

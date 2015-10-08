@@ -46,12 +46,16 @@ public class MazeWindow extends BasicWindow{
 	protected Button clueButton;
 	protected Button solveButton;
 	protected SelectionListener propertiesUpdateListener;
+	protected String mazePath;
+	protected SelectionListener saveListener;
+	protected SelectionListener loadListener;
 	
 	
 
 	public MazeWindow( String title, int width, int height , Properties properties) {		//Ctor
 		super(title, width, height);
 		this.properties= properties;
+		this.mazeProperties=new MazeProperties();   //default values
 		selectedXMLpropertiesFile = null;
 		widgetsList = new ArrayList<MazeDisplayer>();
 		shell.setImage(new Image(display, "resources/pacman.png"));
@@ -96,6 +100,21 @@ public class MazeWindow extends BasicWindow{
 
 		MenuItem fileEditPropItem = new MenuItem(fileMenu, SWT.PUSH);		//button for editing an existing properties.
 		fileEditPropItem.setText("Edit properties");
+		fileEditPropItem.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				PropertiesWindow window = new PropertiesWindow(shell);
+				selectedXMLpropertiesFile = window.open();
+				propertiesUpdateListener.widgetSelected(arg0);
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		    
 		MenuItem fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
 		fileExitItem.setText("Exit");										//button for safe exit.
@@ -155,7 +174,47 @@ public class MazeWindow extends BasicWindow{
 			public void widgetDefaultSelected(SelectionEvent arg0) {}
 			
 		});
-		    
+		
+		MenuItem mazeSave = new MenuItem(MazeMenu, SWT.PUSH);			
+		mazeSave.setText("Save maze");
+		mazeSave.addSelectionListener(new SelectionListener() {
+			
+			
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				FileDialog fd = new FileDialog(shell,SWT.SAVE);
+				mazePath = fd.open();
+				saveListener.widgetSelected(arg0);
+				
+				
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		MenuItem mazeLoad= new MenuItem(MazeMenu, SWT.PUSH);			
+		mazeLoad.setText("Load maze");
+		
+		mazeLoad.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				FileDialog fd = new FileDialog(shell,SWT.OPEN);
+				mazePath = fd.open();
+				loadListener.widgetSelected(arg0);				
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		    
 		shell.setMenuBar(menuBar);
         
@@ -166,7 +225,7 @@ public class MazeWindow extends BasicWindow{
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				PropertiesWindow propwindow = new PropertiesWindow(shell,mazeProperties,generateListener);
+				MazePropertiesWindow propwindow = new MazePropertiesWindow(shell,mazeProperties,generateListener);
 		    	propwindow.open();
 			}
 				
@@ -322,6 +381,26 @@ public class MazeWindow extends BasicWindow{
 
 	public String getSelectedXMLpropertiesFile() {
 		return selectedXMLpropertiesFile;
+		
+	}
+
+
+
+	public void setSaveListener(SelectionListener selectionListener) {
+		this.saveListener= selectionListener;
+		
+	}
+
+
+
+	public String getMazePath() {
+		return this.mazePath;
+	}
+
+
+
+	public void setLoadListener(SelectionListener selectionListener) {
+		this.loadListener = selectionListener;
 		
 	}
 }
