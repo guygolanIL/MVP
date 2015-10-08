@@ -1,9 +1,5 @@
 package GuiView;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -12,16 +8,10 @@ import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.FileDialog;
-
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
-import cliView.MyObservableCLIView;
-import model.MyObservableModel;
-import presenter.Presenter;
 import presenter.Properties;
-import view.ObservableCommonView;
 
 public class MyObservableGuiView extends ObservableCommonGuiView {
 
