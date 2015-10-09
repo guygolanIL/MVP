@@ -7,7 +7,7 @@ import presenter.Presenter;
 import presenter.Properties;
 
 public interface View {
-
+//
 	public void display(String[] strings);
 	public void display(String string);
 	public void display(Maze3d maze);
