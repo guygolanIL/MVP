@@ -5,6 +5,8 @@ import java.io.Serializable;
 /**
  * The  Maze Properties Class.
  * this class collecting all the data of the current maze.
+ * 
+ *  @author Guy Golan && Amit Sandak.
  */
 public class MazeProperties implements Serializable {
 	

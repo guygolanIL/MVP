@@ -1,7 +1,6 @@
 package GuiView;
 
 
-
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
@@ -26,13 +25,27 @@ import org.eclipse.swt.widgets.Text;
 
 import presenter.Properties;
 
-
+/**
+ * This class collecting all the data of the current game in a GUI window.
+ * 
+ *  @author Guy Golan && Amit Sandak.
+ */
 public class PropertiesWindow {
 
+	/** The main window shell. */
 	protected Shell main;
+	
+	/** The game properties. */
 	protected Properties properties;
+	
+	/** The new XML properties file path. */
 	protected String XMLpath;
 	
+	/**
+	 * Instantiates a new properties window.
+	 *
+	 * @param parent the parent shell
+	 */
 	public PropertiesWindow(Shell parent) {
 		main = new Shell(parent);
 		this.properties = new Properties();
@@ -41,7 +54,6 @@ public class PropertiesWindow {
 		main.setText("Game Properties");
 		main.setSize(200, 250);
 		main.setLayout(new GridLayout(6, true));
-		//main.setCursor(new Cursor(parent.getDisplay(), new ImageData("resources/Cursor_Greylight.png").scaledTo(27, 25), 16, 0));
 		
 		Label uiTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
 		uiTitle.setText("UI: ");
@@ -198,7 +210,6 @@ public class PropertiesWindow {
 		saveButton.setText(" Save ");
 		saveButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 6, 1));
 		debugMode.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, false, false, 6, 1));
-		//threadsNum.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 3, 1));
 		
 	
 		
@@ -262,11 +273,13 @@ public class PropertiesWindow {
 						encoder.writeObject(properties);
 						encoder.flush();
 						encoder.close();
-						//propertiesUpdateListener.widgetSelected(arg0);
 						main.dispose();
 					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						MessageBox err = new MessageBox(main, SWT.ICON_ERROR);
+						err.setText("Error ");
+						err.setMessage(e.getStackTrace().toString());
+						err.open();
+						
 					}
 					
 				} catch (NumberFormatException e) {
@@ -280,15 +293,19 @@ public class PropertiesWindow {
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
+				// nothing
 
 			}
 		});
-		// generateButton.addSelectionListener(generateListener);
 	
 		main.pack();
 	}
 
+	/**
+	 * Open the form window.
+	 *
+	 * @return the new XML properties file path 
+	 */
 	public String open() {
 		main.open();
 		while (!main.isDisposed()) {
@@ -300,6 +317,11 @@ public class PropertiesWindow {
 
 	}
 
+	/**
+	 * Gets the new XML properties file path.
+	 *
+	 * @return the new XML properties file path
+	 */
 	public String getXMLpath() {
 		return XMLpath;
 		

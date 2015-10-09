@@ -20,11 +20,27 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+/**
+ * This class collecting all the data of the current maze in a GUI window.
+ * 
+ *  @author Guy Golan && Amit Sandak.
+ */
+ 
 public class MazePropertiesWindow {
 
+	/** The form window. */
 	protected Shell main;
+	
+	/** The maze properties. */
 	protected MazeProperties properties;
 
+	/**
+	 * Instantiates a new maze properties window.
+	 *
+	 * @param parent the parent shell
+	 * @param properties the current properties. used to show the current values in the form.
+	 * @param generateListener the listener that define the behavior after the new properties created.
+	 */
 	public MazePropertiesWindow(Shell parent, MazeProperties properties, SelectionListener generateListener) {
 		main = new Shell(parent);
 		this.properties = properties;
@@ -32,7 +48,6 @@ public class MazePropertiesWindow {
 		main.setText("Maze Properties");
 		main.setSize(200, 250);
 		main.setLayout(new GridLayout(6, true));
-		//main.setCursor(new Cursor(parent.getDisplay(), new ImageData("resources/Cursor_Greylight.png").scaledTo(27, 25), 16, 0));
 		
 		
 		Label nameTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
@@ -168,7 +183,7 @@ public class MazePropertiesWindow {
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
+				// nothing
 
 			}
 		});
@@ -184,13 +199,16 @@ public class MazePropertiesWindow {
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
+				// nothing
 
 			}
 		});
 		main.pack();
 	}
 
+	/**
+	 * Open the form window.
+	 */
 	public void open() {
 		main.open();
 
