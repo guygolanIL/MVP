@@ -72,15 +72,79 @@ public interface Model {
 	 */
 	void exit();
 	
+	/**
+	 * Retreives a Position from the position Map.
+	 * @param name - the maze's name.
+	 * @return - Position - the current player position.
+	 */
 	Position getCharPosition(String name);
+	
+	/**
+	 * Moves the character position in the map accordingly.
+	 * @param name - the Maze's name.
+	 */
 	void MoveUP(String name);
+	
+	/**
+	 * Moves the character position in the map accordingly.
+	 * @param name - the Maze's name.
+	 */
 	void MoveDOWN(String name);
+	
+	/**
+	 * Moves the character position in the map accordingly.
+	 * @param name - the Maze's name.
+	 */
 	void MoveLEFT(String name);
+	
+	/**
+	 * Moves the character position in the map accordingly.
+	 * @param name - the Maze's name.
+	 */
 	void MoveRIGHT(String name);
+	
+	/**
+	 * Moves the character position in the map accordingly.
+	 * @param name - the Maze's name.
+	 */
 	void MoveLVLUP(String name);
+	
+	/**
+	 * Moves the character position in the map accordingly.
+	 * @param name - the Maze's name.
+	 */
 	void MoveLVLDOWN(String name);
+	
+	/**
+	 * setting the model properties (usually through a Presenter).
+	 * @param properties - properties.
+	 */
 	void setProperties(Properties properties);
+	
+	/**
+	 * Regular get for the properties.
+	 * @return Properties properties.
+	 */
 	Properties getProperties();
+	
+	/**
+	 * Solving a searchable maze.
+	 * @param name - name of the maze.
+	 * @param algorithm - name of the searching algorithm.
+	 */
+	void solve(String name, String algorithm);
+	
+	/**
+	 * Using the solve method to get a clue.
+	 * @param name - name of the maze.
+	 * @param algorithm - name of the searching algorithm.
+	 */
 	void clue(String name, String algorithm);
+	
+	/**
+	 * Using the solve method to get a final solution.
+	 * @param name - name of the maze.
+	 * @param algorithm - name of the searching algorithm.
+	 */
 	void solution(String name, String algorithm);
 }
