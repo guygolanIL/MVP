@@ -12,7 +12,7 @@ public class FileSize extends CommonCommand {
 	}
 
 	/**
-	 * Using the Controller to check what the given Maze3d(name) size in a file. 
+	 * Using the model to check what the given Maze3d(name) size in a file. 
 	 * @param name - the Maze3d's name.
 	 */
 	@Override

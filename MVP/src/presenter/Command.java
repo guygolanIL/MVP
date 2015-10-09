@@ -7,6 +7,10 @@ package presenter;
  */
 public interface Command {
 
+	/**
+	 * Doing the command.
+	 * @param param - parameters.
+	 */
 	void doCommand(String param);
 	
 }

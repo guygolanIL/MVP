@@ -7,7 +7,7 @@ package presenter;
  */
 public abstract class CommonCommand implements Command {
 
-	protected Presenter presenter;
+	protected Presenter presenter;	//the presenter who activated the command.
 	
 	
 	public CommonCommand(Presenter presenter) {		//Ctor

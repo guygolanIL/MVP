@@ -12,7 +12,7 @@ public class Solve extends CommonCommand {
 	}
 
 	/**
-	 * Using the Controller to solve a Maze3d.
+	 * Using the model to solve a Maze3d.
 	 * @param param - parameters.
 	 */
 	@Override

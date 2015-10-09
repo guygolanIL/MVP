@@ -6,14 +6,19 @@ import java.io.PrintWriter;
 
 import GuiView.MyObservableGuiView;
 import cliView.MyObservableCLIView;
-import model.MyObservableModel;
 import view.ObservableCommonView;
 
+
+/**
+ * Defines what the Command SwitchUi should do.
+ * @author Guy Golan & Amit Sandak.
+ *
+ */
 public class SwitchUi extends CommonCommand {
 
 	public SwitchUi(Presenter presenter) {
 		super(presenter);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
@@ -34,7 +39,7 @@ public class SwitchUi extends CommonCommand {
 
 		view.addObserver(presenter);
 		presenter.closeView();
-		presenter.setView(view);
+		presenter.setView(view);		//switching view DURING runtime.
 		view.start();
 
 	}

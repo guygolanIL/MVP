@@ -13,7 +13,7 @@ public class Save extends CommonCommand {
 
 	
 	/**
-	 * Using the Controller to save a Maze3d to a file.
+	 * Using the model to save a Maze3d to a file.
 	 * @param param - parameters.
 	 */
 	@Override

@@ -23,20 +23,20 @@ public class Display extends CommonCommand {
 			try{
 				switch (s[3])
 				{
-				case "x":
-				case "X":
-					presenter.getView().displayCrossSectionByX(Integer.parseInt(s[4]),s[6]);
-					break;
-				case "y":
-				case "Y":
-					presenter.getView().displayCrossSectionByY(Integer.parseInt(s[4]),s[6]);
-					break;
-				case "z":		
-				case "Z":
-					presenter.getView().displayCrossSectionByZ(Integer.parseInt(s[4]),s[6]);
-					break;
-				default:
-					presenter.getView().displayError("Invalid parameter");
+					case "x":
+					case "X":
+						presenter.getView().displayCrossSectionByX(Integer.parseInt(s[4]),s[6]);
+						break;
+					case "y":
+					case "Y":
+						presenter.getView().displayCrossSectionByY(Integer.parseInt(s[4]),s[6]);
+						break;
+					case "z":		
+					case "Z":
+						presenter.getView().displayCrossSectionByZ(Integer.parseInt(s[4]),s[6]);
+						break;
+					default:
+						presenter.getView().displayError("Invalid parameter");		//sending error to user.
 				}
 			}catch (NumberFormatException e) {
 				

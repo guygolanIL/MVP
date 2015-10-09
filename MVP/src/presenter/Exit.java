@@ -12,12 +12,13 @@ public class Exit extends CommonCommand {
 	}
 
 	/**
-	 * Activates a chain of safe exit using the Controller.
+	 * Activates a chain of safe exit using the presenter.
 	 */
 	@Override
 	public void doCommand(String param) {
-		System.out.println("PRESENTER EXIT");
-		presenter.getView().exit();
+		if(presenter.getProperties().isDebug())
+			System.out.println("PRESENTER EXIT");
+		presenter.getView().exit();					//safely exiting model and view.
 		presenter.getModel().exit();
 		
 		

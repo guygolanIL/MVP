@@ -2,39 +2,43 @@ package presenter;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
+@SuppressWarnings("serial")
+/**
+ * Properties for the game system.
+ * 
+ * @author Guy Golan && Amit Sandak
+ *
+ */
 public class Properties implements Serializable {
 
+	protected boolean debugMode; // on or off.
+	protected int mazeMaxAxisX; // max X parameter.
+	protected int mazeMaxAxisY; // max Y parameter.
+	protected int mazeMaxAxisZ; // max Z parameter.
+	protected String generateAlgorithm; // maze generating algorithm.
+	protected String solveAlgorithm; // maze solving algorithm.
 
-//	private static final long serialVersionUID = 1L;
-	protected boolean debugMode;
-	protected int mazeMaxAxisX;
-	protected int mazeMaxAxisY;
-	protected int mazeMaxAxisZ;
-	protected String generateAlgorithm;
-	protected String solveAlgorithm;
-	
-	protected int maxThreads;
-	protected String ui;
+	protected int maxThreads; // max threads.
+	protected String ui; // which ui to present.
 
-	
-	
 	public Properties() {
 		super();
 	}
-public void setDefaults()
-{
-	this.debugMode = false;
-	this.generateAlgorithm = "MyMaze3dGenerator";
-	this.solveAlgorithm = "AstarManhattan";
-	this.mazeMaxAxisX = 35;
-	this.mazeMaxAxisY = 35;
-	this.mazeMaxAxisZ = 35;
-	this.maxThreads = 10;
-	this.ui = "Graphic user interface";
-}
+
+	/**
+	 * Setting the defaults values for an empty properties.
+	 */
+	public void setDefaults() {
+		this.debugMode = false;
+		this.generateAlgorithm = "MyMaze3dGenerator";
+		this.solveAlgorithm = "AstarManhattan";
+		this.mazeMaxAxisX = 35;
+		this.mazeMaxAxisY = 35;
+		this.mazeMaxAxisZ = 35;
+		this.maxThreads = 10;
+		this.ui = "Graphic user interface";
+	}
+									//--------------REGULAR SETTERS AND GETTERS------------------
 	public boolean isDebug() {
 		return debugMode;
 	}
@@ -47,9 +51,6 @@ public void setDefaults()
 		this.debugMode = debugMode;
 	}
 
-//	public static long getSerialversionuid() {
-//		return serialVersionUID;
-//	}
 
 	public void setUi(String ui) {
 		this.ui = ui;
@@ -111,5 +112,4 @@ public void setDefaults()
 		return ui;
 	}
 
-	
 }

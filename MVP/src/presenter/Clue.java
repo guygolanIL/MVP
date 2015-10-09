@@ -7,7 +7,7 @@ public class Clue extends CommonCommand {
 	}
 
 	/**
-	 * Using the Controller to solve a Maze3d.
+	 * Using the model to solve and get a clue.
 	 * @param param - parameters.
 	 */
 	@Override

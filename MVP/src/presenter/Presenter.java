@@ -8,12 +8,17 @@ import java.util.Observer;
 import model.Model;
 import view.View;
 
+/**
+ * The unit which observes the independent activity of the View and Model
+ * @author Guy Golan && Amit Sandak.
+ *
+ */
 public class Presenter implements Observer {
-	private Model model;
-	private View view;
-	private Properties properties;
+	private Model model;	//the model.
+	private View view;		//the view.
+	private Properties properties;		//system properties.
 	
-	private HashMap<String, Command> commandMap;
+	private HashMap<String, Command> commandMap;	//the presenter available commands in a map.
 	
 	
 	public Presenter(Model model, View view) {
@@ -21,9 +26,9 @@ public class Presenter implements Observer {
 		this.setModel(model);
 		this.setView(view);
 		
-		properties = new Properties();
+		properties = new Properties();	//creating default properties.
 		properties.setDefaults();
-		model.setProperties(properties);
+		model.setProperties(properties);	//informing the model of the system properties.
 		
 		this.commandMap = new HashMap<String , Command>();		//inserting all the Commands into the map
 		commandMap.put("dir", new Dir(this));
@@ -71,7 +76,7 @@ public class Presenter implements Observer {
 		}
 		
 	}
-
+								//-------------GETTERS & SETTERS-----------------
 	public Model getModel() {
 		return model;
 	}
@@ -96,7 +101,11 @@ public class Presenter implements Observer {
 		properties.setDebug(b);
 		
 	}
-
+	//--------------------------------------------------------------------------------
+	/**
+	 * informing the view and model of the system properties.
+	 * @param prop - properties.
+	 */
 	public void setProperties(Properties prop) {
 		this.properties = prop;
 		if (model != null)

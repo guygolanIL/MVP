@@ -12,7 +12,7 @@ public class Load extends CommonCommand {
 	}
 
 	/**
-	 * Using the Controller to load a compressed Maze3d from a file.
+	 * Using the model to load a compressed Maze3d from a file.
 	 * @param param - the Command's parameters.
 	 */
 	@Override

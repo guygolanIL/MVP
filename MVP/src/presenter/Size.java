@@ -12,7 +12,7 @@ public class Size extends CommonCommand {
 	}
 
 	/**
-	 * Using the Controller to save a Maze3d to a file.
+	 * Using the model to size a Maze3d.
 	 * @param name - the name of the Maze3d.
 	 */
 	@Override

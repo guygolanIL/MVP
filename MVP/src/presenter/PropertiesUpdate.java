@@ -5,6 +5,12 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+
+/**
+ * Defines what the Command PropertiesUpdate should do.
+ * @author Guy Golan & Amit Sandak.
+ *
+ */
 public class PropertiesUpdate extends CommonCommand {
 
 	public PropertiesUpdate(Presenter presenter) {
@@ -19,13 +25,14 @@ public class PropertiesUpdate extends CommonCommand {
 			{
 				Properties prop ;
 				try {
-					FileInputStream in = new FileInputStream(s[0]);
+					FileInputStream in = new FileInputStream(s[0]);						//trying to decode an xml file for properties.
 					XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(in));
 					prop = (Properties)decoder.readObject();
 					decoder.close();
 			
 				} catch (FileNotFoundException e) {
-					System.out.println("file not found, default properties will be loaded");
+					if(presenter.getProperties().isDebug())
+						System.out.println("file not found, default properties will be loaded");
 					prop = new Properties();
 					prop.setDefaults();
 				}
