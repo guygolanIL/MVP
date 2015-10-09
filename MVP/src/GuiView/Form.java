@@ -13,13 +13,30 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-public class Form<T> {//extends BasicWindow {
+/**
+ * A generic Form. this class getting an object and creating a
+ *
+ * @author Guy Golan && Amit Sandak.
+ * @param <T> the generic type
+ */
+public class Form<T> {
 
+	/** The new object that created by the form. */
 	protected T created;
+	
 	Shell shell;
 	
+	/**
+	 * Instantiates a new form.
+	 *
+	 * @param parent the parent shell
+	 * @param classObject the class object
+	 * @param title the title of the shell
+	 * @param width the width of the shell
+	 * @param height the height of the shell
+	 */
 	public Form(Shell parent, T classObject, String title, int width, int height) {
-	//	super(title, width, height);
+
 		shell = new Shell(parent.getDisplay());
 		created = null;
 		shell.setLayout(new GridLayout(2,false));
@@ -84,10 +101,19 @@ public class Form<T> {//extends BasicWindow {
 	}
 
 	
+	/**
+	 * Gets the new object that created by the form.
+	 *
+	 * @return the object
+	 */
 	public T getObject() {
 		return created;
 		
 	}
+
+/**
+ * Run the form shell
+ */
 public void run()
 {
 	shell.open();

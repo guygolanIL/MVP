@@ -7,7 +7,6 @@ import org.eclipse.swt.widgets.Shell;
  
  /**
   * BasicWindow represents what every window with event driven GUI should implement.
-  * @author Guy Golan & Amit Sandak
   *
   */
 public abstract class BasicWindow implements Runnable{
