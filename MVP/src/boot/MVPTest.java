@@ -47,7 +47,7 @@ public class MVPTest {
 		Presenter p = new Presenter(model,view);		
 				
 		p.setProperties(prop);		//setting the properties of the system for the presenter.
-		p.setDebugMode(true);		//debug mode turned on.
+		//p.setDebugMode(true);		//debug mode turned off.
 				
 		model.addObserver(p);		//presenter observing the model for changes.
 		view.addObserver(p);		//presenter observing the view for changes.
