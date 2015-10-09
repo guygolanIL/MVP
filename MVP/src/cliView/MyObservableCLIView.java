@@ -9,7 +9,7 @@ import algorithms.search.Solution;
 import presenter.Properties;
 
 /**
- * This class represents the CLI interface in the MVP.
+ * This class represents the command line user interface in the MVP.
  *
  * @author Guy Golan && Amit Sandak.
  */

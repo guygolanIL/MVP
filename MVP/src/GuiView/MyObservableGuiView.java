@@ -13,17 +13,31 @@ import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
 import presenter.Properties;
 
+/**
+ * This class represents the GUI view in the MVP.
+ *
+ * @author Guy Golan && Amit Sandak.
+ */
 public class MyObservableGuiView extends ObservableCommonGuiView {
 
+	/** The main window of the view. */
 	protected MazeWindow mainWindow;
 	
 	
+	/**
+	 * Instantiates a new observable GUI view.
+	 *
+	 * @param title the window title
+	 * @param width the window width
+	 * @param height the window height
+	 */
 	public MyObservableGuiView(String title, int width, int height) {
 		super(new Properties());
 		properties.setDefaults();
 		mainWindow = new MazeWindow(title, width, height , properties);
+		
+		////////////////////////  the selection listener that sets the behavior of - clue request - in this specific MVP  ////////////
 		mainWindow.setClueListener(new SelectionListener() {
-			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				setChanged();
@@ -33,12 +47,13 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
+				// nothing
 				
 			}
 		});
 		
-mainWindow.setSolveListener(new SelectionListener() {
+	////////////////////////  the selection listener that sets the behavior of - solve request - in this specific MVP  ////////////
+			mainWindow.setSolveListener(new SelectionListener() {
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
@@ -49,32 +64,34 @@ mainWindow.setSolveListener(new SelectionListener() {
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
+				// nothing
 				
 			}
 		});
-mainWindow.setPropertiesUpdateListener(new SelectionListener() {
+			
+	////////////////////////  the selection listener that sets the behavior of - properties update request - in this specific MVP  ////////////
+			mainWindow.setPropertiesUpdateListener(new SelectionListener() {
 	
-	@Override
-	public void widgetSelected(SelectionEvent arg0) {
-	
-		setChanged();
-		notifyObservers("propertiesUpdate "+mainWindow.getSelectedXMLpropertiesFile());
-	}
-
-	@Override
-	public void widgetDefaultSelected(SelectionEvent arg0) {
-		// TODO Auto-generated method stub
+				@Override
+				public void widgetSelected(SelectionEvent arg0) {
+					
+					setChanged();
+					notifyObservers("propertiesUpdate "+mainWindow.getSelectedXMLpropertiesFile());
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent arg0) {
+					// nothing
 		
 		
-	}
-});
-
+				}
+			});
+////////////////////////  the key listener that sets the behavior of - movements requests - in this specific MVP  ////////////
 		mainWindow.setKeyListener(new KeyListener() {
 			
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
+				// nothing
 				
 			}
 			
@@ -122,6 +139,8 @@ mainWindow.setPropertiesUpdateListener(new SelectionListener() {
 				
 			}
 		});
+		
+////////////////////////  the selection listener that sets the behavior of - exit request - in this specific MVP  ////////////
 		mainWindow.setExitListener(new DisposeListener() {
 			
 			@Override
@@ -130,7 +149,7 @@ mainWindow.setPropertiesUpdateListener(new SelectionListener() {
 				
 			}
 		});
-		
+////////////////////////  the selection listener that sets the behavior of - generate new maze request - in this specific MVP  ////////////		
 		mainWindow.setGenerateListener(new SelectionListener() {
 			
 			@Override
@@ -146,11 +165,12 @@ mainWindow.setPropertiesUpdateListener(new SelectionListener() {
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
+				// nothing
 				
 			}
 		});
-		
+
+////////////////////////  the selection listener that sets the behavior of - maze save request - in this specific MVP  ////////////
 		mainWindow.setSaveListener(new SelectionListener() {
 			
 			@Override
@@ -163,12 +183,12 @@ mainWindow.setPropertiesUpdateListener(new SelectionListener() {
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
+				// nothing
 				
 			}
 		});
-		
-mainWindow.setLoadListener(new SelectionListener() {
+////////////////////////  the selection listener that sets the behavior of - maze load request - in this specific MVP  ////////////		
+		mainWindow.setLoadListener(new SelectionListener() {
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
@@ -180,35 +200,50 @@ mainWindow.setLoadListener(new SelectionListener() {
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
+				// nothing
 				
 			}
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#display(java.lang.String[])
+	 */
 	@Override
 	public void display(String[] strings) {
-		// TODO Auto-generated method stub
+		// nothing
 
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#display(java.lang.String)
+	 */
 	@Override
 	public void display(String string) {
 		mainWindow.display(string);
 
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#exit()
+	 */
 	@Override
 	public void exit() {
 		mainWindow.exit();
 
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#start()
+	 */
 	@Override
 	public void start() {
 		mainWindow.run();
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#exitRequest()
+	 */
 	@Override
 	public void exitRequest() {
 		setChanged();
@@ -216,48 +251,72 @@ mainWindow.setLoadListener(new SelectionListener() {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#display(algorithms.search.Solution)
+	 */
 	@Override
 	public void display(Solution<Position> solution) {
 		mainWindow.setSolution(solution);
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see view.View#display(algorithms.mazeGenerators.Maze3d)
+	 */
 	@Override
 	public void display(Maze3d maze) {
 		mainWindow.setMazeData(maze);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#display(algorithms.mazeGenerators.Position)
+	 */
 	@Override
 	public void display(Position charPosition) {
 		mainWindow.setPositionData(charPosition);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#displayError(java.lang.String)
+	 */
 	@Override
 	public void displayError(String string) {
 		mainWindow.displayError(string);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#displayCrossSectionByX(int, java.lang.String)
+	 */
 	@Override
 	public void displayCrossSectionByX(int parseInt, String string) {
-		// TODO Auto-generated method stub
+		// nothing
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#displayCrossSectionByY(int, java.lang.String)
+	 */
 	@Override
 	public void displayCrossSectionByY(int parseInt, String string) {
-		// TODO Auto-generated method stub
+		// nothing
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#displayCrossSectionByZ(int, java.lang.String)
+	 */
 	@Override
 	public void displayCrossSectionByZ(int parseInt, String string) {
-		// TODO Auto-generated method stub
+		// nothing
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see view.View#setProperties(presenter.Properties)
+	 */
 	@Override
 	public void setProperties(presenter.Properties prop) {
 		if(properties.getUi()!=null)

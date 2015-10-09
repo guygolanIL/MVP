@@ -29,30 +29,80 @@ import mazeCube.MazeCube;
 import mazePossibleMoves.PossibleMoves;
 import presenter.Properties;
 
-
+/**
+ * This the main window in the GUI view.
+ * 
+ *  @author Guy Golan && Amit Sandak.
+ */
 public class MazeWindow extends BasicWindow{
+	
+	/** The current maze data. */
 	protected Maze3d maze;
+	
+	/** The  current position. */
 	protected Position charPosition;
+	
+	/** The solution of the maze. */
 	protected ArrayList<Position> solution;
+	
+	/** The selected XML properties file. */
 	protected String selectedXMLpropertiesFile;
+	
+	/** the selection listener that sets the behavior of - exit request - in the MVP */
 	protected DisposeListener exitListener;
+	
+	/** the selection listener that sets the behavior of - generate request - in the MVP */
 	protected SelectionListener generateListener;
+	
+	/** the key listener that sets the behavior of - movements requests - in the MVP */
 	protected KeyListener keyListener;
+	
+	/** the selection listener that sets the behavior of - solve request - in the MVP */
 	protected SelectionListener solveListener;
+	
+	/** the selection listener that sets the behavior of - clue request - in the MVP */
 	protected SelectionListener clueListener;
-	protected ArrayList<MazeDisplayer> widgetsList;
-	protected MazeProperties mazeProperties;
-	protected Properties properties;
-	protected Button clueButton;
-	protected Button solveButton;
+	
+	/** the selection listener that sets the behavior of - update properties request - in the MVP */
 	protected SelectionListener propertiesUpdateListener;
-	protected String mazePath;
+	
+	/** the selection listener that sets the behavior of - save request - in the MVP */
 	protected SelectionListener saveListener;
+	
+	/** the selection listener that sets the behavior of - load request - in the MVP */
 	protected SelectionListener loadListener;
 	
+	/** The widgets list. */
+	protected ArrayList<MazeDisplayer> widgetsList;
+	
+	/** The maze properties. */
+	protected MazeProperties mazeProperties;
+	
+	/** The game properties. */
+	protected Properties properties;
+	
+	/** The clue request button. */
+	protected Button clueButton;
+	
+	/** The solve request button. */
+	protected Button solveButton;
+	
+	/** The maze file path. used in save or load maze scenario */
+	protected String mazePath;
 	
 
-	public MazeWindow( String title, int width, int height , Properties properties) {		//Ctor
+	
+	
+
+	/**
+	 * Instantiates a new maze window.
+	 *
+	 * @param title the window title
+	 * @param width the window width
+	 * @param height the window height
+	 * @param properties the game properties
+	 */
+	public MazeWindow( String title, int width, int height , Properties properties) {
 		super(title, width, height);
 		this.properties= properties;
 		this.mazeProperties=new MazeProperties();   //default values
@@ -63,6 +113,9 @@ public class MazeWindow extends BasicWindow{
 
 
 
+	/* (non-Javadoc)
+	 * @see GuiView.BasicWindow#initWidgets()
+	 */
 	@Override
 	void initWidgets() {
 		shell.addDisposeListener(exitListener);			//for X button and 'Exit' button
@@ -99,8 +152,9 @@ public class MazeWindow extends BasicWindow{
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
-
-		MenuItem fileEditPropItem = new MenuItem(fileMenu, SWT.PUSH);		//button for editing an existing properties.
+		
+        //button for editing an existing properties.
+		MenuItem fileEditPropItem = new MenuItem(fileMenu, SWT.PUSH);		
 		fileEditPropItem.setText("Edit properties");
 		fileEditPropItem.addSelectionListener(new SelectionListener() {
 			
@@ -114,28 +168,31 @@ public class MazeWindow extends BasicWindow{
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
+				// do nothing
 				
 			}
 		});
-		    
+		
+		
+		//button for safe exit.    
 		MenuItem fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
-		fileExitItem.setText("Exit");										//button for safe exit.
+		fileExitItem.setText("Exit");										
 		fileExitItem.addSelectionListener(new SelectionListener() {
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				shell.dispose();								//activates the DisposeListener.
+				shell.dispose();		//activates the DisposeListener.						
 			}
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-				//  Auto-generated method stub
+				//  do nothing
 				
 			}
 		});
-
-		MenuItem MazeMenuHeader = new MenuItem(menuBar, SWT.CASCADE);		//window menu Maze header.
+		
+		//window menu Maze header.
+		MenuItem MazeMenuHeader = new MenuItem(menuBar, SWT.CASCADE);		
 		MazeMenuHeader.setText("Maze");
 
 		Menu MazeMenu = new Menu(shell, SWT.DROP_DOWN);						
@@ -178,6 +235,7 @@ public class MazeWindow extends BasicWindow{
 			
 		});
 		
+		// save maze button
 		MenuItem mazeSave = new MenuItem(MazeMenu, SWT.PUSH);			
 		mazeSave.setText("Save maze");
 		mazeSave.addSelectionListener(new SelectionListener() {
@@ -197,11 +255,12 @@ public class MazeWindow extends BasicWindow{
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
+				// do nothing
 				
 			}
 		});
 		
+		//load maze button
 		MenuItem mazeLoad= new MenuItem(MazeMenu, SWT.PUSH);			
 		mazeLoad.setText("Load maze");
 		
@@ -219,7 +278,7 @@ public class MazeWindow extends BasicWindow{
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
+				// do nothing
 				
 			}
 		});
@@ -243,7 +302,6 @@ public class MazeWindow extends BasicWindow{
 		});
 		
 		//Main Maze display widget.
-		
 		MazeDisplayer mazeWidget=new Maze3D(shell, SWT.NULL);
 		widgetsList.add(mazeWidget);
 		mazeWidget.setFocus();
@@ -279,11 +337,17 @@ public class MazeWindow extends BasicWindow{
 		
 	}
 	
+	/**
+	 * the Exit request behavior.
+	 */
 	protected void exitRequest() {
 		shell.dispose();
 
 	}
 	
+	/**
+	 * Widgets refresh all the relevant data and redraw.
+	 */
 	public void widgetsRefresh()
 	{
 		for (MazeDisplayer canvasWidget : widgetsList) {
@@ -296,12 +360,22 @@ public class MazeWindow extends BasicWindow{
 		}
 	}
 	
+	/**
+	 * Sets the character position data.
+	 *
+	 * @param charPosition the new character position data
+	 */
 	public void setPositionData(Position charPosition) {
 		this.charPosition = charPosition;
 		widgetsRefresh();
 		
 	}
 	
+	/**
+	 * Sets the maze data.
+	 *
+	 * @param maze the new maze data
+	 */
 	public void setMazeData(Maze3d maze){
 		this.maze = maze;
 		this.solution = new ArrayList<Position>(); //reset the solution map
@@ -316,6 +390,11 @@ public class MazeWindow extends BasicWindow{
 	
 	}
 	
+	/**
+	 * Sets the solution data.
+	 *
+	 * @param solution the new solution
+	 */
 	public void setSolution(Solution<Position> solution) {
 		ArrayList<Position> arr= new ArrayList<Position>();
     	for ( State<Position> s: solution.getArr()) {
@@ -326,6 +405,11 @@ public class MazeWindow extends BasicWindow{
 		
 	}
 	
+	/**
+	 * Display error.
+	 *
+	 * @param string the message
+	 */
 	public void displayError(String string) {
 		Display.getDefault().syncExec(new Runnable() {
 			
@@ -338,6 +422,12 @@ public class MazeWindow extends BasicWindow{
 			}
 		});
 	}
+	
+	/**
+	 * Display a string.
+	 *
+	 * @param string the string to display
+	 */
 	public void display(String string) {
 		Display.getDefault().syncExec(new Runnable() {
 			
@@ -345,7 +435,7 @@ public class MazeWindow extends BasicWindow{
 		    public void run() {
 		    	MessageBox messageBox =  new MessageBox(shell, SWT.ICON_INFORMATION); 
 		    	messageBox.setMessage(string);
-		    	messageBox.setText("hi");
+		    	messageBox.setText("information message");
 		    	messageBox.open();		
 		    	
 		    }
@@ -353,26 +443,51 @@ public class MazeWindow extends BasicWindow{
 	}
 	
 
+	/**
+	 * Sets the selection listener that sets the behavior of - generate request - in the MVP.
+	 *
+	 * @param generateListener the new generate listener
+	 */
 	public void setGenerateListener(SelectionListener generateListener) {
 		this.generateListener = generateListener;
 	}
 	
+	/**
+	 * Sets the key listener that sets the behavior of - movements requests - in the MVP.
+	 *
+	 * @param keyListener the new key listener
+	 */
 	public void setKeyListener(KeyListener keyListener) {
 		this.keyListener = keyListener;
 		
 	}
 	
+	/**
+	 * Sets the selection listener that sets the behavior of - solve request - in the MVP.
+	 *
+	 * @param selectionListener the new solve listener
+	 */
 	public void setSolveListener(SelectionListener selectionListener) {
 		this.solveListener = selectionListener;
 		
 	}
 
+	/**
+	 * Sets the selection listener that sets the behavior of - exit request - in the MVP.
+	 *
+	 * @param exitListener the new exit listener
+	 */
 	public void setExitListener(DisposeListener exitListener) {
 		this.exitListener = exitListener;
 	}
 
 
 
+	/**
+	 * Sets the selection listener that sets the behavior of - clue request - in the MVP.
+	 *
+	 * @param selectionListener the new clue listener
+	 */
 	public void setClueListener(SelectionListener selectionListener) {
 		this.clueListener = selectionListener;
 		
@@ -380,6 +495,11 @@ public class MazeWindow extends BasicWindow{
 
 
 
+	/**
+	 * Sets the selection listener that sets the behavior of - update properties request - in the MVP.
+	 *
+	 * @param selectionListener the new properties update listener
+	 */
 	public void setPropertiesUpdateListener(SelectionListener selectionListener) {
 		this.propertiesUpdateListener = selectionListener;
 		
@@ -387,6 +507,11 @@ public class MazeWindow extends BasicWindow{
 
 
 
+	/**
+	 * Gets the selected XML properties file.
+	 *
+	 * @return the selected XML properties file
+	 */
 	public String getSelectedXMLpropertiesFile() {
 		return selectedXMLpropertiesFile;
 		
@@ -394,6 +519,11 @@ public class MazeWindow extends BasicWindow{
 
 
 
+	/**
+	 * Sets the selection listener that sets the behavior of - save maze request - in the MVP.
+	 *
+	 * @param selectionListener the new save listener
+	 */
 	public void setSaveListener(SelectionListener selectionListener) {
 		this.saveListener= selectionListener;
 		
@@ -401,12 +531,22 @@ public class MazeWindow extends BasicWindow{
 
 
 
+	/**
+	 * Gets the maze file path.
+	 *
+	 * @return the maze path
+	 */
 	public String getMazePath() {
 		return this.mazePath;
 	}
 
 
 
+	/**
+	 * Sets the selection listener that sets the behavior of - load maze request - in the MVP.
+	 *
+	 * @param selectionListener the new load listener
+	 */
 	public void setLoadListener(SelectionListener selectionListener) {
 		this.loadListener = selectionListener;
 		
