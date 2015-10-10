@@ -532,7 +532,7 @@ public class MyObservableModel extends ObservableCommonModel {
 
 		};
 
-		timer.scheduleAtFixedRate(task, 0, 100);		
+		timer.scheduleAtFixedRate(task, 0, 200);		
 
 	}
 }
