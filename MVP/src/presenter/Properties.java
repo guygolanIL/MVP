@@ -2,13 +2,17 @@ package presenter;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
+
+import org.hibernate.annotations.Entity;
+
+@SuppressWarnings({ "serial", "deprecation" })
 /**
  * Properties for the game system.
  * 
  * @author Guy Golan && Amit Sandak
  *
  */
+
 public class Properties implements Serializable {
 
 	protected boolean debugMode; // on or off.
