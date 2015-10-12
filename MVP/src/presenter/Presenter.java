@@ -52,7 +52,6 @@ public class Presenter implements Observer {
 	@Override
 	public void update(Observable comp, Object id) {
 		String identifier = ((String)id); //TODO check type
-		
 		Command c = commandMap.get(identifier.split(" ")[0]);
 		
 		if(c != null)

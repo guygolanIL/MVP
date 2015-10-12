@@ -1,12 +1,17 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -72,54 +77,158 @@ public class MyObservableModel extends ObservableCommonModel {
 
 	}
 
+//	@Override
+//	public void generate(String name, int x, int y, int z) {
+//
+//		Future<Maze3d> maze = threadPool.submit(new Callable<Maze3d>() {
+//
+//			@Override
+//			public Maze3d call() throws Exception {
+//				Maze3dGenerator generator;
+//				switch (properties.getGenerateAlgorithm()) {
+//					case ("MyMaze3dGenerator"):
+//						generator = new MyMaze3dGenerator();
+//						break;
+//					case ("SimpleGenerator"):
+//						generator = new SimpleMaze3dGenerator();
+//						break;
+//					default:
+//						generator = new MyMaze3dGenerator();
+//				}
+//				return generator.generate(x, y, z);
+//			}
+//		});
+//
+//		try {
+//			if (properties.isDebug()) {
+//				System.out.println(maze.get());
+//			}
+//
+//			mazeMap.put(name, maze.get());			//inserting newly generated maze into the mazeMap.
+//			charPositionMap.put(name, maze.get().getEntrance());	//updates the position map with the new starting position.
+//			setChanged();
+//			notifyObservers("completedTask maze generated " + name);		//notifying the presenter that the maze was generated.
+//		} catch (InterruptedException | ExecutionException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//	}
+
+	
 	@Override
 	public void generate(String name, int x, int y, int z) {
-
-		Future<Maze3d> maze = threadPool.submit(new Callable<Maze3d>() {
-
-			@Override
-			public Maze3d call() throws Exception {
-				Maze3dGenerator generator;
-				switch (properties.getGenerateAlgorithm()) {
-					case ("MyMaze3dGenerator"):
-						generator = new MyMaze3dGenerator();
-						break;
-					case ("SimpleGenerator"):
-						generator = new SimpleMaze3dGenerator();
-						break;
-					default:
-						generator = new MyMaze3dGenerator();
-				}
-				return generator.generate(x, y, z);
-			}
-		});
-
 		try {
-			if (properties.isDebug()) {
-				System.out.println(maze.get());
-			}
+		Socket theServer=new Socket("127.0.0.1",5400); //TODO add to properties
+		System.out.println("connected to server!");
+		
+		PrintWriter outToServer=new PrintWriter(theServer.getOutputStream());
+		BufferedReader in=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+		String parse;
+		outToServer.println("generate new maze\n");
+		outToServer.flush();
+		
+		 parse = in.readLine();
+		outToServer.println("the name is: " + name+"\n");
+		outToServer.flush();
+		 parse = in.readLine();
+		 outToServer.println("the Axis x is: " + x+"\n");
+		outToServer.flush();
+		 parse = in.readLine();
+		 outToServer.println("the Axis y is: " + y+"\n");
+		outToServer.flush();
+		 parse = in.readLine();
+		 outToServer.println("the Axis z is: " + z+"\n");
+		outToServer.flush();
+		 parse = in.readLine();
+		 setChanged();
+		notifyObservers("completedTask maze generated " + name);
+//		byte[] buffer = new byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()+3*3];
+//		int mazeByte;
+//		int i =0;
+//		while((mazeByte=in.read())==(-1))
+//			buffer[i++]=(byte) mazeByte;
+//		
+		
+		outToServer.println("exit");
+		outToServer.flush();
 
-			mazeMap.put(name, maze.get());			//inserting newly generated maze into the mazeMap.
-			charPositionMap.put(name, maze.get().getEntrance());	//updates the position map with the new starting position.
-			setChanged();
-			notifyObservers("completedTask maze generated " + name);		//notifying the presenter that the maze was generated.
-		} catch (InterruptedException | ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		in.close();
+		outToServer.close();
+		
+		theServer.close();
+		
+		}catch (IOException e)
+		{
+			//do nothing
 		}
-
-	}
-
+		
+		}
+	
+	
+//	
+//	@Override
+//	public Maze3d getMaze(String name) {
+//		Maze3d temp = mazeMap.get(name);
+//
+//		if (temp != null) {
+//			return temp;
+//		} else {
+//			// return("Unavailable maze!");
+//			return null;
+//		}
+//	}
+	
+	
 	@Override
 	public Maze3d getMaze(String name) {
-		Maze3d temp = mazeMap.get(name);
-
-		if (temp != null) {
-			return temp;
-		} else {
-			// return("Unavailable maze!");
-			return null;
+		PrintWriter outToServer = null;
+		Socket theServer = null;
+		BufferedReader in= null;
+		try {
+			 theServer=new Socket("127.0.0.1",5400); //TODO add to properties
+			System.out.println("connected to server!");
+			
+			 outToServer=new PrintWriter(theServer.getOutputStream());
+			 in=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+			String parse;
+			outToServer.println("get maze\n");
+			outToServer.flush();
+			
+			 parse = in.readLine();
+			outToServer.println("the name is: " + name+"\n");
+			outToServer.flush();
+			 parse = in.readLine();
+			 if (parse.equals("sending")){
+			byte[] buffer = new byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()+3*3];
+			int mazeByte;
+			int i =0;
+			while((mazeByte=in.read())==(-1))
+				buffer[i++]=(byte) mazeByte;
+			Maze3d maze = new Maze3d(buffer);
+			return maze;
+			 }
+			 setChanged();
+			 notifyObservers("error missing or worng maze!");
+			 return null;
+		} catch (UnknownHostException e) {
+			 return null;
+		} catch (IOException e) {
+			 return null;
+		}finally
+		{
+			outToServer.println("exit");
+			outToServer.flush();
+			try {
+				in.close();
+				theServer.close();
+				outToServer.close();
+			} catch (IOException e) {
+				//do nothing
+			}
 		}
+			
+			
 	}
 
 	@Override
