@@ -3,7 +3,7 @@ package presenter;
 import java.io.Serializable;
 
 
-import org.hibernate.annotations.Entity;
+//import org.hibernate.annotations.Entity;
 
 @SuppressWarnings({ "serial", "deprecation" })
 /**

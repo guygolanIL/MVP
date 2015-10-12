@@ -119,26 +119,26 @@ public class MyObservableModel extends ObservableCommonModel {
 	@Override
 	public void generate(String name, int x, int y, int z) {
 		try {
-		Socket theServer=new Socket("127.0.0.1",5400); //TODO add to properties
+		Socket theServer=new Socket("10.0.0.15",5400); //TODO add to properties
 		System.out.println("connected to server!");
 		
 		PrintWriter outToServer=new PrintWriter(theServer.getOutputStream());
 		BufferedReader in=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
 		String parse;
-		outToServer.println("generate new maze\n");
+		outToServer.println("generate new maze");
 		outToServer.flush();
 		
 		 parse = in.readLine();
-		outToServer.println("the name is: " + name+"\n");
+		outToServer.println("the name is: " + name);
 		outToServer.flush();
 		 parse = in.readLine();
-		 outToServer.println("the Axis x is: " + x+"\n");
+		 outToServer.println("the Axis x is: " + x);
 		outToServer.flush();
 		 parse = in.readLine();
-		 outToServer.println("the Axis y is: " + y+"\n");
+		 outToServer.println("the Axis y is: " + y);
 		outToServer.flush();
 		 parse = in.readLine();
-		 outToServer.println("the Axis z is: " + z+"\n");
+		 outToServer.println("the Axis z is: " + z);
 		outToServer.flush();
 		 parse = in.readLine();
 		 setChanged();
@@ -186,30 +186,38 @@ public class MyObservableModel extends ObservableCommonModel {
 		Socket theServer = null;
 		BufferedReader in= null;
 		try {
-			 theServer=new Socket("127.0.0.1",5400); //TODO add to properties
+			 theServer=new Socket("10.0.0.15",5400); //TODO add to properties
 			System.out.println("connected to server!");
 			
 			 outToServer=new PrintWriter(theServer.getOutputStream());
 			 in=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
 			String parse;
-			outToServer.println("get maze\n");
+			outToServer.println("get maze");
 			outToServer.flush();
 			
 			 parse = in.readLine();
-			outToServer.println("the name is: " + name+"\n");
+			outToServer.println("the name is: " + name+"");
 			outToServer.flush();
 			 parse = in.readLine();
 			 if (parse.equals("sending")){
-			byte[] buffer = new byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()+3*3];
-			int mazeByte;
-			int i =0;
-			while((mazeByte=in.read())==(-1))
-				buffer[i++]=(byte) mazeByte;
-			Maze3d maze = new Maze3d(buffer);
-			return maze;
+				byte[] buffer = new byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()+3*3];
+				int mazeByte;
+				int i =0;
+				
+				while((mazeByte=in.read())!=(127))
+				{
+					System.out.println(mazeByte);
+					
+					buffer[i++]=(byte) mazeByte;
+				}
+				
+				Maze3d maze = new Maze3d(buffer);
+				mazeMap.put(name, maze);
+				charPositionMap.put(name, maze.getEntrance());
+				return maze;
 			 }
 			 setChanged();
-			 notifyObservers("error missing or worng maze!");
+			 notifyObservers("error missing or wrong maze!");
 			 return null;
 		} catch (UnknownHostException e) {
 			 return null;
