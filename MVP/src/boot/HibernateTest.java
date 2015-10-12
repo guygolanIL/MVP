@@ -11,14 +11,20 @@ public class HibernateTest {
 	public static void main(String[] args) {
 		Properties prop = new Properties();
 		prop.setDefaults();
-		 Configuration cfg = new Configuration();
-		 
-		 SessionFactory sf;
-		 sf = cfg.configure("hibernate.cfg.xml").buildSessionFactory();
-
-		 Session session = sf.openSession();
+		
+		SessionFactory factory = new Configuration().configure().buildSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		
+//		
+//		Configuration cfg = new Configuration();
+//		 
+//		 SessionFactory sf;
+//		 sf = cfg.configure("hibernate.cfg.xml").buildSessionFactory();
+//
+//		 Session session = sf.openSession();
 	        // begin transaction
-		 session.beginTransaction();
+		// session.beginTransaction();
 		 session.saveOrUpdate(prop);
 
 	}
