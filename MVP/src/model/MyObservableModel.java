@@ -119,7 +119,7 @@ public class MyObservableModel extends ObservableCommonModel {
 	@Override
 	public void generate(String name, int x, int y, int z) {
 		try {
-		Socket theServer=new Socket("10.0.0.15",5400); //TODO add to properties
+		Socket theServer=new Socket("localhost",5400); //TODO add to properties
 		System.out.println("connected to server!");
 		
 		PrintWriter outToServer=new PrintWriter(theServer.getOutputStream());
@@ -186,7 +186,7 @@ public class MyObservableModel extends ObservableCommonModel {
 		Socket theServer = null;
 		BufferedReader in= null;
 		try {
-			 theServer=new Socket("10.0.0.15",5400); //TODO add to properties
+			 theServer=new Socket("localhost",5400); //TODO add to properties
 			System.out.println("connected to server!");
 			
 			 outToServer=new PrintWriter(theServer.getOutputStream());
@@ -563,42 +563,115 @@ public class MyObservableModel extends ObservableCommonModel {
 		}
 	}
 
+//	@Override
+//	public void solve(String name, String algorithm) {
+//		try {
+//			Future<Solution<Position>> solution = threadPool.submit((new Callable<Solution<Position>>() {
+//
+//				@Override
+//				public Solution<Position> call() throws IllegalArgumentException {
+//					Maze3d tmpMaze = mazeMap.get(name);
+//					Searcher<Position> alg;
+//					if (tmpMaze != null) {
+//
+//						switch (algorithm) // generating a Searcher according to
+//											// the parameters.
+//						{
+//							case "BFS":
+//								alg = new BFS<Position>();
+//								break;
+//							case "AstarManhattan":
+//								alg = new AStar<Position>(
+//										new MazeManhattanDistance(new State<Position>(tmpMaze.getExit())));
+//								break;
+//							case "AstarAirDistance":
+//								alg = new AStar<Position>(new MazeAirDistance(new State<Position>(tmpMaze.getExit())));
+//								break;
+//	
+//							default:
+//								throw new IllegalArgumentException("invalid search algorithm"); 
+//																				
+//						}
+//					} else
+//						throw new IllegalArgumentException("unavailable maze"); 
+//																			
+//					return alg.search(new MazeDomain(tmpMaze));
+//				}
+//			}));
+//
+//			solutionMap.put(name, solution.get()); // inserting the Solution
+//													// into the solution map.
+//
+//		} catch (IllegalArgumentException t) {		//catching the exception and notifying the presenter accordingly.
+//			setChanged();
+//			switch (t.getMessage()) {
+//				case ("invalid search algorithm"):
+//					notifyObservers("completedTask error " + algorithm+ " is not a valid algorithm!\nvalid algorithms are: BFS, AstarManhattan, AstarAirDistance.");
+//				case ("unavailable maze"):
+//					notifyObservers("completedTask error '" + name + "' is unavailable maze");
+//				default:
+//					notifyObservers("completedTask error general error!!");
+//			}
+//
+//		} catch (InterruptedException e) {
+//			if (properties.isDebug()) {
+//				System.out.println("solve method interupted:");
+//				e.printStackTrace();
+//			}
+//		} catch (ExecutionException e) {
+//			if (properties.isDebug()) {
+//				System.out.println("solve method general error:");
+//				e.printStackTrace();
+//			}
+//		}
+//	}
+
+	
 	@Override
 	public void solve(String name, String algorithm) {
 		try {
-			Future<Solution<Position>> solution = threadPool.submit((new Callable<Solution<Position>>() {
+			Socket theServer=new Socket("localhost",5400); //TODO add to properties
+			System.out.println("connected to server!");
+			
+			PrintWriter outToServer=new PrintWriter(theServer.getOutputStream());
+			BufferedReader in=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+			String parse;
+			outToServer.println("solve maze");
+			outToServer.flush();
+			
+			 parse = in.readLine();
+			outToServer.println("the name is: " + name);
+			outToServer.flush();
+			 parse = in.readLine();
+			 outToServer.println("the algorithm is: " + algorithm);
+			outToServer.flush();
+			 parse = in.readLine();
+			 outToServer.println("get solution");
+			outToServer.flush();
+			 parse = in.readLine();
+			 Object obj = in.////////////////////////////////////////// Continue.....
+			 setChanged();
+			notifyObservers("completedTask maze generated " + name);
+//			byte[] buffer = new byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()+3*3];
+//			int mazeByte;
+//			int i =0;
+//			while((mazeByte=in.read())==(-1))
+//				buffer[i++]=(byte) mazeByte;
+//			
+			
+			outToServer.println("exit");
+			outToServer.flush();
 
-				@Override
-				public Solution<Position> call() throws IllegalArgumentException {
-					Maze3d tmpMaze = mazeMap.get(name);
-					Searcher<Position> alg;
-					if (tmpMaze != null) {
-
-						switch (algorithm) // generating a Searcher according to
-											// the parameters.
-						{
-							case "BFS":
-								alg = new BFS<Position>();
-								break;
-							case "AstarManhattan":
-								alg = new AStar<Position>(
-										new MazeManhattanDistance(new State<Position>(tmpMaze.getExit())));
-								break;
-							case "AstarAirDistance":
-								alg = new AStar<Position>(new MazeAirDistance(new State<Position>(tmpMaze.getExit())));
-								break;
-	
-							default:
-								throw new IllegalArgumentException("invalid search algorithm"); 
-																				
-						}
-					} else
-						throw new IllegalArgumentException("unavailable maze"); 
-																			
-					return alg.search(new MazeDomain(tmpMaze));
-				}
-			}));
-
+			in.close();
+			outToServer.close();
+			
+			theServer.close();
+			
+			}catch (IOException e)
+			{
+				//do nothing
+			}
+		
 			solutionMap.put(name, solution.get()); // inserting the Solution
 													// into the solution map.
 
@@ -626,6 +699,14 @@ public class MyObservableModel extends ObservableCommonModel {
 		}
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public void solution(String name, String algorithm) {		//this solution uses a timer and a timertask to move the character to the end of 
 																//the maze.
