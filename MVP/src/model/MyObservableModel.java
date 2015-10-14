@@ -648,9 +648,9 @@ public class MyObservableModel extends ObservableCommonModel {
 			 outToServer.println("the algorithm is: " + algorithm);
 			outToServer.flush();
 			 parse = in.readLine();
-			 outToServer.println("get solution");
-			outToServer.flush();
-			 parse = in.readLine();
+//			 outToServer.println("get solution");
+//			outToServer.flush();
+//			 parse = in.readLine();
 			 if (parse.equals("sending")){
 				byte[] buffer =new byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()];
 				int tmpByte;
@@ -660,10 +660,8 @@ public class MyObservableModel extends ObservableCommonModel {
 					buffer[i++]=(byte) tmpByte;
 					
 				
-				Solution<State<Position>> solution = byteToSolution(buffer,i);
-//				 ByteArrayInputStream b = new ByteArrayInputStream(buffer);
-//			        ObjectInputStream o = new ObjectInputStream(b);
-//			        Solution<Position> solution =  (Solution<Position>)o.readObject();
+				Solution<Position> solution = byteToSolution(buffer,i);
+				System.out.println(solution.toString());
 			        solutionMap.put(name, solution);
 				
 			 }
@@ -677,7 +675,7 @@ public class MyObservableModel extends ObservableCommonModel {
 			
 			theServer.close();
 			
-			}catch (IOException | ClassNotFoundException e)
+			}catch (IOException e)
 			{
 				//do nothing
 			} 
@@ -685,12 +683,12 @@ public class MyObservableModel extends ObservableCommonModel {
 	}
 	
 	
-	private Solution<State<Position>> byteToSolution(byte[] buffer, int length) {
+	private Solution<Position> byteToSolution(byte[] buffer, int length) {
 		Solution<Position> solution = new Solution<Position>();
 int i = 0, j = 0;
 		for (i =0 ; i<length ;)
 		{
-			solution.add( new State<Position>(new Position(buffer[i],buffer[i+1],buffer[i+2])));
+			solution.add(new State<Position>(new Position(buffer[i],buffer[i+1],buffer[i+2])));
 			i=i+3;
 		}
 		return solution;
@@ -701,6 +699,7 @@ int i = 0, j = 0;
 																//the maze.
 		solve(name, algorithm);
 		Solution<Position> course = solutionMap.get(name);
+		System.out.println(course.toString());
 
 		Timer timer = new Timer();
 
