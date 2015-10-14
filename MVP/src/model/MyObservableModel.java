@@ -1,6 +1,7 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -629,6 +630,8 @@ public class MyObservableModel extends ObservableCommonModel {
 	
 	@Override
 	public void solve(String name, String algorithm) {
+		if (solutionMap.get(name)==null)
+		{
 		try {
 			Socket theServer=new Socket("localhost",5400); //TODO add to properties
 			System.out.println("connected to server!");
@@ -638,7 +641,6 @@ public class MyObservableModel extends ObservableCommonModel {
 			String parse;
 			outToServer.println("solve maze");
 			outToServer.flush();
-			
 			 parse = in.readLine();
 			outToServer.println("the name is: " + name);
 			outToServer.flush();
@@ -649,17 +651,25 @@ public class MyObservableModel extends ObservableCommonModel {
 			 outToServer.println("get solution");
 			outToServer.flush();
 			 parse = in.readLine();
-			 Object obj = in.////////////////////////////////////////// Continue.....
-			 setChanged();
-			notifyObservers("completedTask maze generated " + name);
-//			byte[] buffer = new byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()+3*3];
-//			int mazeByte;
-//			int i =0;
-//			while((mazeByte=in.read())==(-1))
-//				buffer[i++]=(byte) mazeByte;
-//			
+			 if (parse.equals("sending")){
+				byte[] buffer =new byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()];
+				int tmpByte;
+				int i =0;
+				
+				while((tmpByte=in.read())!=(127))
+					buffer[i++]=(byte) tmpByte;
+					
+				
+				Solution<State<Position>> solution = byteToSolution(buffer,i);
+//				 ByteArrayInputStream b = new ByteArrayInputStream(buffer);
+//			        ObjectInputStream o = new ObjectInputStream(b);
+//			        Solution<Position> solution =  (Solution<Position>)o.readObject();
+			        solutionMap.put(name, solution);
+				
+			 }
+			 
+			outToServer.println("exit");	
 			
-			outToServer.println("exit");
 			outToServer.flush();
 
 			in.close();
@@ -667,46 +677,25 @@ public class MyObservableModel extends ObservableCommonModel {
 			
 			theServer.close();
 			
-			}catch (IOException e)
+			}catch (IOException | ClassNotFoundException e)
 			{
 				//do nothing
-			}
-		
-			solutionMap.put(name, solution.get()); // inserting the Solution
-													// into the solution map.
-
-		} catch (IllegalArgumentException t) {		//catching the exception and notifying the presenter accordingly.
-			setChanged();
-			switch (t.getMessage()) {
-				case ("invalid search algorithm"):
-					notifyObservers("completedTask error " + algorithm+ " is not a valid algorithm!\nvalid algorithms are: BFS, AstarManhattan, AstarAirDistance.");
-				case ("unavailable maze"):
-					notifyObservers("completedTask error '" + name + "' is unavailable maze");
-				default:
-					notifyObservers("completedTask error general error!!");
-			}
-
-		} catch (InterruptedException e) {
-			if (properties.isDebug()) {
-				System.out.println("solve method interupted:");
-				e.printStackTrace();
-			}
-		} catch (ExecutionException e) {
-			if (properties.isDebug()) {
-				System.out.println("solve method general error:");
-				e.printStackTrace();
-			}
+			} 
 		}
 	}
+	
+	
+	private Solution<State<Position>> byteToSolution(byte[] buffer, int length) {
+		Solution<Position> solution = new Solution<Position>();
+int i = 0, j = 0;
+		for (i =0 ; i<length ;)
+		{
+			solution.add( new State<Position>(new Position(buffer[i],buffer[i+1],buffer[i+2])));
+			i=i+3;
+		}
+		return solution;
+	}
 
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public void solution(String name, String algorithm) {		//this solution uses a timer and a timertask to move the character to the end of 
 																//the maze.
