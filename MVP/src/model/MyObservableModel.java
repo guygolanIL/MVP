@@ -124,24 +124,24 @@ public class MyObservableModel extends ObservableCommonModel {
 		System.out.println("connected to server!");
 		
 		PrintWriter outToServer=new PrintWriter(theServer.getOutputStream());
-		BufferedReader in=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+		BufferedReader inFromServer=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
 		String parse;
 		outToServer.println("generate new maze");
 		outToServer.flush();
 		
-		 parse = in.readLine();
+		 parse = inFromServer.readLine();
 		outToServer.println("the name is: " + name);
 		outToServer.flush();
-		 parse = in.readLine();
+		 parse = inFromServer.readLine();
 		 outToServer.println("the Axis x is: " + x);
 		outToServer.flush();
-		 parse = in.readLine();
+		 parse = inFromServer.readLine();
 		 outToServer.println("the Axis y is: " + y);
 		outToServer.flush();
-		 parse = in.readLine();
+		 parse = inFromServer.readLine();
 		 outToServer.println("the Axis z is: " + z);
 		outToServer.flush();
-		 parse = in.readLine();
+		 parse = inFromServer.readLine();
 		 setChanged();
 		notifyObservers("completedTask maze generated " + name);
 //		byte[] buffer = new byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()+3*3];
@@ -154,7 +154,7 @@ public class MyObservableModel extends ObservableCommonModel {
 		outToServer.println("exit");
 		outToServer.flush();
 
-		in.close();
+		inFromServer.close();
 		outToServer.close();
 		
 		theServer.close();
@@ -185,27 +185,27 @@ public class MyObservableModel extends ObservableCommonModel {
 	public Maze3d getMaze(String name) {
 		PrintWriter outToServer = null;
 		Socket theServer = null;
-		BufferedReader in= null;
+		BufferedReader inFromServer= null;
 		try {
 			 theServer=new Socket("localhost",5400); //TODO add to properties
 			System.out.println("connected to server!");
 			
 			 outToServer=new PrintWriter(theServer.getOutputStream());
-			 in=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+			 inFromServer=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
 			String parse;
 			outToServer.println("get maze");
 			outToServer.flush();
 			
-			 parse = in.readLine();
+			 parse = inFromServer.readLine();
 			outToServer.println("the name is: " + name+"");
 			outToServer.flush();
-			 parse = in.readLine();
-			 if (parse.equals("sending")){
+			 parse = inFromServer.readLine();
+			 if (parse.equals("sending")){		//add else for error
 				byte[] buffer = new byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()+3*3];
 				int mazeByte;
 				int i =0;
 				
-				while((mazeByte=in.read())!=(127))
+				while((mazeByte=inFromServer.read())!=(127))
 				{
 					System.out.println(mazeByte);
 					
@@ -229,7 +229,7 @@ public class MyObservableModel extends ObservableCommonModel {
 			outToServer.println("exit");
 			outToServer.flush();
 			try {
-				in.close();
+				inFromServer.close();
 				theServer.close();
 				outToServer.close();
 			} catch (IOException e) {
