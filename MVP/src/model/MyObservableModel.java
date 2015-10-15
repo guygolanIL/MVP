@@ -637,17 +637,17 @@ public class MyObservableModel extends ObservableCommonModel {
 			System.out.println("connected to server!");
 			
 			PrintWriter outToServer=new PrintWriter(theServer.getOutputStream());
-			BufferedReader in=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+			BufferedReader inFromServer=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
 			String parse;
 			outToServer.println("solve maze");
 			outToServer.flush();
-			 parse = in.readLine();
+			 parse = inFromServer.readLine();
 			outToServer.println("the name is: " + name);
 			outToServer.flush();
-			 parse = in.readLine();
+			 parse = inFromServer.readLine();
 			 outToServer.println("the algorithm is: " + algorithm);
 			outToServer.flush();
-			 parse = in.readLine();
+			 parse = inFromServer.readLine();
 //			 outToServer.println("get solution");
 //			outToServer.flush();
 //			 parse = in.readLine();
@@ -656,7 +656,7 @@ public class MyObservableModel extends ObservableCommonModel {
 				int tmpByte;
 				int i =0;
 				
-				while((tmpByte=in.read())!=(127))
+				while((tmpByte=inFromServer.read())!=(127))
 					buffer[i++]=(byte) tmpByte;
 					
 				
@@ -670,7 +670,7 @@ public class MyObservableModel extends ObservableCommonModel {
 			
 			outToServer.flush();
 
-			in.close();
+			inFromServer.close();
 			outToServer.close();
 			
 			theServer.close();
