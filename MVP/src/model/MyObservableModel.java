@@ -57,7 +57,12 @@ public class MyObservableModel extends ObservableCommonModel {
 		super();
 		ObjectInputStream oos = null;
 		try {
-			oos = new ObjectInputStream(new GZIPInputStream(new FileInputStream("mazeMap.zip"))); // tries to read old cached maps.
+			oos = new ObjectInputStream(new GZIPInputStream(new FileInputStream("mazeMap.zip"))); // tries
+																									// to
+																									// read
+																									// old
+																									// cached
+																									// maps.
 			mazeMap = (HashMap<String, Maze3d>) oos.readObject();
 			oos.close();
 			oos = new ObjectInputStream(new GZIPInputStream(new FileInputStream("solutionMap.zip")));
@@ -78,154 +83,154 @@ public class MyObservableModel extends ObservableCommonModel {
 
 	}
 
-//	@Override
-//	public void generate(String name, int x, int y, int z) {
-//
-//		Future<Maze3d> maze = threadPool.submit(new Callable<Maze3d>() {
-//
-//			@Override
-//			public Maze3d call() throws Exception {
-//				Maze3dGenerator generator;
-//				switch (properties.getGenerateAlgorithm()) {
-//					case ("MyMaze3dGenerator"):
-//						generator = new MyMaze3dGenerator();
-//						break;
-//					case ("SimpleGenerator"):
-//						generator = new SimpleMaze3dGenerator();
-//						break;
-//					default:
-//						generator = new MyMaze3dGenerator();
-//				}
-//				return generator.generate(x, y, z);
-//			}
-//		});
-//
-//		try {
-//			if (properties.isDebug()) {
-//				System.out.println(maze.get());
-//			}
-//
-//			mazeMap.put(name, maze.get());			//inserting newly generated maze into the mazeMap.
-//			charPositionMap.put(name, maze.get().getEntrance());	//updates the position map with the new starting position.
-//			setChanged();
-//			notifyObservers("completedTask maze generated " + name);		//notifying the presenter that the maze was generated.
-//		} catch (InterruptedException | ExecutionException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//	}
+	// @Override
+	// public void generate(String name, int x, int y, int z) {
+	//
+	// Future<Maze3d> maze = threadPool.submit(new Callable<Maze3d>() {
+	//
+	// @Override
+	// public Maze3d call() throws Exception {
+	// Maze3dGenerator generator;
+	// switch (properties.getGenerateAlgorithm()) {
+	// case ("MyMaze3dGenerator"):
+	// generator = new MyMaze3dGenerator();
+	// break;
+	// case ("SimpleGenerator"):
+	// generator = new SimpleMaze3dGenerator();
+	// break;
+	// default:
+	// generator = new MyMaze3dGenerator();
+	// }
+	// return generator.generate(x, y, z);
+	// }
+	// });
+	//
+	// try {
+	// if (properties.isDebug()) {
+	// System.out.println(maze.get());
+	// }
+	//
+	// mazeMap.put(name, maze.get()); //inserting newly generated maze into the
+	// mazeMap.
+	// charPositionMap.put(name, maze.get().getEntrance()); //updates the
+	// position map with the new starting position.
+	// setChanged();
+	// notifyObservers("completedTask maze generated " + name); //notifying the
+	// presenter that the maze was generated.
+	// } catch (InterruptedException | ExecutionException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	//
+	// }
 
-	
 	@Override
 	public void generate(String name, int x, int y, int z) {
 		try {
-		Socket theServer=new Socket("localhost",5400); //TODO add to properties
-		System.out.println("connected to server!");
-		
-		PrintWriter outToServer=new PrintWriter(theServer.getOutputStream());
-		BufferedReader inFromServer=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
-		String parse;
-		outToServer.println("generate new maze");
-		outToServer.flush();
-		
-		 parse = inFromServer.readLine();
-		outToServer.println("the name is: " + name);
-		outToServer.flush();
-		 parse = inFromServer.readLine();
-		 outToServer.println("the Axis x is: " + x);
-		outToServer.flush();
-		 parse = inFromServer.readLine();
-		 outToServer.println("the Axis y is: " + y);
-		outToServer.flush();
-		 parse = inFromServer.readLine();
-		 outToServer.println("the Axis z is: " + z);
-		outToServer.flush();
-		 parse = inFromServer.readLine();
-		 setChanged();
-		notifyObservers("completedTask maze generated " + name);
-//		byte[] buffer = new byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()+3*3];
-//		int mazeByte;
-//		int i =0;
-//		while((mazeByte=in.read())==(-1))
-//			buffer[i++]=(byte) mazeByte;
-//		
-		
-		outToServer.println("exit");
-		outToServer.flush();
+			Socket theServer = new Socket("localhost", 5400); // TODO add to
+																// properties
+			System.out.println("connected to server!");
 
-		inFromServer.close();
-		outToServer.close();
-		
-		theServer.close();
-		
-		}catch (IOException e)
-		{
-			//do nothing
+			PrintWriter outToServer = new PrintWriter(theServer.getOutputStream());
+			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+			String parse;
+			outToServer.println("generate new maze");
+			outToServer.flush();
+
+			parse = inFromServer.readLine();
+			outToServer.println("the name is: " + name);
+			outToServer.flush();
+			parse = inFromServer.readLine();
+			outToServer.println("the Axis x is: " + x);
+			outToServer.flush();
+			parse = inFromServer.readLine();
+			outToServer.println("the Axis y is: " + y);
+			outToServer.flush();
+			parse = inFromServer.readLine();
+			outToServer.println("the Axis z is: " + z);
+			outToServer.flush();
+			parse = inFromServer.readLine();
+			setChanged();
+			notifyObservers("completedTask maze generated " + name);
+			// byte[] buffer = new
+			// byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()+3*3];
+			// int mazeByte;
+			// int i =0;
+			// while((mazeByte=in.read())==(-1))
+			// buffer[i++]=(byte) mazeByte;
+			//
+
+			outToServer.println("exit");
+			outToServer.flush();
+
+			inFromServer.close();
+			outToServer.close();
+
+			theServer.close();
+
+		} catch (IOException e) {
+			// do nothing
 		}
-		
-		}
-	
-	
-//	
-//	@Override
-//	public Maze3d getMaze(String name) {
-//		Maze3d temp = mazeMap.get(name);
-//
-//		if (temp != null) {
-//			return temp;
-//		} else {
-//			// return("Unavailable maze!");
-//			return null;
-//		}
-//	}
-	
-	
+
+	}
+
+	//
+	// @Override
+	// public Maze3d getMaze(String name) {
+	// Maze3d temp = mazeMap.get(name);
+	//
+	// if (temp != null) {
+	// return temp;
+	// } else {
+	// // return("Unavailable maze!");
+	// return null;
+	// }
+	// }
+
 	@Override
 	public Maze3d getMaze(String name) {
 		PrintWriter outToServer = null;
 		Socket theServer = null;
-		BufferedReader inFromServer= null;
+		BufferedReader inFromServer = null;
 		try {
-			 theServer=new Socket("localhost",5400); //TODO add to properties
+			theServer = new Socket("localhost", 5400); // TODO add to properties
 			System.out.println("connected to server!");
-			
-			 outToServer=new PrintWriter(theServer.getOutputStream());
-			 inFromServer=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+
+			outToServer = new PrintWriter(theServer.getOutputStream());
+			inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
 			String parse;
 			outToServer.println("get maze");
 			outToServer.flush();
-			
-			 parse = inFromServer.readLine();
-			outToServer.println("the name is: " + name+"");
+
+			parse = inFromServer.readLine();
+			outToServer.println("the name is: " + name + "");
 			outToServer.flush();
-			 parse = inFromServer.readLine();
-			 if (parse.equals("sending")){		//add else for error
-				byte[] buffer = new byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()+3*3];
+			parse = inFromServer.readLine();
+			if (parse.equals("sending")) { // add else for error
+				byte[] buffer = new byte[properties.getMazeMaxAxisX() * properties.getMazeMaxAxisY()
+						* properties.getMazeMaxAxisZ() + 3 * 3];
 				int mazeByte;
-				int i =0;
-				
-				while((mazeByte=inFromServer.read())!=(127))
-				{
+				int i = 0;
+
+				while ((mazeByte = inFromServer.read()) != (127)) {
 					System.out.println(mazeByte);
-					
-					buffer[i++]=(byte) mazeByte;
+
+					buffer[i++] = (byte) mazeByte;
 				}
-				
+
 				Maze3d maze = new Maze3d(buffer);
 				mazeMap.put(name, maze);
 				charPositionMap.put(name, maze.getEntrance());
 				return maze;
-			 }
-			 setChanged();
-			 notifyObservers("error missing or wrong maze!");
-			 return null;
+			}
+			setChanged();
+			notifyObservers("error missing or wrong maze!");
+			return null;
 		} catch (UnknownHostException e) {
-			 return null;
+			return null;
 		} catch (IOException e) {
-			 return null;
-		}finally
-		{
+			return null;
+		} finally {
 			outToServer.println("exit");
 			outToServer.flush();
 			try {
@@ -233,11 +238,10 @@ public class MyObservableModel extends ObservableCommonModel {
 				theServer.close();
 				outToServer.close();
 			} catch (IOException e) {
-				//do nothing
+				// do nothing
 			}
 		}
-			
-			
+
 	}
 
 	@Override
@@ -308,21 +312,42 @@ public class MyObservableModel extends ObservableCommonModel {
 				tmpCompressor.close(); // compressing the maze into and writing
 										// it to the file.
 				setChanged();
-				notifyObservers("completedTask save");		//notifying the presenter that the save was completed.
-				
+				notifyObservers("completedTask save"); // notifying the
+														// presenter that the
+														// save was completed.
+
 			} catch (FileNotFoundException e) {
 				setChanged();
-				notifyObservers("completedTask error '" + fileName + "' is not a valid file name.");	//notifying the presenter that an error has occurred.
-				
+				notifyObservers("completedTask error '" + fileName + "' is not a valid file name."); // notifying
+																										// the
+																										// presenter
+																										// that
+																										// an
+																										// error
+																										// has
+																										// occurred.
+
 			} catch (IOException e) {
 				setChanged();
-				notifyObservers("completedTask error IO error.");	//notifying the presenter that an error has occurred.
-				
+				notifyObservers("completedTask error IO error."); // notifying
+																	// the
+																	// presenter
+																	// that an
+																	// error has
+																	// occurred.
+
 			}
 		} else {
 			setChanged();
-			notifyObservers("completedTask error '" + name + "' is an unavailable maze");	//notifying the presenter that an error has occurred.
-			
+			notifyObservers("completedTask error '" + name + "' is an unavailable maze"); // notifying
+																							// the
+																							// presenter
+																							// that
+																							// an
+																							// error
+																							// has
+																							// occurred.
+
 		}
 	}
 
@@ -330,28 +355,55 @@ public class MyObservableModel extends ObservableCommonModel {
 	public void load(String fileName, String name) {
 		try {
 			MyDecompressorInputStream tmpDecompressor = new MyDecompressorInputStream(new FileInputStream(fileName));
-			byte[] buffer = new byte[35 * 35 * 35]; 
+			byte[] buffer = new byte[35 * 35 * 35];
 			if (tmpDecompressor.read(buffer) == -1) {
 				Maze3d tmpMaze = new Maze3d(buffer);
 				mazeMap.put(name, tmpMaze);
 				setChanged();
-				notifyObservers("completedTask load " + name);	//notifying the presenter that the load was completed.
-				
-				tmpDecompressor.close();		//closing resources.
-				charPositionMap.put(name, tmpMaze.getEntrance());	//updates the charpositionMap for the entrance of the loaded maze.
+				notifyObservers("completedTask load " + name); // notifying the
+																// presenter
+																// that the load
+																// was
+																// completed.
+
+				tmpDecompressor.close(); // closing resources.
+				charPositionMap.put(name, tmpMaze.getEntrance()); // updates the
+																	// charpositionMap
+																	// for the
+																	// entrance
+																	// of the
+																	// loaded
+																	// maze.
 			} else {
 				setChanged();
-				notifyObservers("completedTask error The requsted maze is too big!");	//notifying the presenter that an error has occurred.
-				
+				notifyObservers("completedTask error The requsted maze is too big!"); // notifying
+																						// the
+																						// presenter
+																						// that
+																						// an
+																						// error
+																						// has
+																						// occurred.
+
 			}
 		} catch (FileNotFoundException e) {
 			setChanged();
-			notifyObservers("completedTask error wrong file path.");	//notifying the presenter that an error has occurred.
-			
+			notifyObservers("completedTask error wrong file path."); // notifying
+																		// the
+																		// presenter
+																		// that
+																		// an
+																		// error
+																		// has
+																		// occurred.
+
 		} catch (IOException e) {
 			setChanged();
-			notifyObservers("completedTask error IO error.");		//notifying the presenter that an error has occurred.
-			
+			notifyObservers("completedTask error IO error."); // notifying the
+																// presenter
+																// that an error
+																// has occurred.
+
 		}
 
 	}
@@ -363,10 +415,21 @@ public class MyObservableModel extends ObservableCommonModel {
 		if (tempMaze != null) {
 			int size = tempMaze.getxAxis() * tempMaze.getyAxis() * tempMaze.getzAxis() + 9;
 			setChanged();
-			notifyObservers("completedTask mazeSize " + size);		//notifying the presenter that the mazeSize was completed.
+			notifyObservers("completedTask mazeSize " + size); // notifying the
+																// presenter
+																// that the
+																// mazeSize was
+																// completed.
 		} else {
 			setChanged();
-			notifyObservers("completedTask error '" + name + "' is unavailable maze");	//notifying the presenter that an error has occurred.
+			notifyObservers("completedTask error '" + name + "' is unavailable maze"); // notifying
+																						// the
+																						// presenter
+																						// that
+																						// an
+																						// error
+																						// has
+																						// occurred.
 		}
 
 	}
@@ -382,10 +445,22 @@ public class MyObservableModel extends ObservableCommonModel {
 				compress.write(tmpMaze.toByteArray()); // trying to compress the
 														// maze into the buffer.
 				setChanged();
-				notifyObservers("completedTask fileSize " + name + " " + buffer.size());	//notifying the presenter that the mazeSize was completed.
+				notifyObservers("completedTask fileSize " + name + " " + buffer.size()); // notifying
+																							// the
+																							// presenter
+																							// that
+																							// the
+																							// mazeSize
+																							// was
+																							// completed.
 			} catch (IOException e) {
 				setChanged();
-				notifyObservers("completedTask error IO error.");		//notifying the presenter that an error has occurred.
+				notifyObservers("completedTask error IO error."); // notifying
+																	// the
+																	// presenter
+																	// that an
+																	// error has
+																	// occurred.
 			} finally {
 				try {
 					compress.close(); // closing resources.
@@ -396,7 +471,7 @@ public class MyObservableModel extends ObservableCommonModel {
 		} else {
 			setChanged();
 			notifyObservers("completedTask error '" + name + "' is unavailable maze");
-			
+
 		}
 
 	}
@@ -416,21 +491,21 @@ public class MyObservableModel extends ObservableCommonModel {
 		if (tmp != null) {
 			return (tmp);
 		} else {
-			
+
 			return null;
 		}
 	}
 
 	@Override
-	public void exit() { // safely terminating the existing threads. Also trying to save and cache all maps.
+	public void exit() { // safely terminating the existing threads. Also trying
+							// to save and cache all maps.
 		try {
 			threadPool.shutdown();
 			if (!threadPool.awaitTermination(5, TimeUnit.SECONDS)) {
 				threadPool.shutdownNow();
 				// presenter.get.display("threads terminated violently!");
 			}
-			
-			
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -481,11 +556,18 @@ public class MyObservableModel extends ObservableCommonModel {
 		Position current = charPositionMap.get(name);
 		String[] moves = mazeMap.get(name).getPossibleMoves(current);
 		for (String move : moves) {
-			if (move.equals("BACKWARD")) {			//checks if up movement is possible.
+			if (move.equals("BACKWARD")) { // checks if up movement is possible.
 				current.setY(current.getY() - 1);
-				charPositionMap.put(name, current);		//updates the new character position.
+				charPositionMap.put(name, current); // updates the new character
+													// position.
 				setChanged();
-				notifyObservers("completedTask movement " + name);	//notifying the presenter that the movement was completed.
+				notifyObservers("completedTask movement " + name); // notifying
+																	// the
+																	// presenter
+																	// that the
+																	// movement
+																	// was
+																	// completed.
 			}
 		}
 	}
@@ -495,11 +577,19 @@ public class MyObservableModel extends ObservableCommonModel {
 		Position current = charPositionMap.get(name);
 		String[] moves = mazeMap.get(name).getPossibleMoves(current);
 		for (String move : moves) {
-			if (move.equals("FORWARD")) {		//checks if down movement is possible.
+			if (move.equals("FORWARD")) { // checks if down movement is
+											// possible.
 				current.setY(current.getY() + 1);
-				charPositionMap.put(name, current);	//updates the new character position.
+				charPositionMap.put(name, current); // updates the new character
+													// position.
 				setChanged();
-				notifyObservers("completedTask movement " + name);	//notifying the presenter that the movement was completed.
+				notifyObservers("completedTask movement " + name); // notifying
+																	// the
+																	// presenter
+																	// that the
+																	// movement
+																	// was
+																	// completed.
 			}
 		}
 	}
@@ -509,11 +599,18 @@ public class MyObservableModel extends ObservableCommonModel {
 		Position current = charPositionMap.get(name);
 		String[] moves = mazeMap.get(name).getPossibleMoves(current);
 		for (String move : moves) {
-			if (move.equals("RIGHT")) {		//checks if left movement is possible.
+			if (move.equals("RIGHT")) { // checks if left movement is possible.
 				current.setZ(current.getZ() - 1);
-				charPositionMap.put(name, current);	//updates the new character position.
+				charPositionMap.put(name, current); // updates the new character
+													// position.
 				setChanged();
-				notifyObservers("completedTask movement " + name);	//notifying the presenter that the movement was completed.
+				notifyObservers("completedTask movement " + name); // notifying
+																	// the
+																	// presenter
+																	// that the
+																	// movement
+																	// was
+																	// completed.
 			}
 		}
 	}
@@ -523,11 +620,18 @@ public class MyObservableModel extends ObservableCommonModel {
 		Position current = charPositionMap.get(name);
 		String[] moves = mazeMap.get(name).getPossibleMoves(current);
 		for (String move : moves) {
-			if (move.equals("LEFT")) {			//checks if right movement is possible.
+			if (move.equals("LEFT")) { // checks if right movement is possible.
 				current.setZ(current.getZ() + 1);
-				charPositionMap.put(name, current);	//updates the new character position.
+				charPositionMap.put(name, current); // updates the new character
+													// position.
 				setChanged();
-				notifyObservers("completedTask movement " + name);	//notifying the presenter that the movement was completed.
+				notifyObservers("completedTask movement " + name); // notifying
+																	// the
+																	// presenter
+																	// that the
+																	// movement
+																	// was
+																	// completed.
 			}
 		}
 	}
@@ -538,13 +642,20 @@ public class MyObservableModel extends ObservableCommonModel {
 		Position current = charPositionMap.get(name);
 
 		String[] moves = mazeMap.get(name).getPossibleMoves(current);
-		for (String move : moves) {	
-			if (move.equals("UP")) {			//checks if level up movement is possible.
+		for (String move : moves) {
+			if (move.equals("UP")) { // checks if level up movement is possible.
 				current.setX(current.getX() + 1);
-				charPositionMap.put(name, current);	//updates the new character position.
+				charPositionMap.put(name, current); // updates the new character
+													// position.
 
 				setChanged();
-				notifyObservers("completedTask movement " + name);		//notifying the presenter that the movement was completed.
+				notifyObservers("completedTask movement " + name); // notifying
+																	// the
+																	// presenter
+																	// that the
+																	// movement
+																	// was
+																	// completed.
 
 			}
 		}
@@ -555,148 +666,162 @@ public class MyObservableModel extends ObservableCommonModel {
 		Position current = charPositionMap.get(name);
 		String[] moves = mazeMap.get(name).getPossibleMoves(current);
 		for (String move : moves) {
-			if (move.equals("DOWN")) {		//checks if level down movement is possible.
+			if (move.equals("DOWN")) { // checks if level down movement is
+										// possible.
 				current.setX(current.getX() - 1);
-				charPositionMap.put(name, current);		//updates the new character position.
+				charPositionMap.put(name, current); // updates the new character
+													// position.
 				setChanged();
-				notifyObservers("completedTask movement " + name);		//notifying the presenter that the movement was completed.
+				notifyObservers("completedTask movement " + name); // notifying
+																	// the
+																	// presenter
+																	// that the
+																	// movement
+																	// was
+																	// completed.
 			}
 		}
 	}
 
-//	@Override
-//	public void solve(String name, String algorithm) {
-//		try {
-//			Future<Solution<Position>> solution = threadPool.submit((new Callable<Solution<Position>>() {
-//
-//				@Override
-//				public Solution<Position> call() throws IllegalArgumentException {
-//					Maze3d tmpMaze = mazeMap.get(name);
-//					Searcher<Position> alg;
-//					if (tmpMaze != null) {
-//
-//						switch (algorithm) // generating a Searcher according to
-//											// the parameters.
-//						{
-//							case "BFS":
-//								alg = new BFS<Position>();
-//								break;
-//							case "AstarManhattan":
-//								alg = new AStar<Position>(
-//										new MazeManhattanDistance(new State<Position>(tmpMaze.getExit())));
-//								break;
-//							case "AstarAirDistance":
-//								alg = new AStar<Position>(new MazeAirDistance(new State<Position>(tmpMaze.getExit())));
-//								break;
-//	
-//							default:
-//								throw new IllegalArgumentException("invalid search algorithm"); 
-//																				
-//						}
-//					} else
-//						throw new IllegalArgumentException("unavailable maze"); 
-//																			
-//					return alg.search(new MazeDomain(tmpMaze));
-//				}
-//			}));
-//
-//			solutionMap.put(name, solution.get()); // inserting the Solution
-//													// into the solution map.
-//
-//		} catch (IllegalArgumentException t) {		//catching the exception and notifying the presenter accordingly.
-//			setChanged();
-//			switch (t.getMessage()) {
-//				case ("invalid search algorithm"):
-//					notifyObservers("completedTask error " + algorithm+ " is not a valid algorithm!\nvalid algorithms are: BFS, AstarManhattan, AstarAirDistance.");
-//				case ("unavailable maze"):
-//					notifyObservers("completedTask error '" + name + "' is unavailable maze");
-//				default:
-//					notifyObservers("completedTask error general error!!");
-//			}
-//
-//		} catch (InterruptedException e) {
-//			if (properties.isDebug()) {
-//				System.out.println("solve method interupted:");
-//				e.printStackTrace();
-//			}
-//		} catch (ExecutionException e) {
-//			if (properties.isDebug()) {
-//				System.out.println("solve method general error:");
-//				e.printStackTrace();
-//			}
-//		}
-//	}
+	// @Override
+	// public void solve(String name, String algorithm) {
+	// try {
+	// Future<Solution<Position>> solution = threadPool.submit((new
+	// Callable<Solution<Position>>() {
+	//
+	// @Override
+	// public Solution<Position> call() throws IllegalArgumentException {
+	// Maze3d tmpMaze = mazeMap.get(name);
+	// Searcher<Position> alg;
+	// if (tmpMaze != null) {
+	//
+	// switch (algorithm) // generating a Searcher according to
+	// // the parameters.
+	// {
+	// case "BFS":
+	// alg = new BFS<Position>();
+	// break;
+	// case "AstarManhattan":
+	// alg = new AStar<Position>(
+	// new MazeManhattanDistance(new State<Position>(tmpMaze.getExit())));
+	// break;
+	// case "AstarAirDistance":
+	// alg = new AStar<Position>(new MazeAirDistance(new
+	// State<Position>(tmpMaze.getExit())));
+	// break;
+	//
+	// default:
+	// throw new IllegalArgumentException("invalid search algorithm");
+	//
+	// }
+	// } else
+	// throw new IllegalArgumentException("unavailable maze");
+	//
+	// return alg.search(new MazeDomain(tmpMaze));
+	// }
+	// }));
+	//
+	// solutionMap.put(name, solution.get()); // inserting the Solution
+	// // into the solution map.
+	//
+	// } catch (IllegalArgumentException t) { //catching the exception and
+	// notifying the presenter accordingly.
+	// setChanged();
+	// switch (t.getMessage()) {
+	// case ("invalid search algorithm"):
+	// notifyObservers("completedTask error " + algorithm+ " is not a valid
+	// algorithm!\nvalid algorithms are: BFS, AstarManhattan,
+	// AstarAirDistance.");
+	// case ("unavailable maze"):
+	// notifyObservers("completedTask error '" + name + "' is unavailable
+	// maze");
+	// default:
+	// notifyObservers("completedTask error general error!!");
+	// }
+	//
+	// } catch (InterruptedException e) {
+	// if (properties.isDebug()) {
+	// System.out.println("solve method interupted:");
+	// e.printStackTrace();
+	// }
+	// } catch (ExecutionException e) {
+	// if (properties.isDebug()) {
+	// System.out.println("solve method general error:");
+	// e.printStackTrace();
+	// }
+	// }
+	// }
 
-	
 	@Override
 	public void solve(String name, String algorithm) {
-		if (solutionMap.get(name)==null)
-		{
-		try {
-			Socket theServer=new Socket("localhost",5400); //TODO add to properties
-			System.out.println("connected to server!");
-			
-			PrintWriter outToServer=new PrintWriter(theServer.getOutputStream());
-			BufferedReader inFromServer=new BufferedReader(new InputStreamReader(theServer.getInputStream()));
-			String parse;
-			outToServer.println("solve maze");
-			outToServer.flush();
-			 parse = inFromServer.readLine();
-			outToServer.println("the name is: " + name);
-			outToServer.flush();
-			 parse = inFromServer.readLine();
-			 outToServer.println("the algorithm is: " + algorithm);
-			outToServer.flush();
-			 parse = inFromServer.readLine();
-//			 outToServer.println("get solution");
-//			outToServer.flush();
-//			 parse = in.readLine();
-			 if (parse.equals("sending")){
-				byte[] buffer =new byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()];
-				int tmpByte;
-				int i =0;
-				
-				while((tmpByte=inFromServer.read())!=(127))
-					buffer[i++]=(byte) tmpByte;
-					
-				
-				Solution<Position> solution = byteToSolution(buffer,i);
-				System.out.println(solution.toString());
-			        solutionMap.put(name, solution);
-				
-			 }
-			 
-			outToServer.println("exit");	
-			
-			outToServer.flush();
+		if (solutionMap.get(name) == null) {
+			try {
+				Socket theServer = new Socket("localhost", 5400); // TODO add to
+																	// properties
+				System.out.println("connected to server!");
 
-			inFromServer.close();
-			outToServer.close();
-			
-			theServer.close();
-			
-			}catch (IOException e)
-			{
-				//do nothing
-			} 
+				PrintWriter outToServer = new PrintWriter(theServer.getOutputStream());
+				BufferedReader inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+				String parse;
+				outToServer.println("solve maze");
+				outToServer.flush();
+				parse = inFromServer.readLine();
+				outToServer.println("the name is: " + name);
+				outToServer.flush();
+				parse = inFromServer.readLine();
+				outToServer.println("the algorithm is: " + algorithm);
+				outToServer.flush();
+				parse = inFromServer.readLine();
+				// outToServer.println("get solution");
+				// outToServer.flush();
+				// parse = in.readLine();
+				if (parse.equals("sending")) { // TODO add else for error
+					byte[] buffer = new byte[properties.getMazeMaxAxisX() * properties.getMazeMaxAxisY()
+							* properties.getMazeMaxAxisZ()];
+					int tmpByte;
+					int i = 0;
+
+					while ((tmpByte = inFromServer.read()) != (127))
+						buffer[i++] = (byte) tmpByte;
+
+					Solution<Position> solution = byteToSolution(buffer, i);
+					System.out.println(solution.toString());
+					solutionMap.put(name, solution);
+
+				}
+
+				outToServer.println("exit");
+
+				outToServer.flush();
+
+				inFromServer.close();
+				outToServer.close();
+
+				theServer.close();
+
+			} catch (IOException e) {
+				// do nothing
+			}
 		}
 	}
-	
-	
+
 	private Solution<Position> byteToSolution(byte[] buffer, int length) {
 		Solution<Position> solution = new Solution<Position>();
-int i = 0, j = 0;
-		for (i =0 ; i<length ;)
-		{
-			solution.add(new State<Position>(new Position(buffer[i],buffer[i+1],buffer[i+2])));
-			i=i+3;
+		int i = 0, j = 0;
+		for (i = 0; i < length;) {
+			solution.add(new State<Position>(new Position(buffer[i], buffer[i + 1], buffer[i + 2])));
+			i = i + 3;
 		}
 		return solution;
 	}
 
 	@Override
-	public void solution(String name, String algorithm) {		//this solution uses a timer and a timertask to move the character to the end of 
-																//the maze.
+	public void solution(String name, String algorithm) { // this solution uses
+															// a timer and a
+															// timertask to move
+															// the character to
+															// the end of
+															// the maze.
 		solve(name, algorithm);
 		Solution<Position> course = solutionMap.get(name);
 		System.out.println(course.toString());
@@ -711,14 +836,20 @@ int i = 0, j = 0;
 				if (i == course.getArr().size() - 1)
 					this.cancel();
 
-				charPositionMap.put(name, course.getArr().get(i++).getState());	//setting the new position in the map.
+				charPositionMap.put(name, course.getArr().get(i++).getState()); // setting
+																				// the
+																				// new
+																				// position
+																				// in
+																				// the
+																				// map.
 				setChanged();
 				notifyObservers("completedTask movement " + name);
 			}
 
 		};
 
-		timer.scheduleAtFixedRate(task, 0, 200);		
+		timer.scheduleAtFixedRate(task, 0, 200);
 
 	}
 }
