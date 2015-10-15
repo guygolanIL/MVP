@@ -776,8 +776,7 @@ public class MyObservableModel extends ObservableCommonModel {
 				// outToServer.flush();
 				// parse = in.readLine();
 				if (parse.equals("sending")) { // TODO add else for error
-					byte[] buffer = new byte[properties.getMazeMaxAxisX() * properties.getMazeMaxAxisY()
-							* properties.getMazeMaxAxisZ()];
+					byte[] buffer = new byte[properties.getMazeMaxAxisX() * properties.getMazeMaxAxisY()* properties.getMazeMaxAxisZ()];
 					int tmpByte;
 					int i = 0;
 
