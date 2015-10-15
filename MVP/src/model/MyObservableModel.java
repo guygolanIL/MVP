@@ -815,12 +815,7 @@ public class MyObservableModel extends ObservableCommonModel {
 	}
 
 	@Override
-	public void solution(String name, String algorithm) { // this solution uses
-															// a timer and a
-															// timertask to move
-															// the character to
-															// the end of
-															// the maze.
+	public void solution(String name, String algorithm) { // this solution uses a timer and a timertask to move the character to the end of the maze.
 		solve(name, algorithm);
 		Solution<Position> course = solutionMap.get(name);
 		System.out.println(course.toString());
@@ -835,13 +830,7 @@ public class MyObservableModel extends ObservableCommonModel {
 				if (i == course.getArr().size() - 1)
 					this.cancel();
 
-				charPositionMap.put(name, course.getArr().get(i++).getState()); // setting
-																				// the
-																				// new
-																				// position
-																				// in
-																				// the
-																				// map.
+				charPositionMap.put(name, course.getArr().get(i++).getState()); // setting the new position in the map.
 				setChanged();
 				notifyObservers("completedTask movement " + name);
 			}
