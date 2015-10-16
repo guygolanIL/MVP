@@ -49,6 +49,12 @@ public class Presenter implements Observer {
 		
 	}
 
+	public void start()
+	{
+		if(model.start())
+			view.start();
+	}
+	
 	@Override
 	public void update(Observable comp, Object id) {
 		String identifier = ((String)id); //TODO check type

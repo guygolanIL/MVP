@@ -147,4 +147,5 @@ public interface Model {
 	 * @param algorithm - name of the searching algorithm.
 	 */
 	void solution(String name, String algorithm);
+	boolean start();
 }

@@ -1,5 +1,6 @@
 package model;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -11,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -48,38 +50,30 @@ import io.MyDecompressorInputStream;
  */
 public class MyObservableModel extends ObservableCommonModel {
 
+	
+	Socket theServer ;
+	BufferedReader inFromServer;
+	PrintWriter outToServer;
 	@SuppressWarnings("unchecked")
-	/**
-	 * Ctor. Tries to get old maps from cached maps , if failed initializing new
-	 * maps.
-	 */
-	public MyObservableModel() { // Ctor
-		super();
-		ObjectInputStream oos = null;
+	
+@Override
+	public boolean start() {
 		try {
-			oos = new ObjectInputStream(new GZIPInputStream(new FileInputStream("mazeMap.zip"))); // tries
-																									// to
-																									// read
-																									// old
-																									// cached
-																									// maps.
-			mazeMap = (HashMap<String, Maze3d>) oos.readObject();
-			oos.close();
-			oos = new ObjectInputStream(new GZIPInputStream(new FileInputStream("solutionMap.zip")));
-			solutionMap = (HashMap<String, Solution<Position>>) oos.readObject();
-		} catch (IOException | ClassNotFoundException e) {
-			if (properties.isDebug())
-				System.out.println("starting from scratch maps");
-		} finally {
-			try {
-				if (oos != null) // closing resources.
-					oos.close();
-			} catch (IOException e) {
-				if (properties.isDebug())
-					System.out.println("failed to close resources.");
-				e.printStackTrace();
-			}
+			theServer = new Socket("localhost", 5400);// TODO add to properties
+			inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+			outToServer = new PrintWriter(theServer.getOutputStream());
+			return true;
+		} catch (ConnectException e) {
+			setChanged();
+			notifyObservers("completedTask error Failed to connect to server");
+			return false;
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return false; 
+
 
 	}
 
@@ -127,12 +121,12 @@ public class MyObservableModel extends ObservableCommonModel {
 	@Override
 	public void generate(String name, int x, int y, int z) {
 		try {
-			Socket theServer = new Socket("localhost", 5400); // TODO add to
+			//Socket theServer = new Socket("localhost", 5400); // TODO add to
 																// properties
 			System.out.println("connected to server!");
 
-			PrintWriter outToServer = new PrintWriter(theServer.getOutputStream());
-			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+//			PrintWriter outToServer = new PrintWriter(theServer.getOutputStream());
+//			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
 			String parse;
 			outToServer.println("generate new maze");
 			outToServer.flush();
@@ -160,13 +154,13 @@ public class MyObservableModel extends ObservableCommonModel {
 			// buffer[i++]=(byte) mazeByte;
 			//
 
-			outToServer.println("exit");
-			outToServer.flush();
+			//outToServer.println("exit");
+			//outToServer.flush();
 
-			inFromServer.close();
-			outToServer.close();
+//			inFromServer.close();
+//			outToServer.close();
 
-			theServer.close();
+			//theServer.close();
 
 		} catch (IOException e) {
 			// do nothing
@@ -189,15 +183,15 @@ public class MyObservableModel extends ObservableCommonModel {
 
 	@Override
 	public Maze3d getMaze(String name) {
-		PrintWriter outToServer = null;
-		Socket theServer = null;
-		BufferedReader inFromServer = null;
+//		PrintWriter outToServer = null;
+//		Socket theServer = null;
+//		BufferedReader inFromServer = null;
 		try {
-			theServer = new Socket("localhost", 5400); // TODO add to properties
+			//theServer = new Socket("localhost", 5400); // TODO add to properties
 			System.out.println("connected to server!");
 
-			outToServer = new PrintWriter(theServer.getOutputStream());
-			inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+//			outToServer = new PrintWriter(theServer.getOutputStream());
+//			inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
 			String parse;
 			outToServer.println("get maze");
 			outToServer.flush();
@@ -231,15 +225,6 @@ public class MyObservableModel extends ObservableCommonModel {
 		} catch (IOException e) {
 			return null;
 		} finally {
-			outToServer.println("exit");
-			outToServer.flush();
-			try {
-				inFromServer.close();
-				theServer.close();
-				outToServer.close();
-			} catch (IOException e) {
-				// do nothing
-			}
 		}
 
 	}
@@ -499,6 +484,23 @@ public class MyObservableModel extends ObservableCommonModel {
 	@Override
 	public void exit() { // safely terminating the existing threads. Also trying
 							// to save and cache all maps.
+		
+		try {
+
+			if(outToServer!=null)
+			{
+				outToServer.println("exit");
+					outToServer.close();
+			}
+			if(inFromServer!=null)
+				inFromServer.close();		
+			if(theServer!=null)
+					if(theServer.isConnected())
+						theServer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		try {
 			threadPool.shutdown();
 			if (!threadPool.awaitTermination(5, TimeUnit.SECONDS)) {
@@ -509,41 +511,7 @@ public class MyObservableModel extends ObservableCommonModel {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		ObjectOutputStream oos = null;
-		try {
-			oos = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream("solutionMap.zip")));
-			oos.writeObject(solutionMap);
-			oos.flush();
-			oos.close();
-		} catch (IOException e) {
-			if (properties.isDebug())
-				e.printStackTrace();
-		} finally {
-			try {
-				oos.flush();
-				oos.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 
-		try {
-			oos = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream("mazeMap.zip")));
-			oos.writeObject(mazeMap);
-		} catch (IOException e) {
-
-			if (properties.isDebug())
-				e.printStackTrace();
-		} finally {
-			try {
-				oos.flush();
-				oos.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 	}
 
 	@Override
@@ -756,12 +724,12 @@ public class MyObservableModel extends ObservableCommonModel {
 	public void solve(String name, String algorithm) {
 		if (solutionMap.get(name) == null) {
 			try {
-				Socket theServer = new Socket("localhost", 5400); // TODO add to
+				//Socket theServer = new Socket("localhost", 5400); // TODO add to
 																	// properties
 				System.out.println("connected to server!");
 
-				PrintWriter outToServer = new PrintWriter(theServer.getOutputStream());
-				BufferedReader inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+//				PrintWriter outToServer = new PrintWriter(theServer.getOutputStream());
+//				BufferedReader inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
 				String parse;
 				outToServer.println("solve maze");
 				outToServer.flush();
@@ -789,14 +757,14 @@ public class MyObservableModel extends ObservableCommonModel {
 
 				}
 
-				outToServer.println("exit");
+				//outToServer.println("exit");
 
-				outToServer.flush();
+				//outToServer.flush();
 
-				inFromServer.close();
-				outToServer.close();
+//				inFromServer.close();
+//				outToServer.close();
 
-				theServer.close();
+				//theServer.close();
 
 			} catch (IOException e) {
 				// do nothing
