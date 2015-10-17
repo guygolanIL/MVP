@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Widget;
 
 /**
  * A generic Form. this class getting an object and creating a
@@ -19,13 +20,11 @@ import org.eclipse.swt.widgets.Text;
  * @author Guy Golan && Amit Sandak.
  * @param <T> the generic type
  */
-public class Form<T> {
+public class Form extends BasicWindow{
 
-	/** The new object that created by the form. */
-	protected T created;
-	
-	Shell shell;
-	
+	Object created;
+	//Shell shell;
+	Class format;
 	/**
 	 * Instantiates a new form.
 	 *
@@ -35,22 +34,42 @@ public class Form<T> {
 	 * @param width the width of the shell
 	 * @param height the height of the shell
 	 */
-	public Form(Shell parent, T classObject, String title, int width, int height) {
-
-		shell = new Shell(parent.getDisplay());
-		created = null;
+	public Form(/*Shell parent,*/ Class format, String title) {
+		super(title,500,500);
+		//shell = new Shell(parent.getDisplay());
+		//created = null;
 		shell.setLayout(new GridLayout(2,false));
-		Class<? extends Object> format = classObject.getClass();
+		//Class<? extends Object> format = classObject.getClass();
+		this.format = format;
+		
+	}
+	
+	@Override
+	public void initWidgets(){
 		Label titel = new Label(shell,SWT.CENTER);
 		titel.setText(format.getName());
 		titel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
 		
 		Field[] fields = format.getDeclaredFields();
-		HashMap<String, Text> hm = new HashMap<String, Text>();
+		HashMap<String, Widget> hm = new HashMap<String, Widget>();
 		for (Field field : fields) {
-			new Label(shell,SWT.TOP).setText(field.getName());
-		hm.put(field.getName(), new Text(shell, SWT.BORDER));
+			switch(field.getType().getName())
+			{
+			case "boolean":
+				new Label(shell,SWT.TOP).setText(field.getName());
+				hm.put(field.getName(), new Button(shell, SWT.CHECK));
+				break;
+				default:
+				new Label(shell,SWT.TOP).setText(field.getName());
+		hm.put(field.getName(), new Text(shell, SWT.BORDER));	
+			}
 		}
+		
+		
+//		for (Field field : fields) {
+//			new Label(shell,SWT.TOP).setText(field.getName());
+//			hm.put(field.getName(), new Text(shell, SWT.BORDER));
+//		}
 		
 		Button saveButton=new Button(shell, SWT.PUSH);
 		saveButton.setText("  Save  ");
@@ -60,18 +79,22 @@ public class Form<T> {
 					@Override
 					public void widgetSelected(SelectionEvent arg0) {
 						try {
-							created=(T) format.getConstructor().newInstance();
-					
+							created=format.newInstance();
 							for (Field field : fields) {
-								System.out.println(field.getName());
-								String tmp = hm.get(field.getName()).getText();
 								
-								System.out.println(tmp);
+								try{
+								 boolean tmp = ((Button)hm.get(field.getName())).getSelection();
+								
+								}catch(ClassCastException e)
+								{
+								String tmp =((Text)hm.get(field.getName())).getText();
 								String type = field.getType().getSimpleName();
+								field.setAccessible(true);
 								switch (type)
 								{
 								
 								case "int":
+									
 									field.set(created,Integer.parseInt(tmp));
 									break;
 								case "String":
@@ -79,13 +102,17 @@ public class Form<T> {
 									field.set(created,tmp);
 									break;
 								} 
+								}
+					
+								
 							}
+							shell.dispose();
 						}
 						catch (IllegalArgumentException | IllegalAccessException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 						}
-						catch (InstantiationException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+						catch (InstantiationException | SecurityException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}	
@@ -106,16 +133,17 @@ public class Form<T> {
 	 *
 	 * @return the object
 	 */
-	public T getObject() {
+	public Object getObject() {
 		return created;
 		
 	}
 
-/**
- * Run the form shell
- */
-public void run()
-{
-	shell.open();
-}
+///**
+// * Run the form shell
+// */
+//public void run()
+//{
+//	shell.open();
+//}
+
 }

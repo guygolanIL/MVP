@@ -178,12 +178,11 @@ public class PropertiesWindow {
 
 		
 		
-		Button debugMode = new Button(main, SWT.CHECK);
-		debugMode.setText("debug mode");
+
 		
 		
 		Label threadsNum = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
-		threadsNum.setText("Thread num:");
+		threadsNum.setText("Max threads:");
 
 		Text threadsNumBox = new Text(main, SWT.BORDER);
 		threadsNumBox.setText("" + properties.getMaxThreads());
@@ -204,8 +203,57 @@ public class PropertiesWindow {
 						
 					}
 				});
+		Label title = new Label(main, SWT.TITLE);
+		title.setText("server details:");
+		title.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 6, 1));
 		
-		
+		Label server = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
+		server.setText("server address:");
+		server.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+
+		Text serverBox = new Text(main, SWT.BORDER);
+		serverBox.setText("" + properties.getServerAddress());
+		serverBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		serverBox.setToolTipText("host name or ip address");
+		serverBox.addFocusListener(new FocusListener() {
+					
+					@Override
+					public void focusLost(FocusEvent arg0) {
+						
+						
+					}
+					
+					@Override
+					public void focusGained(FocusEvent arg0) {
+						((Text)arg0.getSource()).setText("");
+						
+					}
+				});
+		Label port = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
+		port.setText("port:");
+		port.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+
+		Text portBox = new Text(main, SWT.BORDER);
+		portBox.setText("" + properties.getPort());
+		portBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		portBox.setToolTipText("port number");
+		portBox.addFocusListener(new FocusListener() {
+					
+					@Override
+					public void focusLost(FocusEvent arg0) {
+						
+						
+					}
+					
+					@Override
+					public void focusGained(FocusEvent arg0) {
+						((Text)arg0.getSource()).setText("");
+						
+					}
+				});
+
+		Button debugMode = new Button(main, SWT.CHECK);
+		debugMode.setText("debug mode");
 		Button saveButton = new Button(main, SWT.PUSH);
 		saveButton.setText(" Save ");
 		saveButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 6, 1));
@@ -231,7 +279,21 @@ public class PropertiesWindow {
 		xTextBox.addModifyListener(checkAxisData);
 		yTextBox.addModifyListener(checkAxisData);
 		zTextBox.addModifyListener(checkAxisData);
-		threadsNumBox.addModifyListener(checkAxisData);
+		threadsNumBox.addModifyListener(checkAxisData);	
+		portBox.addModifyListener(new ModifyListener() {
+
+			@Override
+			public void modifyText(ModifyEvent arg0) {
+				try {
+					if (Integer.parseInt(((Text)arg0.getSource()).getText())>0)
+						saveButton.setEnabled(true);
+					else
+						saveButton.setEnabled(false);
+				} catch (NumberFormatException e) {
+					saveButton.setEnabled(false);
+				}
+			}
+		});
 
 		////////////Save sequence/////////////////////////////////////////////////////////////////////////////
 		saveButton.addSelectionListener(new SelectionListener() {
@@ -247,6 +309,8 @@ public class PropertiesWindow {
 					properties.setDebug(debugMode.getSelection());
 					properties.setGenerateAlgorithm(generateBox.getText());
 					properties.setUi(uiBox.getText());
+					properties.setServerAddress(serverBox.getText());
+					properties.setPort(Integer.parseInt(portBox.getText()));
 					switch (searchBox.getText()) {
 					case ("BFS"):
 						properties.setSolveAlgorithm("BFS");

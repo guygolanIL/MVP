@@ -59,7 +59,7 @@ public class MyObservableModel extends ObservableCommonModel {
 @Override
 	public boolean start() {
 		try {
-			theServer = new Socket("localhost", 5400);// TODO add to properties
+			theServer = new Socket(properties.getServerAddress(), properties.getPort());
 			inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
 			outToServer = new PrintWriter(theServer.getOutputStream());
 			return true;
@@ -120,13 +120,9 @@ public class MyObservableModel extends ObservableCommonModel {
 
 	@Override
 	public void generate(String name, int x, int y, int z) {
-		try {
-			//Socket theServer = new Socket("localhost", 5400); // TODO add to
-																// properties
-			System.out.println("connected to server!");
-
-//			PrintWriter outToServer = new PrintWriter(theServer.getOutputStream());
-//			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+		if(theServer.isConnected()){
+			try {
+			//	name=name+"@"+x+"@"+y+"@"+z;
 			String parse;
 			outToServer.println("generate new maze");
 			outToServer.flush();
@@ -165,6 +161,9 @@ public class MyObservableModel extends ObservableCommonModel {
 		} catch (IOException e) {
 			// do nothing
 		}
+		}else
+			setChanged();
+		notifyObservers("completedTask error Connection Lost\nPlease restart the app");
 
 	}
 
@@ -183,15 +182,9 @@ public class MyObservableModel extends ObservableCommonModel {
 
 	@Override
 	public Maze3d getMaze(String name) {
-//		PrintWriter outToServer = null;
-//		Socket theServer = null;
-//		BufferedReader inFromServer = null;
-		try {
-			//theServer = new Socket("localhost", 5400); // TODO add to properties
-			System.out.println("connected to server!");
 
-//			outToServer = new PrintWriter(theServer.getOutputStream());
-//			inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
+		try {
+			//name=name+"@"+properties.x+"@"+y+"@"+z;
 			String parse;
 			outToServer.println("get maze");
 			outToServer.flush();
@@ -723,6 +716,7 @@ public class MyObservableModel extends ObservableCommonModel {
 	@Override
 	public void solve(String name, String algorithm) {
 		if (solutionMap.get(name) == null) {
+			if(theServer.isConnected()){
 			try {
 				//Socket theServer = new Socket("localhost", 5400); // TODO add to
 																	// properties
@@ -769,6 +763,9 @@ public class MyObservableModel extends ObservableCommonModel {
 			} catch (IOException e) {
 				// do nothing
 			}
+		}else
+			setChanged();
+		notifyObservers("completedTask error Connection Lost\nPlease restart the app");
 		}
 	}
 

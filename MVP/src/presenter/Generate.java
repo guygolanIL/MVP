@@ -13,8 +13,11 @@ public class Generate extends CommonCommand {
 	
 	
 	/**
-	 * Using the presenter to generate a Maze3d according to the parameters.
+	 * Using the presenter to generate a Ma ze3d according to the parameters.
 	 * @param param - the parameters.
+	 */
+	/* (non-Javadoc)
+	 * @see presenter.CommonCommand#doCommand(java.lang.String)
 	 */
 	@Override
 	public void doCommand(String param) {

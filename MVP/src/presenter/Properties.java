@@ -24,6 +24,9 @@ public class Properties implements Serializable {
 
 	protected int maxThreads; // max threads.
 	protected String ui; // which ui to present.
+	
+	protected String serverAddress;
+	protected int port;
 
 	public Properties() {
 		super();
@@ -41,6 +44,9 @@ public class Properties implements Serializable {
 		this.mazeMaxAxisZ = 35;
 		this.maxThreads = 10;
 		this.ui = "Graphic user interface";
+		this.serverAddress = "localhost";
+		this.port=5400;
+
 	}
 									//--------------REGULAR SETTERS AND GETTERS------------------
 	public boolean isDebug() {
@@ -114,6 +120,22 @@ public class Properties implements Serializable {
 
 	public String getUi() {
 		return ui;
+	}
+
+	public String getServerAddress() {
+		return serverAddress;
+	}
+
+	public void setServerAddress(String serverAddress) {
+		this.serverAddress = serverAddress;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
 	}
 
 }
