@@ -17,7 +17,7 @@
    <int>35</int>
   </void>
   <void property="port">
-   <int>5300</int>
+   <int>5400</int>
   </void>
   <void property="serverAddress">
    <string>localhost</string>
