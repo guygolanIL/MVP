@@ -77,46 +77,6 @@ public class MyObservableModel extends ObservableCommonModel {
 
 	}
 
-	// @Override
-	// public void generate(String name, int x, int y, int z) {
-	//
-	// Future<Maze3d> maze = threadPool.submit(new Callable<Maze3d>() {
-	//
-	// @Override
-	// public Maze3d call() throws Exception {
-	// Maze3dGenerator generator;
-	// switch (properties.getGenerateAlgorithm()) {
-	// case ("MyMaze3dGenerator"):
-	// generator = new MyMaze3dGenerator();
-	// break;
-	// case ("SimpleGenerator"):
-	// generator = new SimpleMaze3dGenerator();
-	// break;
-	// default:
-	// generator = new MyMaze3dGenerator();
-	// }
-	// return generator.generate(x, y, z);
-	// }
-	// });
-	//
-	// try {
-	// if (properties.isDebug()) {
-	// System.out.println(maze.get());
-	// }
-	//
-	// mazeMap.put(name, maze.get()); //inserting newly generated maze into the
-	// mazeMap.
-	// charPositionMap.put(name, maze.get().getEntrance()); //updates the
-	// position map with the new starting position.
-	// setChanged();
-	// notifyObservers("completedTask maze generated " + name); //notifying the
-	// presenter that the maze was generated.
-	// } catch (InterruptedException | ExecutionException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	//
-	// }
 
 	@Override
 	public void generate(String name, int x, int y, int z) {
