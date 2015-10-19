@@ -608,7 +608,7 @@ public class MyObservableModel extends ObservableCommonModel {
 
 	@Override
 	public void solve(String name, String algorithm) {
-		if (solutionMap.get(name) == null) {
+		if (solutionMap.get(mazeMap.get(name)) == null) {
 			if(theServer.isConnected()){
 			try {
 				//Socket theServer = new Socket("localhost", 5400); // TODO add to
