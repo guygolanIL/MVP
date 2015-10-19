@@ -424,7 +424,7 @@ public class MyObservableModel extends ObservableCommonModel {
 
 	@Override
 	public Solution<Position> getSolution(String mazeName) {
-		Solution<Position> tmp = solutionMap.get(mazeName);
+		Solution<Position> tmp = solutionMap.get(mazeMap.get(mazeName));
 
 		if (tmp != null) {
 			return (tmp);
@@ -604,74 +604,7 @@ public class MyObservableModel extends ObservableCommonModel {
 		}
 	}
 
-	// @Override
-	// public void solve(String name, String algorithm) {
-	// try {
-	// Future<Solution<Position>> solution = threadPool.submit((new
-	// Callable<Solution<Position>>() {
-	//
-	// @Override
-	// public Solution<Position> call() throws IllegalArgumentException {
-	// Maze3d tmpMaze = mazeMap.get(name);
-	// Searcher<Position> alg;
-	// if (tmpMaze != null) {
-	//
-	// switch (algorithm) // generating a Searcher according to
-	// // the parameters.
-	// {
-	// case "BFS":
-	// alg = new BFS<Position>();
-	// break;
-	// case "AstarManhattan":
-	// alg = new AStar<Position>(
-	// new MazeManhattanDistance(new State<Position>(tmpMaze.getExit())));
-	// break;
-	// case "AstarAirDistance":
-	// alg = new AStar<Position>(new MazeAirDistance(new
-	// State<Position>(tmpMaze.getExit())));
-	// break;
-	//
-	// default:
-	// throw new IllegalArgumentException("invalid search algorithm");
-	//
-	// }
-	// } else
-	// throw new IllegalArgumentException("unavailable maze");
-	//
-	// return alg.search(new MazeDomain(tmpMaze));
-	// }
-	// }));
-	//
-	// solutionMap.put(name, solution.get()); // inserting the Solution
-	// // into the solution map.
-	//
-	// } catch (IllegalArgumentException t) { //catching the exception and
-	// notifying the presenter accordingly.
-	// setChanged();
-	// switch (t.getMessage()) {
-	// case ("invalid search algorithm"):
-	// notifyObservers("completedTask error " + algorithm+ " is not a valid
-	// algorithm!\nvalid algorithms are: BFS, AstarManhattan,
-	// AstarAirDistance.");
-	// case ("unavailable maze"):
-	// notifyObservers("completedTask error '" + name + "' is unavailable
-	// maze");
-	// default:
-	// notifyObservers("completedTask error general error!!");
-	// }
-	//
-	// } catch (InterruptedException e) {
-	// if (properties.isDebug()) {
-	// System.out.println("solve method interupted:");
-	// e.printStackTrace();
-	// }
-	// } catch (ExecutionException e) {
-	// if (properties.isDebug()) {
-	// System.out.println("solve method general error:");
-	// e.printStackTrace();
-	// }
-	// }
-	// }
+	
 
 	@Override
 	public void solve(String name, String algorithm) {
@@ -707,7 +640,7 @@ public class MyObservableModel extends ObservableCommonModel {
 
 					Solution<Position> solution = byteToSolution(buffer, i);
 					System.out.println(solution.toString());
-					solutionMap.put(name, solution);
+					solutionMap.put(mazeMap.get(name), solution);
 
 				}
 
@@ -742,7 +675,7 @@ public class MyObservableModel extends ObservableCommonModel {
 	@Override
 	public void solution(String name, String algorithm) { // this solution uses a timer and a timertask to move the character to the end of the maze.
 		solve(name, algorithm);
-		Solution<Position> course = solutionMap.get(name);
+		Solution<Position> course = solutionMap.get(mazeMap.get(name));
 		System.out.println(course.toString());
 
 		Timer timer = new Timer();
