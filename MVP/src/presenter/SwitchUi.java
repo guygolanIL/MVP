@@ -23,7 +23,8 @@ public class SwitchUi extends CommonCommand {
 
 	@Override
 	public void doCommand(String param) {
-		ObservableCommonView view = null;
+			presenter.closeView();
+		ObservableCommonView view = null;	
 		switch (presenter.getProperties().getUi())
 		{
 			case "Command line":
@@ -38,7 +39,6 @@ public class SwitchUi extends CommonCommand {
 		
 
 		view.addObserver(presenter);
-		presenter.closeView();
 		presenter.setView(view);		//switching view DURING runtime.
 		view.start();
 

@@ -103,37 +103,37 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 					if (properties.isDebug() == true)
 						System.out.println("up key pressed");
 					setChanged();
-					notifyObservers("movementRequest UP " + mainWindow.mazeProperties.name);
+					notifyObservers("movementRequest UP " + mainWindow.mazeProperties.getName());
 					break;
 				case SWT.ARROW_DOWN:
 					if (properties.isDebug() == true)
 						System.out.println("down key pressed");
 					setChanged();
-					notifyObservers("movementRequest DOWN "+ mainWindow.mazeProperties.name);
+					notifyObservers("movementRequest DOWN "+ mainWindow.mazeProperties.getName());
 					break;
 				case SWT.ARROW_LEFT:
 					if (properties.isDebug() == true)
 						System.out.println("left key pressed");
 					setChanged();
-					notifyObservers("movementRequest LEFT "+ mainWindow.mazeProperties.name);
+					notifyObservers("movementRequest LEFT "+ mainWindow.mazeProperties.getName());
 					break;
 				case SWT.ARROW_RIGHT:
 					if (properties.isDebug() == true)
 						System.out.println("right key pressed");
 					setChanged();
-					notifyObservers("movementRequest RIGHT "+ mainWindow.mazeProperties.name);
+					notifyObservers("movementRequest RIGHT "+ mainWindow.mazeProperties.getName());
 					break;
 				case SWT.PAGE_UP:
 					if (properties.isDebug() == true)
 						System.out.println("lvl up key pressed");
 					setChanged();
-					notifyObservers("movementRequest LVLUP "+ mainWindow.mazeProperties.name);
+					notifyObservers("movementRequest LVLUP "+ mainWindow.mazeProperties.getName());
 					break;
 				case SWT.PAGE_DOWN:
 					if (properties.isDebug() == true)
 						System.out.println("lvl down key pressed");
 					setChanged();
-					notifyObservers("movementRequest LVLDOWN "+ mainWindow.mazeProperties.name);
+					notifyObservers("movementRequest LVLDOWN "+ mainWindow.mazeProperties.getName());
 					break;
 				}
 				
