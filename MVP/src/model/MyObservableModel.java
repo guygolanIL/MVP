@@ -286,6 +286,7 @@ public class MyObservableModel extends ObservableCommonModel {
 	
 	public void clue(String name, String algorithm) {
 		solve(name, algorithm);
+		
 		setChanged();
 		notifyObservers("completedTask clue " + name);
 
@@ -460,6 +461,7 @@ public class MyObservableModel extends ObservableCommonModel {
 				parse = inFromServer.readLine();
 				outToServer.println("the algorithm is: " + algorithm);
 				outToServer.flush();
+				
 				parse = inFromServer.readLine();
 				
 				if (parse.equals("sending")) { 
@@ -471,7 +473,9 @@ public class MyObservableModel extends ObservableCommonModel {
 						buffer[i++] = (byte) tmpByte;
 
 					Solution<Position> solution = byteToSolution(buffer, i);
-					System.out.println(solution.toString());
+					if(this.properties.isDebug()){
+						System.out.println(solution.toString());
+					}
 					solutionMap.put(mazeMap.get(name), solution);
 
 				}
