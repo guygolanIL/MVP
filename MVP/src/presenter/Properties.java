@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 //import org.hibernate.annotations.Entity;
 
-@SuppressWarnings({ "serial", "deprecation" })
+@SuppressWarnings({ "serial" })
 /**
  * Properties for the game system.
  * 

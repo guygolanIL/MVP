@@ -208,49 +208,27 @@ public class MyObservableModel extends ObservableCommonModel {
 				Maze3d tmpMaze = new Maze3d(buffer);
 				mazeMap.put(name, tmpMaze);
 				setChanged();
-				notifyObservers("completedTask load " + name); // notifying the
-																// presenter
-																// that the load
-																// was
-																// completed.
+				// notifying the presenter that the load was completed.
+				notifyObservers("completedTask load " + name); 
 
 				tmpDecompressor.close(); // closing resources.
-				charPositionMap.put(name, tmpMaze.getEntrance()); // updates the
-																	// charpositionMap
-																	// for the
-																	// entrance
-																	// of the
-																	// loaded
-																	// maze.
+				// updates the charpositionMap for the entrance of the loaded maze.
+				charPositionMap.put(name, tmpMaze.getEntrance()); 
 			} else {
 				setChanged();
-				notifyObservers("completedTask error The requsted maze is too big!"); // notifying
-																						// the
-																						// presenter
-																						// that
-																						// an
-																						// error
-																						// has
-																						// occurred.
+				// notifying the presenter that an error has occurred.
+				notifyObservers("completedTask error The requsted maze is too big!"); 
 
 			}
 		} catch (FileNotFoundException e) {
 			setChanged();
-			notifyObservers("completedTask error wrong file path."); // notifying
-																		// the
-																		// presenter
-																		// that
-																		// an
-																		// error
-																		// has
-																		// occurred.
+			// notifying the presenter that an error has occurred.
+			notifyObservers("completedTask error wrong file path."); 
 
 		} catch (IOException e) {
 			setChanged();
-			notifyObservers("completedTask error IO error."); // notifying the
-																// presenter
-																// that an error
-																// has occurred.
+			// notifying the presenter that an error has occurred.
+			notifyObservers("completedTask error IO error."); 
 
 		}
 
@@ -263,21 +241,12 @@ public class MyObservableModel extends ObservableCommonModel {
 		if (tempMaze != null) {
 			int size = tempMaze.getxAxis() * tempMaze.getyAxis() * tempMaze.getzAxis() + 9;
 			setChanged();
-			notifyObservers("completedTask mazeSize " + size); // notifying the
-																// presenter
-																// that the
-																// mazeSize was
-																// completed.
+			// notifying the presenter that an error has occurred.
+			notifyObservers("completedTask mazeSize " + size); 
 		} else {
 			setChanged();
-			notifyObservers("completedTask error '" + name + "' is unavailable maze"); // notifying
-																						// the
-																						// presenter
-																						// that
-																						// an
-																						// error
-																						// has
-																						// occurred.
+			// notifying the presenter that an error has occurred.
+			notifyObservers("completedTask error '" + name + "' is unavailable maze"); 
 		}
 
 	}
@@ -293,22 +262,12 @@ public class MyObservableModel extends ObservableCommonModel {
 				compress.write(tmpMaze.toByteArray()); // trying to compress the
 														// maze into the buffer.
 				setChanged();
-				notifyObservers("completedTask fileSize " + name + " " + buffer.size()); // notifying
-																							// the
-																							// presenter
-																							// that
-																							// the
-																							// mazeSize
-																							// was
-																							// completed.
+				// notifying the presenter that an error has occurred.
+				notifyObservers("completedTask fileSize " + name + " " + buffer.size()); 
 			} catch (IOException e) {
 				setChanged();
-				notifyObservers("completedTask error IO error."); // notifying
-																	// the
-																	// presenter
-																	// that an
-																	// error has
-																	// occurred.
+				// notifying the presenter that an error has occurred.
+				notifyObservers("completedTask error IO error."); 
 			} finally {
 				try {
 					compress.close(); // closing resources.
@@ -389,13 +348,8 @@ public class MyObservableModel extends ObservableCommonModel {
 				charPositionMap.put(name, current); // updates the new character
 													// position.
 				setChanged();
-				notifyObservers("completedTask movement " + name); // notifying
-																	// the
-																	// presenter
-																	// that the
-																	// movement
-																	// was
-																	// completed.
+				// notifying the presenter that the movement was completed.
+				notifyObservers("completedTask movement " + name); 
 			}
 		}
 	}
@@ -411,13 +365,8 @@ public class MyObservableModel extends ObservableCommonModel {
 				charPositionMap.put(name, current); // updates the new character
 													// position.
 				setChanged();
-				notifyObservers("completedTask movement " + name); // notifying
-																	// the
-																	// presenter
-																	// that the
-																	// movement
-																	// was
-																	// completed.
+				// notifying the presenter that the movement was completed.
+				notifyObservers("completedTask movement " + name); 
 			}
 		}
 	}
@@ -432,13 +381,8 @@ public class MyObservableModel extends ObservableCommonModel {
 				charPositionMap.put(name, current); // updates the new character
 													// position.
 				setChanged();
-				notifyObservers("completedTask movement " + name); // notifying
-																	// the
-																	// presenter
-																	// that the
-																	// movement
-																	// was
-																	// completed.
+				// notifying the presenter that the movement was completed.
+				notifyObservers("completedTask movement " + name); 
 			}
 		}
 	}
@@ -453,13 +397,8 @@ public class MyObservableModel extends ObservableCommonModel {
 				charPositionMap.put(name, current); // updates the new character
 													// position.
 				setChanged();
-				notifyObservers("completedTask movement " + name); // notifying
-																	// the
-																	// presenter
-																	// that the
-																	// movement
-																	// was
-																	// completed.
+				// notifying the presenter that the movement was completed.
+				notifyObservers("completedTask movement " + name); 
 			}
 		}
 	}
@@ -477,13 +416,8 @@ public class MyObservableModel extends ObservableCommonModel {
 													// position.
 
 				setChanged();
-				notifyObservers("completedTask movement " + name); // notifying
-																	// the
-																	// presenter
-																	// that the
-																	// movement
-																	// was
-																	// completed.
+				// notifying the presenter that the movement was completed.
+				notifyObservers("completedTask movement " + name); 
 
 			}
 		}
@@ -500,13 +434,8 @@ public class MyObservableModel extends ObservableCommonModel {
 				charPositionMap.put(name, current); // updates the new character
 													// position.
 				setChanged();
-				notifyObservers("completedTask movement " + name); // notifying
-																	// the
-																	// presenter
-																	// that the
-																	// movement
-																	// was
-																	// completed.
+				// notifying the presenter that the movement was completed.
+				notifyObservers("completedTask movement " + name); 
 			}
 		}
 	}
@@ -548,9 +477,7 @@ public class MyObservableModel extends ObservableCommonModel {
 				}
 
 				
-			} catch (IOException e) {
-				// do nothing
-			}
+			} catch (IOException e) {}
 		}else
 			setChanged();
 			notifyObservers("completedTask error Connection Lost\nPlease restart the app");

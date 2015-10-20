@@ -18,7 +18,7 @@ import presenter.Properties;
 public abstract class ObservableCommonModel extends Observable implements Model{
 	
 	protected HashMap<String, Maze3d> mazeMap;						//a name -->> Maze map.
-	protected HashMap<Maze3d, Solution<Position>> solutionMap;		//a name -->> solution map.
+	protected HashMap<Maze3d, Solution<Position>> solutionMap;		//a Maze3d -->> solution map.
 	protected HashMap<String, Position> charPositionMap;			//a name -->> character position map.
 	protected ExecutorService threadPool;					//thread pool to manage all important threads.
 	protected Properties properties;						//system properties.

@@ -49,6 +49,10 @@ public class Presenter implements Observer {
 		
 	}
 
+	/**
+	 * this method starting the model first and checks if model.start() has returned true value,
+	 * if so it can continue to start the view,if not the view wont start.
+	 */
 	public void start()
 	{
 		if(model.start())
@@ -57,7 +61,7 @@ public class Presenter implements Observer {
 	
 	@Override
 	public void update(Observable comp, Object id) {
-		String identifier = ((String)id); //TODO check type
+		String identifier = ((String)id); 
 		Command c = commandMap.get(identifier.split(" ")[0]);
 		
 		if(c != null)
@@ -120,6 +124,9 @@ public class Presenter implements Observer {
 		
 	}
 
+	/**
+	 * closing the view.
+	 */
 	public void closeView() {
 		view.exit();
 		

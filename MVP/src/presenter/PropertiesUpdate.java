@@ -8,7 +8,8 @@ import java.io.FileNotFoundException;
 
 /**
  * Defines what the Command PropertiesUpdate should do.
- * @author Guy Golan & Amit Sandak.
+ * used to initiallize the properties object of the system from a file at the start of the program.
+ * @author Guy Golan && Amit Sandak.
  *
  */
 public class PropertiesUpdate extends CommonCommand {

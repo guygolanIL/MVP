@@ -11,7 +11,7 @@ import view.ObservableCommonView;
 
 /**
  * Defines what the Command SwitchUi should do.
- * @author Guy Golan & Amit Sandak.
+ * @author Guy Golan && Amit Sandak.
  *
  */
 public class SwitchUi extends CommonCommand {
@@ -23,7 +23,7 @@ public class SwitchUi extends CommonCommand {
 
 	@Override
 	public void doCommand(String param) {
-			presenter.closeView();
+		presenter.closeView();
 		ObservableCommonView view = null;	
 		switch (presenter.getProperties().getUi())
 		{
