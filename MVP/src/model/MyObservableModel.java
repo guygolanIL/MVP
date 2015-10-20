@@ -60,50 +60,42 @@ public class MyObservableModel extends ObservableCommonModel {
 
 	@Override
 	public void generate(String name, int x, int y, int z) {
-		if(theServer.isConnected()){
-			try {
-			//	name=name+"@"+x+"@"+y+"@"+z;
-			String parse;
-			outToServer.println("generate new maze");
-			outToServer.flush();
-
-			parse = inFromServer.readLine();
-			outToServer.println("the name is: " + name);
-			outToServer.flush();
-			parse = inFromServer.readLine();
-			outToServer.println("the Axis x is: " + x);
-			outToServer.flush();
-			parse = inFromServer.readLine();
-			outToServer.println("the Axis y is: " + y);
-			outToServer.flush();
-			parse = inFromServer.readLine();
-			outToServer.println("the Axis z is: " + z);
-			outToServer.flush();
-			parse = inFromServer.readLine();
-			setChanged();
-			notifyObservers("completedTask maze generated " + name);
-			// byte[] buffer = new
-			// byte[properties.getMazeMaxAxisX()*properties.getMazeMaxAxisY()*properties.getMazeMaxAxisZ()+3*3];
-			// int mazeByte;
-			// int i =0;
-			// while((mazeByte=in.read())==(-1))
-			// buffer[i++]=(byte) mazeByte;
-			//
-
-			//outToServer.println("exit");
-			//outToServer.flush();
-
-//			inFromServer.close();
-//			outToServer.close();
-
-			//theServer.close();
-
-		} catch (IOException e) {
-			// do nothing
+		Maze3d maze = mazeMap.get(name);
+		
+		if(maze==null)
+		{
+			if(theServer.isConnected()){
+				try {
+				
+				String parse;
+				outToServer.println("generate new maze");
+				outToServer.flush();
+	
+				parse = inFromServer.readLine();
+				outToServer.println("the name is: " + name);
+				outToServer.flush();
+				parse = inFromServer.readLine();
+				outToServer.println("the Axis x is: " + x);
+				outToServer.flush();
+				parse = inFromServer.readLine();
+				outToServer.println("the Axis y is: " + y);
+				outToServer.flush();
+				parse = inFromServer.readLine();
+				outToServer.println("the Axis z is: " + z);
+				outToServer.flush();
+				parse = inFromServer.readLine();
+				
+				
+	
+			} catch (IOException e) {
+				// do nothing
+			}
+			}else
+				setChanged();
+			notifyObservers("completedTask error Connection Lost\nPlease restart the app");
 		}
-		}else
-			setChanged();
-		notifyObservers("completedTask error Connection Lost\nPlease restart the app");
+		setChanged();
+		notifyObservers("completedTask maze generated " + name);
 
 	}
 
@@ -591,12 +583,10 @@ public class MyObservableModel extends ObservableCommonModel {
 		if (solutionMap.get(mazeMap.get(name)) == null) {
 			if(theServer.isConnected()){
 			try {
-				//Socket theServer = new Socket("localhost", 5400); // TODO add to
-																	// properties
-				System.out.println("connected to server!");
+				
+				if(properties.isDebug())
+					System.out.println("connected to server!");
 
-//				PrintWriter outToServer = new PrintWriter(theServer.getOutputStream());
-//				BufferedReader inFromServer = new BufferedReader(new InputStreamReader(theServer.getInputStream()));
 				String parse;
 				outToServer.println("solve maze");
 				outToServer.flush();
@@ -607,13 +597,11 @@ public class MyObservableModel extends ObservableCommonModel {
 				outToServer.println("the algorithm is: " + algorithm);
 				outToServer.flush();
 				parse = inFromServer.readLine();
-				// outToServer.println("get solution");
-				// outToServer.flush();
-				// parse = in.readLine();
-				if (parse.equals("sending")) { // TODO add else for error
+				
+				if (parse.equals("sending")) { 
 					byte[] buffer = new byte[properties.getMazeMaxAxisX() * properties.getMazeMaxAxisY()* properties.getMazeMaxAxisZ()];
-					int tmpByte;
-					int i = 0;
+				int tmpByte;
+				int i = 0;
 
 					while ((tmpByte = inFromServer.read()) != (127))
 						buffer[i++] = (byte) tmpByte;
@@ -624,22 +612,15 @@ public class MyObservableModel extends ObservableCommonModel {
 
 				}
 
-				//outToServer.println("exit");
-
-				//outToServer.flush();
-
-//				inFromServer.close();
-//				outToServer.close();
-
-				//theServer.close();
-
+				
 			} catch (IOException e) {
 				// do nothing
 			}
 		}else
 			setChanged();
-		notifyObservers("completedTask error Connection Lost\nPlease restart the app");
+			notifyObservers("completedTask error Connection Lost\nPlease restart the app");
 		}
+		
 	}
 
 	private Solution<Position> byteToSolution(byte[] buffer, int length) {
