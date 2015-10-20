@@ -46,10 +46,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 			}
 			
 			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// nothing
-				
-			}
+			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
 		
 	////////////////////////  the selection listener that sets the behavior of - solve request - in this specific MVP  ////////////
@@ -63,10 +60,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 			}
 			
 			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// nothing
-				
-			}
+			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
 			
 	////////////////////////  the selection listener that sets the behavior of - properties update request - in this specific MVP  ////////////
@@ -80,20 +74,13 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 				}
 				
 				@Override
-				public void widgetDefaultSelected(SelectionEvent arg0) {
-					// nothing
-		
-		
-				}
+				public void widgetDefaultSelected(SelectionEvent arg0) {}
 			});
 ////////////////////////  the key listener that sets the behavior of - movements requests - in this specific MVP  ////////////
 		mainWindow.setKeyListener(new KeyListener() {
 			
 			@Override
-			public void keyReleased(KeyEvent arg0) {
-				// nothing
-				
-			}
+			public void keyReleased(KeyEvent arg0) {}
 			
 			@Override
 			public void keyPressed(KeyEvent key) {
@@ -164,10 +151,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 			 }
 			
 			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// nothing
-				
-			}
+			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
 
 ////////////////////////  the selection listener that sets the behavior of - maze save request - in this specific MVP  ////////////
@@ -177,15 +161,11 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 			public void widgetSelected(SelectionEvent arg0) {
 				setChanged();
 				notifyObservers("save maze "+ mainWindow.mazeProperties.getName()+" " + mainWindow.getMazePath());
-				
-				
+								
 			}
 			
 			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// nothing
-				
-			}
+			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
 ////////////////////////  the selection listener that sets the behavior of - maze load request - in this specific MVP  ////////////		
 		mainWindow.setLoadListener(new SelectionListener() {
@@ -199,10 +179,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 			}
 			
 			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// nothing
-				
-			}
+			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
 	}
 
@@ -210,10 +187,7 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 	 * @see view.View#display(java.lang.String[])
 	 */
 	@Override
-	public void display(String[] strings) {
-		// nothing
-
-	}
+	public void display(String[] strings) {}
 
 	/* (non-Javadoc)
 	 * @see view.View#display(java.lang.String)
@@ -291,28 +265,19 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 	 * @see view.View#displayCrossSectionByX(int, java.lang.String)
 	 */
 	@Override
-	public void displayCrossSectionByX(int parseInt, String string) {
-		// nothing
-		
-	}
+	public void displayCrossSectionByX(int parseInt, String string) {}
 
 	/* (non-Javadoc)
 	 * @see view.View#displayCrossSectionByY(int, java.lang.String)
 	 */
 	@Override
-	public void displayCrossSectionByY(int parseInt, String string) {
-		// nothing
-		
-	}
+	public void displayCrossSectionByY(int parseInt, String string) {}
 
 	/* (non-Javadoc)
 	 * @see view.View#displayCrossSectionByZ(int, java.lang.String)
 	 */
 	@Override
-	public void displayCrossSectionByZ(int parseInt, String string) {
-		// nothing
-		
-	}
+	public void displayCrossSectionByZ(int parseInt, String string) {}
 
 	/* (non-Javadoc)
 	 * @see view.View#setProperties(presenter.Properties)
@@ -327,7 +292,6 @@ public class MyObservableGuiView extends ObservableCommonGuiView {
 		}
 		else
 			this.properties = prop;
-		
 		
 	}
 

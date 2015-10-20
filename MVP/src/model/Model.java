@@ -39,12 +39,13 @@ public interface Model {
 	 * @param name - Maze3d name.
 	 */
 	void getCrossSectionByZ(int index, String name);
+	
 	/**
 	 * Save a Maze3d to the given file.
 	 * @param name - Maze3d name.
 	 * @param fileName - file name.
 	 */
-	void save(String name, String fileName);
+	public void save(String name, String fileName);
 
 	/**
 	 * Load a compressed Maze3d from the given file name.
@@ -147,5 +148,10 @@ public interface Model {
 	 * @param algorithm - name of the searching algorithm.
 	 */
 	void solution(String name, String algorithm);
+	
+	/**
+	 * starts the model component.
+	 * @return
+	 */
 	boolean start();
 }

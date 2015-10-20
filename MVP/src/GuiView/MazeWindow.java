@@ -12,13 +12,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-
 import abstracts.MazeDisplayer;
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
@@ -123,8 +119,7 @@ public class MazeWindow extends BasicWindow{
 		Image image= new Image(display,"resources/background.jpg");
 		shell.setBackgroundImage(image);
 		shell.setBackgroundMode(SWT.INHERIT_FORCE);
-		//shell.setCursor(new Cursor(shell.getDisplay(), new ImageData("resources/Cursor_Greylight.png").scaledTo(27, 25), 16, 0));
-	
+		
 		
 		Menu menuBar = new Menu(shell, SWT.BAR);			//the main window menu bar.
 		MenuItem fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);		//menu bar header button.
@@ -167,10 +162,7 @@ public class MazeWindow extends BasicWindow{
 			}
 			
 			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// do nothing
-				
-			}
+			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
 		
 		
@@ -185,10 +177,7 @@ public class MazeWindow extends BasicWindow{
 			}
 			
 			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				//  do nothing
-				
-			}
+			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
 		
 		//window menu Maze header.
@@ -198,49 +187,11 @@ public class MazeWindow extends BasicWindow{
 		Menu MazeMenu = new Menu(shell, SWT.DROP_DOWN);						
 		MazeMenuHeader.setMenu(MazeMenu);
 
-		MenuItem mazePropItem = new MenuItem(MazeMenu, SWT.PUSH);			
-		mazePropItem.setText("Maze properties");
-		mazePropItem.addSelectionListener(new SelectionListener() {
-				
-			@Override
-			public void widgetSelected(SelectionEvent arg0) {
-				Shell mazeProp = new Shell(shell);
-				mazeProp.setText("Maze Properties");
-				mazeProp.setSize(130,120);
-				mazeProp.setLayout(new GridLayout(6, false));
-				Label xTitle = new Label(mazeProp, SWT.COLOR_WIDGET_DARK_SHADOW);
-				xTitle.setText("Dimensions: ");
-				xTitle.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 6, 1));	
-				Label xxTitle = new Label(mazeProp, SWT.COLOR_WIDGET_DARK_SHADOW);
-				xxTitle.setText("X");
-				Text xTextBox =	new Text(mazeProp, SWT.BORDER);
-				xTextBox.setText("  ");
-				Label yyTitle = new Label(mazeProp, SWT.COLOR_WIDGET_DARK_SHADOW);
-				yyTitle.setText("Y");
-				Text yTextBox =	new Text(mazeProp, SWT.BORDER);
-				yTextBox.setText("  ");
-				Label ZZTitle = new Label(mazeProp, SWT.COLOR_WIDGET_DARK_SHADOW);
-				ZZTitle.setText("Z");
-				Text zTextBox =	new Text(mazeProp, SWT.BORDER);
-				zTextBox.setText("  ");
-				Button saveButton =  new Button(mazeProp, SWT.PUSH);
-				saveButton.setText(" Save ");
-				saveButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 6, 1));	
-					
-				mazeProp.open();
-			}
-				
-			@Override				
-			public void widgetDefaultSelected(SelectionEvent arg0) {}
-			
-		});
 		
 		// save maze button
 		MenuItem mazeSave = new MenuItem(MazeMenu, SWT.PUSH);			
 		mazeSave.setText("Save maze");
 		mazeSave.addSelectionListener(new SelectionListener() {
-			
-			
 
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
@@ -254,10 +205,7 @@ public class MazeWindow extends BasicWindow{
 			}
 			
 			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// do nothing
-				
-			}
+			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
 		
 		//load maze button
@@ -277,10 +225,7 @@ public class MazeWindow extends BasicWindow{
 			}
 			
 			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// do nothing
-				
-			}
+			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
 		    
 		shell.setMenuBar(menuBar);

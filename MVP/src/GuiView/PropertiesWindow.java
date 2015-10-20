@@ -58,6 +58,7 @@ public class PropertiesWindow {
 		Label uiTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
 		uiTitle.setText("UI: ");
 		uiTitle.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 6, 1));
+		
 		Combo uiBox = new Combo(main, SWT.DROP_DOWN);
 		uiBox.setItems(new String[] { "Command line", "Graphic user interface" });
 		if (properties.getUi().equals("Command line"))
@@ -85,10 +86,7 @@ public class PropertiesWindow {
 		xTextBox.addFocusListener(new FocusListener() {
 			
 			@Override
-			public void focusLost(FocusEvent arg0) {
-				
-				
-			}
+			public void focusLost(FocusEvent arg0) {}
 			
 			@Override
 			public void focusGained(FocusEvent arg0) {
@@ -108,10 +106,7 @@ public class PropertiesWindow {
 		yTextBox.addFocusListener(new FocusListener() {
 					
 					@Override
-					public void focusLost(FocusEvent arg0) {
-						
-						
-					}
+					public void focusLost(FocusEvent arg0) {}
 					
 					@Override
 					public void focusGained(FocusEvent arg0) {
@@ -131,10 +126,7 @@ public class PropertiesWindow {
 		zTextBox.addFocusListener(new FocusListener() {
 					
 					@Override
-					public void focusLost(FocusEvent arg0) {
-						
-						
-					}
+					public void focusLost(FocusEvent arg0) {}
 					
 					@Override
 					public void focusGained(FocusEvent arg0) {
@@ -146,6 +138,7 @@ public class PropertiesWindow {
 		Label generateTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
 		generateTitle.setText("Generate Algorithm: ");
 		generateTitle.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 6, 1));
+		
 		Combo generateBox = new Combo(main, SWT.DROP_DOWN);
 		generateBox.setItems(new String[] { "SimpleGenerator", "MyMaze3dGenerator" });
 		if (properties.getGenerateAlgorithm().equals("MyMaze3dGenerator"))
@@ -160,6 +153,7 @@ public class PropertiesWindow {
 		Label searchTitle = new Label(main, SWT.COLOR_WIDGET_DARK_SHADOW);
 		searchTitle.setText("Solving Algorithm: ");
 		searchTitle.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 6, 1));
+		
 		Combo searchBox = new Combo(main, SWT.DROP_DOWN);
 		searchBox.setItems(new String[] { "BFS", "A* manhattan", "A* air distance" });
 		switch (properties.getSolveAlgorithm()) {
@@ -192,10 +186,7 @@ public class PropertiesWindow {
 		threadsNumBox.addFocusListener(new FocusListener() {
 					
 					@Override
-					public void focusLost(FocusEvent arg0) {
-						
-						
-					}
+					public void focusLost(FocusEvent arg0) {}
 					
 					@Override
 					public void focusGained(FocusEvent arg0) {
@@ -218,10 +209,7 @@ public class PropertiesWindow {
 		serverBox.addFocusListener(new FocusListener() {
 					
 					@Override
-					public void focusLost(FocusEvent arg0) {
-						
-						
-					}
+					public void focusLost(FocusEvent arg0) {}
 					
 					@Override
 					public void focusGained(FocusEvent arg0) {
@@ -240,10 +228,7 @@ public class PropertiesWindow {
 		portBox.addFocusListener(new FocusListener() {
 					
 					@Override
-					public void focusLost(FocusEvent arg0) {
-						
-						
-					}
+					public void focusLost(FocusEvent arg0) {}
 					
 					@Override
 					public void focusGained(FocusEvent arg0) {
@@ -254,6 +239,7 @@ public class PropertiesWindow {
 
 		Button debugMode = new Button(main, SWT.CHECK);
 		debugMode.setText("debug mode");
+		
 		Button saveButton = new Button(main, SWT.PUSH);
 		saveButton.setText(" Save ");
 		saveButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 6, 1));
@@ -356,10 +342,7 @@ public class PropertiesWindow {
 			}
 
 			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// nothing
-
-			}
+			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
 	
 		main.pack();

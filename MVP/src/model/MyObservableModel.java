@@ -34,7 +34,7 @@ public class MyObservableModel extends ObservableCommonModel {
 	Socket theServer ;
 	BufferedReader inFromServer;
 	PrintWriter outToServer;
-	@SuppressWarnings("unchecked")
+	
 	
 @Override
 	public boolean start() {
@@ -48,10 +48,7 @@ public class MyObservableModel extends ObservableCommonModel {
 			notifyObservers("completedTask error Failed to connect to server");
 			return false;
 			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (IOException e) {}
 		return false; 
 
 
@@ -67,6 +64,7 @@ public class MyObservableModel extends ObservableCommonModel {
 			if(theServer.isConnected()){
 				try {
 				
+				@SuppressWarnings("unused")
 				String parse;
 				outToServer.println("generate new maze");
 				outToServer.flush();
@@ -87,36 +85,22 @@ public class MyObservableModel extends ObservableCommonModel {
 				
 				
 	
-			} catch (IOException e) {
-				// do nothing
-			}
+			} catch (IOException e) {}
 			}else
 				setChanged();
-			notifyObservers("completedTask error Connection Lost\nPlease restart the app");
+				notifyObservers("completedTask error Connection Lost\nPlease restart the app");
 		}
 		setChanged();
 		notifyObservers("completedTask maze generated " + name);
 
 	}
 
-	//
-	// @Override
-	// public Maze3d getMaze(String name) {
-	// Maze3d temp = mazeMap.get(name);
-	//
-	// if (temp != null) {
-	// return temp;
-	// } else {
-	// // return("Unavailable maze!");
-	// return null;
-	// }
-	// }
 
 	@Override
 	public Maze3d getMaze(String name) {
 
 		try {
-			//name=name+"@"+properties.x+"@"+y+"@"+z;
+			
 			String parse;
 			outToServer.println("get maze");
 			outToServer.flush();
@@ -125,14 +109,14 @@ public class MyObservableModel extends ObservableCommonModel {
 			outToServer.println("the name is: " + name + "");
 			outToServer.flush();
 			parse = inFromServer.readLine();
-			if (parse.equals("sending")) { // add else for error
-				byte[] buffer = new byte[properties.getMazeMaxAxisX() * properties.getMazeMaxAxisY()
-						* properties.getMazeMaxAxisZ() + 3 * 3];
+			if (parse.equals("sending")) { 
+				byte[] buffer = new byte[properties.getMazeMaxAxisX() * properties.getMazeMaxAxisY()* properties.getMazeMaxAxisZ() + 3 * 3];
 				int mazeByte;
 				int i = 0;
 
 				while ((mazeByte = inFromServer.read()) != (127)) {
-					System.out.println(mazeByte);
+					if(this.properties.isDebug())
+						System.out.println(mazeByte);
 
 					buffer[i++] = (byte) mazeByte;
 				}
@@ -149,45 +133,18 @@ public class MyObservableModel extends ObservableCommonModel {
 			return null;
 		} catch (IOException e) {
 			return null;
-		} finally {
-		}
+		} 
 
 	}
 
 	@Override
-	public void getCrossSectionByX(int index, String name) {
-		Maze3d tmpMaze = mazeMap.get(name);
-
-		if (tmpMaze != null) {
-			// controller.display(arrIntToString(tmpMaze.getCrossSectionByX(index)));
-		} else {
-			// controller.display("Unavailable maze!");
-		}
-	}
+	public void getCrossSectionByX(int index, String name) {}
 
 	@Override
-	public void getCrossSectionByY(int index, String name) {
-		Maze3d tmpMaze = mazeMap.get(name);
-
-		if (tmpMaze != null) {
-			// controller.display(arrIntToString(tmpMaze.getCrossSectionByY(index)));
-		} else {
-			// controller.display("Unavailable maze!");
-		}
-
-	}
+	public void getCrossSectionByY(int index, String name) {}
 
 	@Override
-	public void getCrossSectionByZ(int index, String name) {
-		Maze3d tmpMaze = mazeMap.get(name);
-
-		if (tmpMaze != null) {
-			// controller.display(arrIntToString(tmpMaze.getCrossSectionByZ(index)));
-		} else {
-			// controller.display("Unavailable maze!");
-		}
-
-	}
+	public void getCrossSectionByZ(int index, String name) {}
 
 	/**
 	 * Converts a dou - dimensional array into a String.
@@ -222,41 +179,22 @@ public class MyObservableModel extends ObservableCommonModel {
 				tmpCompressor.close(); // compressing the maze into and writing
 										// it to the file.
 				setChanged();
-				notifyObservers("completedTask save"); // notifying the
-														// presenter that the
-														// save was completed.
+				notifyObservers("completedTask save"); // notifying the presenter that the save was completed.
 
 			} catch (FileNotFoundException e) {
 				setChanged();
-				notifyObservers("completedTask error '" + fileName + "' is not a valid file name."); // notifying
-																										// the
-																										// presenter
-																										// that
-																										// an
-																										// error
-																										// has
-																										// occurred.
+				notifyObservers("completedTask error '" + fileName + "' is not a valid file name."); // notifying the presenter that an error has occurred.
 
 			} catch (IOException e) {
 				setChanged();
-				notifyObservers("completedTask error IO error."); // notifying
-																	// the
-																	// presenter
-																	// that an
-																	// error has
-																	// occurred.
+				// notifying the presenter that an error has occurred.
+				notifyObservers("completedTask error IO error."); 
 
 			}
 		} else {
 			setChanged();
-			notifyObservers("completedTask error '" + name + "' is an unavailable maze"); // notifying
-																							// the
-																							// presenter
-																							// that
-																							// an
-																							// error
-																							// has
-																							// occurred.
+			// notifying the presenter that an error has occurred.
+			notifyObservers("completedTask error '" + name + "' is an unavailable maze"); 
 
 		}
 	}
@@ -386,7 +324,7 @@ public class MyObservableModel extends ObservableCommonModel {
 
 	}
 
-	@Override
+	
 	public void clue(String name, String algorithm) {
 		solve(name, algorithm);
 		setChanged();
@@ -422,15 +360,12 @@ public class MyObservableModel extends ObservableCommonModel {
 			if(theServer!=null)
 					if(theServer.isConnected())
 						theServer.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (IOException e) {e.printStackTrace();}
 		try {
 			threadPool.shutdown();
 			if (!threadPool.awaitTermination(5, TimeUnit.SECONDS)) {
 				threadPool.shutdownNow();
-				// presenter.get.display("threads terminated violently!");
+				
 			}
 
 		} catch (InterruptedException e) {

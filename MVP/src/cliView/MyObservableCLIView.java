@@ -132,28 +132,19 @@ public class MyObservableCLIView extends ObservableCommonCLIView {
 	 * @see view.View#displayCrossSectionByX(int, java.lang.String)
 	 */
 	@Override
-	public void displayCrossSectionByX(int parseInt, String string) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void displayCrossSectionByX(int parseInt, String string) {}
 
 	/* (non-Javadoc)
 	 * @see view.View#displayCrossSectionByY(int, java.lang.String)
 	 */
 	@Override
-	public void displayCrossSectionByY(int parseInt, String string) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void displayCrossSectionByY(int parseInt, String string) {}
 
 	/* (non-Javadoc)
 	 * @see view.View#displayCrossSectionByZ(int, java.lang.String)
 	 */
 	@Override
-	public void displayCrossSectionByZ(int parseInt, String string) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void displayCrossSectionByZ(int parseInt, String string) {}
 
 	/* (non-Javadoc)
 	 * @see view.View#display(algorithms.search.Solution)
@@ -179,9 +170,4 @@ public class MyObservableCLIView extends ObservableCommonCLIView {
 		
 	}
 		
-	}
-
-
-	
-	
-
+}

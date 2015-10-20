@@ -33,8 +33,5 @@ public abstract class ObservableCommonGuiView extends ObservableCommonView {
 		properties.setDebug(debug);
 		
 	}
-	
-	
-
 
 }

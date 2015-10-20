@@ -14,7 +14,12 @@ import presenter.Presenter;
 import presenter.Properties;
 import view.ObservableCommonView;
 
-public class MVPTest {
+/**
+ * The class loads properties from the file properties.xml and starts the Client's program.
+ * @author Guy Golan && Amit Sandak
+ *
+ */
+public class RunClient {
 
 	public static void main(String[] args) {
 		String defaultXMLname = "properties.xml";

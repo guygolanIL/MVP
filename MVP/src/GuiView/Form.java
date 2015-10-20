@@ -1,7 +1,6 @@
 package GuiView;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -10,7 +9,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 
@@ -23,7 +21,7 @@ import org.eclipse.swt.widgets.Widget;
 public class Form extends BasicWindow{
 
 	Object created;
-	//Shell shell;
+	@SuppressWarnings("rawtypes")
 	Class format;
 	/**
 	 * Instantiates a new form.
@@ -34,24 +32,22 @@ public class Form extends BasicWindow{
 	 * @param width the width of the shell
 	 * @param height the height of the shell
 	 */
-	public Form(/*Shell parent,*/ Class format, String title) {
+	public Form(@SuppressWarnings("rawtypes") Class format, String title) {
 		super(title,500,500);
-		//shell = new Shell(parent.getDisplay());
-		//created = null;
 		shell.setLayout(new GridLayout(2,false));
-		//Class<? extends Object> format = classObject.getClass();
 		this.format = format;
 		
 	}
 	
 	@Override
 	public void initWidgets(){
-		Label titel = new Label(shell,SWT.CENTER);
+		Label titel = new Label(shell,SWT.CENTER);		//presenting the class's name.
 		titel.setText(format.getName());
 		titel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
 		
 		Field[] fields = format.getDeclaredFields();
 		HashMap<String, Widget> hm = new HashMap<String, Widget>();
+		//determine for each field in the class what entry widget to set it with.
 		for (Field field : fields) {
 			switch(field.getType().getName())
 			{
@@ -66,14 +62,12 @@ public class Form extends BasicWindow{
 		}
 		
 		
-//		for (Field field : fields) {
-//			new Label(shell,SWT.TOP).setText(field.getName());
-//			hm.put(field.getName(), new Text(shell, SWT.BORDER));
-//		}
-		
+
 		Button saveButton=new Button(shell, SWT.PUSH);
 		saveButton.setText("  Save  ");
 		saveButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 2, 1));
+		
+		//creating an instance of the given class' format and saving it in a field member.
 		saveButton.addSelectionListener(new SelectionListener() {
 					
 					@Override
@@ -83,46 +77,38 @@ public class Form extends BasicWindow{
 							for (Field field : fields) {
 								
 								try{
-								 boolean tmp = ((Button)hm.get(field.getName())).getSelection();
-								
+									boolean tmp = ((Button)hm.get(field.getName())).getSelection();
+									field.setAccessible(true);
+									field.set(created,tmp);
+
 								}catch(ClassCastException e)
 								{
-								String tmp =((Text)hm.get(field.getName())).getText();
-								String type = field.getType().getSimpleName();
-								field.setAccessible(true);
-								switch (type)
-								{
+									String tmp =((Text)hm.get(field.getName())).getText();
+									String type = field.getType().getSimpleName();
+									field.setAccessible(true);
+									switch (type)
+									{
 								
-								case "int":
+									case "int":
 									
-									field.set(created,Integer.parseInt(tmp));
-									break;
-								case "String":
-								case "char[]":
-									field.set(created,tmp);
-									break;
-								} 
+										field.set(created,Integer.parseInt(tmp));
+										break;
+									case "String":
+									case "char[]":
+										field.set(created,tmp);
+										break;
+									} 
 								}
 					
-								
 							}
 							shell.dispose();
 						}
-						catch (IllegalArgumentException | IllegalAccessException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-						}
-						catch (InstantiationException | SecurityException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}	
+						catch (IllegalArgumentException | IllegalAccessException e) {}
+						catch (InstantiationException | SecurityException e) {}	
 					}
 					
 					@Override
-					public void widgetDefaultSelected(SelectionEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
+					public void widgetDefaultSelected(SelectionEvent arg0) {}
 				});	
 		shell.pack();
 	}
@@ -137,13 +123,5 @@ public class Form extends BasicWindow{
 		return created;
 		
 	}
-
-///**
-// * Run the form shell
-// */
-//public void run()
-//{
-//	shell.open();
-//}
 
 }

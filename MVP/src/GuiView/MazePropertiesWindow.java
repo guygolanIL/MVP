@@ -7,15 +7,10 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Cursor;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -55,6 +50,8 @@ public class MazePropertiesWindow {
 		nameTitle.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 3, 1));
 
 		Text nameBox = new Text(main, SWT.BORDER);
+		
+		//splitting the received string from it's name[x][y][z] format.
 		nameBox.setText("" + properties.getName().split("\\[")[0]);
 		nameBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 3, 1));
 		
@@ -74,10 +71,7 @@ public class MazePropertiesWindow {
 		xTextBox.addFocusListener(new FocusListener() {
 			
 			@Override
-			public void focusLost(FocusEvent arg0) {
-				
-				
-			}
+			public void focusLost(FocusEvent arg0) {}
 			
 			@Override
 			public void focusGained(FocusEvent arg0) {
@@ -97,10 +91,7 @@ public class MazePropertiesWindow {
 		yTextBox.addFocusListener(new FocusListener() {
 					
 					@Override
-					public void focusLost(FocusEvent arg0) {
-						
-						
-					}
+					public void focusLost(FocusEvent arg0) {}
 					
 					@Override
 					public void focusGained(FocusEvent arg0) {
@@ -120,10 +111,7 @@ public class MazePropertiesWindow {
 		zTextBox.addFocusListener(new FocusListener() {
 					
 					@Override
-					public void focusLost(FocusEvent arg0) {
-						
-						
-					}
+					public void focusLost(FocusEvent arg0) {}
 					
 					@Override
 					public void focusGained(FocusEvent arg0) {
@@ -182,12 +170,10 @@ public class MazePropertiesWindow {
 			}
 
 			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// nothing
-
-			}
+			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
-		// generateButton.addSelectionListener(generateListener);
+		
+		
 		generateButton.addSelectionListener(new SelectionListener() {
 
 			@Override
@@ -198,10 +184,7 @@ public class MazePropertiesWindow {
 			}
 
 			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// nothing
-
-			}
+			public void widgetDefaultSelected(SelectionEvent arg0) {}
 		});
 		main.pack();
 	}
