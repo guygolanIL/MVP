@@ -55,7 +55,7 @@ public class MazePropertiesWindow {
 		nameTitle.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 3, 1));
 
 		Text nameBox = new Text(main, SWT.BORDER);
-		nameBox.setText("" + properties.getName());
+		nameBox.setText("" + properties.getName().split("\\[")[0]);
 		nameBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 3, 1));
 		
 		

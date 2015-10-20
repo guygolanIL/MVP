@@ -99,7 +99,7 @@ public class MazeProperties implements Serializable {
 	 * @return the maze name
 	 */
 	public String getName() {
-		return name;
+		return name+"["+getxAxis()+"]["+getyAxis()+"]["+getzAxis()+"]";
 	}
 	
 	/**
